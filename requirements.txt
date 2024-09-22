@@ -1,2 +1,3 @@
 pynput==1.7.7
 Flask
+pywin32
