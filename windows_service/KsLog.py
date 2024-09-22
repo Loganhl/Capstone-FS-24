@@ -10,8 +10,8 @@ import servicemanager
 class KsLogService(win32serviceutil.ServiceFramework):
     """base class to create a windows service python"""
     
-    _svc_name = "kslogservice"
-    _svc_display_name ='kslogger'
+    _svc_name_ = "kslogservice"
+    _svc_display_name_ ='kslogger'
 
     @classmethod 
     def parse_command_line(cls):
@@ -25,8 +25,7 @@ class KsLogService(win32serviceutil.ServiceFramework):
         win32serviceutil.ServiceFramework.__init__(self,args)
         self.hWaitStop = win32event.CreateEvent(None,0,0,None)
         socket.setdefaulttimeout(60)
-        super().__init__(args)
-        
+    
     def SvcStop(self):
         '''
         Called when the service is asked to stop
@@ -55,3 +54,6 @@ class KsLogService(win32serviceutil.ServiceFramework):
         '''
         pass
     
+    
+if __name__ == '__main__':
+    KsLogService.parse_command_line()
