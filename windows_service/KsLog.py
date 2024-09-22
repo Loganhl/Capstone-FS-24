@@ -35,16 +35,20 @@ class KsLogService(win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
         
     def SvcDoRun(self):
+        '''
+        Called when the service is asked to start
+        '''
         self.start()
-        servicemanager.LogMsg(servicemanager.EVENTLOG_INFORMATION_TYPE,servicemanager.PYS_SERVICE_STARTED,
-                              (self._svc_name,''))
+        servicemanager.LogMsg(servicemanager.EVENTLOG_INFORMATION_TYPE,
+                              servicemanager.PYS_SERVICE_STARTED,
+                              (self._svc_name_, ''))
         self.main()
-    
     def start(self):
         '''
         Override to add logic before the start
         eg. running condition
         '''
+        print('hello')
         pass
     
     def stop(self):
@@ -53,7 +57,9 @@ class KsLogService(win32serviceutil.ServiceFramework):
         eg. running condition
         '''
         pass
-    
+    def main(self):
+        #this might be where we start logging keystroke data
+        pass
     
 if __name__ == '__main__':
     KsLogService.parse_command_line()
