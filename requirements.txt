@@ -1,0 +1,4 @@
+pynput==1.7.7
+Flask
+pywin32
+MySQL-python=1.2.5
