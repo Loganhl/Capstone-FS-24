@@ -1,0 +1,8 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.ensemble import IsolationForest
+
+df = pd.read_csv('salary.csv')
+df.head(10)
