@@ -1,5 +1,5 @@
-from keystroker import on_press, on_release
-from pynput import keyboard
+#from keystroker import on_press, on_release
+#from pynput import keyboard
 
 # ================================
 # SECTION 1: 2FA OTP Generation and Verification
@@ -12,32 +12,35 @@ import pyotp
 def two_factor_auth():
     """Handles the OTP generation, sending, and verification."""
     
-    # Secret key for generating and verifying the OTP
-    secret = pyotp.random_base32()  # Make sure this is constant for OTP generation and verification
-
-    # Generate an OTP using the secret
-    otp = generate_totp(secret)  # Generates a time-based OTP using the secret
+    # Generate a new secret dynamically
+    secret = pyotp.random_base32()
+    
+    # Create a TOTP instance with a custom interval of 10 minutes (600 seconds)
+    totp = pyotp.TOTP(secret, interval=600)
+    
+    # Generate an OTP using the TOTP instance
+    otp = totp.now()  # Generates a time-based OTP
 
     # Send OTP to user's email
-    user_email = input("Enter your email address: ")
-    send_email(user_email, otp)
+    user_email = input("Enter your email address: ")  # Ask for the user's email
+    send_email(user_email, otp)  # Call the function from send_email.py
 
     # Ask user to input OTP
     user_input = input("Enter the OTP sent to your email: ")
 
     # Verify the OTP
-    if verify_totp(secret, user_input):  # Verifies the OTP using the same secret
-        print("OTP verified successfully")
+    if totp.verify(user_input):
+        print("OTP verified successfully.")
     else:
-        print("Invalid OTP or OTP has expired")
+        print("Invalid OTP or OTP has expired.")
 
 # ================================
 # SECTION 2: Keystroke Listener
 # ================================
-def start_keystroke_listener():
-    """Starts the keyboard listener."""
-    with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-        listener.join() 
+#def start_keystroke_listener():
+ #   """Starts the keyboard listener."""
+  #  with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+   #     listener.join() 
 
 # ================================
 # MAIN FUNCTION
@@ -49,7 +52,7 @@ def main():
     two_factor_auth()
 
     # Start the keyboard listener (if needed)
-    start_keystroke_listener()
+   # start_keystroke_listener()
 
 if __name__ == "__main__":
     main()
