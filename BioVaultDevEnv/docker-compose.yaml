@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: web_app
+    ports:
+      - "8000:5000"  
+    volumes:
+      - .:/app  
+    depends_on:
+      - mysql  
+    environment:
+      - FLASK_ENV=development
+
+  mysql:
+    image: mysql:latest
+    container_name: BioVault
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secretsquirrels
+      MYSQL_DATABASE: biometric_auth
+      MYSQL_USER: mashedsnake
+      MYSQL_PASSWORD: ilovelamp
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql  
+
+volumes:
+  mysql_data:
