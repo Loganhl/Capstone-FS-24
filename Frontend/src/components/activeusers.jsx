@@ -3,21 +3,22 @@ import {Table} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
 import axios from 'axios'
 //still need to write logout function
+import getKeycloak from './kc'
 function ForceLogout(username){
     //need to figure out how to implement this
 }
 
 const ActiveUsers = ()=>{
     const [users,setUsers] = useState([]);
-    useEffect(()=>{
-        //url is  a placeholder
-        axios.get('https://backend.local',{
+    // useEffect(()=>{
+    //     //url is  a placeholder
+    //     axios.get('https://backend.local',{
         
-        }).then(response => response.json())
-            .then(users =>setUsers(users))
-            .catch(error => console.error('error'))
-    },[])
-
+    //     }).then(response => response.json())
+    //         .then(users =>setUsers(users))
+    //         .catch(error => console.error('error'))
+    // },[])
+    
     return(
         <Table striped bordered hover>
             <thead>
@@ -39,10 +40,10 @@ const ActiveUsers = ()=>{
                     <td>Grant</td>
                     <td>Richardet</td>
                     <td>Type speed</td>
-                    <td><Button variant='danger'>Sign out</Button></td>
+                    {/* <td><Button variant='danger' onClick={()=> getKeycloak().logout({"logoutMethod":"POST"})}>Sign out</Button></td> */}
                 </tr>
             </tbody>
-            <tbody>
+            {/* <tbody>
                 {users.map(user=>{
                     <tr key={user.id}>
                         <td>{user.id}</td>
@@ -54,7 +55,7 @@ const ActiveUsers = ()=>{
                         <td><Button variant='danger'>Log Out</Button></td>
                     </tr>
                 })}
-            </tbody>
+            </tbody> */}
         </Table>
     )
 
