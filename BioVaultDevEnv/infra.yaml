@@ -1,0 +1,8 @@
+version: 1.0
+
+services:
+  - name: web
+    build: Dockerfile
+    port: 8000
+  - name: mysql
+    port: 3306
