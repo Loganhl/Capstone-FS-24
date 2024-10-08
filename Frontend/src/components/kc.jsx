@@ -18,13 +18,19 @@
 // // }
 // export default getKeycloak;
 import Keycloak from 'keycloak-js';
+// const kc = new Keycloak({
+//     "clientId":'biovault',
+//     'realm':'biovault',
+//     'url':"http://localhost:80"
+// })
 
 let keycloakInstance;
+
 
 const getKeycloak = () => {
     if (!keycloakInstance) {
         keycloakInstance = new Keycloak({
-            url: 'https://localhost:8443/',
+            url: 'http://localhost/',
             realm: 'BioVault',
             clientId: 'biovault',
         });
