@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import getKeycloak from './keycloak';
 
 const KeycloakContext = createContext(null);
-
+keycloak
 export const KeycloakProvider = ({ children }) => {
     const [keycloak, setKeycloak] = useState(getKeycloak());
 
@@ -16,6 +16,5 @@ export const KeycloakProvider = ({ children }) => {
         </KeycloakContext.Provider>
     );
 };
-
 
 export const useKeycloak = () => useContext(KeycloakContext);

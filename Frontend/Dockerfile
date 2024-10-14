@@ -1,6 +1,13 @@
 FROM node:latest
 
-WORKDIR /node/app
+WORKDIR /frontend
 
 
-COPY . .
+COPY /public /frontend/
+
+COPY /src /frontend/
+COPY package.json /frontend/
+
+RUN npm install
+
+CMD ["npm", "start"]

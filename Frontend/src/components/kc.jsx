@@ -30,9 +30,9 @@ let keycloakInstance;
 const getKeycloak = () => {
     if (!keycloakInstance) {
         keycloakInstance = new Keycloak({
-            url: 'http://localhost/',
-            realm: 'BioVault',
-            clientId: 'biovault',
+            url: 'http://localhost',
+            realm: 'biovault',
+            clientId: 'biovault-site',
         });
     }
     return keycloakInstance;

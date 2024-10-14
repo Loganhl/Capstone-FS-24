@@ -10,7 +10,18 @@ db_config = {
     'host': 'mysql',
     'database': 'biometric_auth',
 }
+#probably want to add user id variable as parameter in the path
 
+@app.route('/api/keyboardanomaly:userid',methods=('GET','POST'))
+def keyboardanomaly():
+    #WILL CONTINUE ONCE IVE HAD MY COFFEE!
+    
+    connection = mysql.connector.connect(**db_config)
+    insertquery = ''  
+#create an endpoint for mouse anomaly data to be sent to.
+@app.route('/api/mouseanomaly:userid',methods=('POST'))
+def mouseanomaly():
+    return
 @app.route('/')
 def index():
     connection = mysql.connector.connect(**db_config)
@@ -21,7 +32,7 @@ def index():
 
     cursor.close()
     connection.close()
-
+    
     return jsonify({"message": f"Connected to {db[0]}!"})
 
 
