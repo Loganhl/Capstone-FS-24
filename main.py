@@ -1,4 +1,5 @@
 from keystroker import on_press, on_release
+from Encryption.encryption import encrypt_data, decrypt_data
 from pynput import keyboard
 from pynput import mouse
 import threading
@@ -87,6 +88,17 @@ def main():
     # Wait for both threads to complete (join)
     keyboard_thread.join()
     mouse_thread.join()
+
+    # Example of encrypting data
+    sensitive_data = "qwerty"
+
+    # Encrypt the data
+    encrypted_data = encrypt_data(sensitive_data)
+    print(f"Encrypted Data: {encrypted_data}")
+
+    # Decrypt the data
+    decrypted_data = decrypt_data(encrypted_data)
+    print(f"Decrypted Data: {decrypted_data}")
 
 if __name__ == "__main__":
     main()
