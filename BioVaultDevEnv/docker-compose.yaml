@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  backend:
+    build: ../backend/.
+    container_name: backend
+    ports:
+      - "2500:2500"
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE=biometric_auth
+      - ROOT_PASS=secretsquirrels
+      - DB_URL=http://localhost:3306
+      - DB_USER=root
+    entrypoint: node server.js
   web:
     build: .
     container_name: web_app
