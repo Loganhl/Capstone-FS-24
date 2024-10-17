@@ -4,23 +4,23 @@ import matplotlib.pyplot as plt
 import os
 import numpy as np
 
-file_path = os.path.join('AuthenticationTesting', 'test2.csv')
+file_path = os.path.join('AuthenticationTesting', 'test3.csv')
 df = pd.read_csv(file_path)
 
-iso_forest = IsolationForest(contamination=0.01, random_state=50)
+iso_forest = IsolationForest(contamination=0.2, random_state=50)
 
-iso_forest.fit(df[['TypeAverage', 'MouseAverage']])
+iso_forest.fit(df[['TypeAverage', 'MouseAverage', 'TestAverage']])
 
-df['anomaly'] = iso_forest.predict(df[['TypeAverage', 'MouseAverage']])
+df['anomaly'] = iso_forest.predict(df[['TypeAverage', 'MouseAverage', 'TestAverage']])
 
 
 df['anomaly'] = df['anomaly'].map({1: 0, -1: 1})
 
 if df['anomaly'].sum() > 0:
+    
     print(f"Warning: {df['anomaly'].sum()} anomalies detected in the dataset.")
 
 print(df)
-
 
 plt.scatter(df['TypeAverage'], df['MouseAverage'], c=df['anomaly'], cmap='coolwarm')
 plt.xlabel('Type Average')
@@ -30,20 +30,20 @@ plt.show()
 
 
 '''
+num_rows = 100
 
-num_rows = 350  
 
-
-column1 = np.random.uniform(30.0, 65.0, num_rows)  
-column2 = np.random.uniform(1.0, 3.0, num_rows)  
+column1 = np.random.uniform(60, 90, num_rows)  
+column2 = np.random.uniform(9, 12, num_rows)  
+column3 = np.random.uniform(30, 60, num_rows) 
 
 df = pd.DataFrame({
     'TypeAverage': column1,
-    'MouseAverage': column2
+    'MouseAverage': column2,
+    'TestAverage': column3
 })
 
 
-csv_filename = 'test2.csv'
+csv_filename = 'test4.csv'
 df.to_csv(csv_filename, index=False)
-
 '''
