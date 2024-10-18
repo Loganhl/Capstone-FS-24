@@ -1,49 +1,40 @@
 import pandas as pd
 from sklearn.ensemble import IsolationForest
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import seaborn as sns
+from pandas.plotting import parallel_coordinates
+from sklearn.decomposition import PCA
 import os
 import numpy as np
 
-file_path = os.path.join('AuthenticationTesting', 'test2.csv')
+# FIle Path
+file_path = os.path.join('AuthenticationTesting', 'test1.csv')
+
+# Load the dataset
 df = pd.read_csv(file_path)
 
-iso_forest = IsolationForest(contamination=0.01, random_state=50)
+# Initialize the Isolation Forest model
+iso_forest = IsolationForest(contamination=0.1, random_state=42)
 
-iso_forest.fit(df[['TypeAverage', 'MouseAverage']])
+# Fit the model
+iso_forest.fit(df[['TypeAverage', 'MouseAverage', 'TestAverage', 'MouseMoveSpeed', 'KeysPerSecond']])
 
-df['anomaly'] = iso_forest.predict(df[['TypeAverage', 'MouseAverage']])
+# Predict Anomaly
+df['anomaly'] = iso_forest.predict(df[['TypeAverage', 'MouseAverage', 'TestAverage', 'MouseMoveSpeed', 'KeysPerSecond']])
 
-
+# Set Predictions to Binary
 df['anomaly'] = df['anomaly'].map({1: 0, -1: 1})
 
-if df['anomaly'].sum() > 0:
-    print(f"Warning: {df['anomaly'].sum()} anomalies detected in the dataset.")
+# Check for Anomaly & Print Count
+anomalies_count = df['anomaly'].sum()
+if anomalies_count > 0:
+    print(f"Warning: {anomalies_count} anomalies detected in the dataset.")
 
-print(df)
-
-
-plt.scatter(df['TypeAverage'], df['MouseAverage'], c=df['anomaly'], cmap='coolwarm')
-plt.xlabel('Type Average')
-plt.ylabel('Mouse Average')
-plt.title('Isolation Forest Anomaly Detection')
+# Pairwise Scatter Plots
+sns.pairplot(df, hue='anomaly', vars=['TypeAverage', 'MouseAverage', 'TestAverage', 'MouseMoveSpeed', 'KeysPerSecond'], palette='coolwarm')
+plt.suptitle('Pairwise Scatter Plots', y=1.02)
 plt.show()
 
 
-'''
 
-num_rows = 350  
-
-
-column1 = np.random.uniform(30.0, 65.0, num_rows)  
-column2 = np.random.uniform(1.0, 3.0, num_rows)  
-
-df = pd.DataFrame({
-    'TypeAverage': column1,
-    'MouseAverage': column2
-})
-
-
-csv_filename = 'test2.csv'
-df.to_csv(csv_filename, index=False)
-
-'''
