@@ -1,44 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Table } from 'react-bootstrap';
 
 const DataTable = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/anomalies/6242771f-785a-4c47-9c6a-6d5d8c8fffc6',
-        {
-            "mode":"cors"
-        }
-      )
-      .then(data => setData(data))
-      .catch(error => console.error('Error fetching data:', error));
-      
+    axios.get('http://localhost:2500/api/users')
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the data!', error);
+      });
   }, []);
 
   return (
-    <table>
+    <Table striped bordered hover>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Value</th>
+          <th>Userid</th>
+          <th>User</th>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
         </tr>
       </thead>
       <tbody>
-        {data && data.length > 0 ? (
-          data.map(item => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.email}</td>
-              <td>{item.first_name}</td>
-            </tr>
-          ))
-        ) : (
-          <tr>
-            <td colSpan="3">No data available</td>
+        {data.map((item) => (
+          <tr key={item.id}>
+            <td>{item.ID}</td>
+            <td>{item.USERNAME}</td>
+            <td>{item.EMAIL}</td>
+            <td>{item.FIRST_NAME}</td>
+            <td>{item.LAST_NAME}</td>
           </tr>
-        )}
+        ))}
       </tbody>
-    </table>
+    </Table>
   );
 };
 

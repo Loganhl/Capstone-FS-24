@@ -1,18 +1,24 @@
 version: '3.8'
 
 services:
+  #frontend isnt quite ready yet dont build it 
+  # frontend:
+  #   build: ../frontend
+  #   container_name: frontend
+  #   ports:
+  #     -"80:80"
+  #   depends_on:
+  #     - mysql
+  #     - backend
+  #   entrypoint: node 
   backend:
     build: ../backend/.
     container_name: backend
+    restart: always
     ports:
       - "2500:2500"
     depends_on:
       - mysql
-    environment:
-      - DATABASE=biometric_auth
-      - ROOT_PASS=secretsquirrels
-      - DB_URL=http://localhost:3306
-      - DB_USER=root
     entrypoint: node server.js
   web:
     build: .
@@ -30,6 +36,8 @@ services:
     image: mysql:latest
     container_name: BioVault
     restart: always
+    expose:
+      - 3306
     environment:
       MYSQL_ROOT_PASSWORD: secretsquirrels
       MYSQL_DATABASE: biometric_auth
@@ -46,12 +54,12 @@ services:
       - "80:8080"
     image: quay.io/keycloak/keycloak:26.0.0
     environment:
-      - KC_DB=mysql
-      - KC_DB_PASSWORD=secretsquirrels
-      - KC_DB_URL=jdbc:mysql://mysql:3306/biometric_auth
-      - KC_DB_USERNAME=root
-      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
-      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      KC_DB: mysql
+      KC_DB_PASSWORD: secretsquirrels
+      KC_DB_URL: jdbc:mysql://mysql:3306/biometric_auth
+      KC_DB_USERNAME: root
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
     entrypoint: ["/opt/keycloak/bin/kc.sh","start-dev" ]
   
 volumes:

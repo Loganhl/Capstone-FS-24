@@ -32,7 +32,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
         {/* <ActiveUsers /> */}
-        {/* <Button variant='dark' onClick={() => keycloak.logout()}>Grant</Button> Corrected onClick handler */}
+        <Button variant='dark' onClick={() => keycloak.logout()}>Logout</Button> 
         <ActiveUsers></ActiveUsers>
       </header>
     </div>
