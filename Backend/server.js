@@ -8,12 +8,13 @@ const connection = mysql.createConnection({
   "user": "root",
   "password":"secretsquirrels",
   "database":"biometric_auth",
-  "host":"http://mysql:3306",
+  "host":"mysql",
 })
 app.use(cors())
 app.use(express.json())
 app.get('/api/users',(req,res)=>{
   connection.query("SELECT * FROM USER_ENTITY;",(err,result,fields)=>{
+    console.log(result);
     res.json(result);
   })
 })
@@ -49,7 +50,7 @@ app.post('/api/keyboarddata:userid',(req,res)=>{
 })
 app.get('/api/activeusers',(req,res)=>{
   
-    connection.query("SELECT a.USERNAME b.USER_ID FROM USER_ENTITY a, OFFLINE_USER_SESSION b WHERE a.ID = b.USER_ID",(err,result,fields)=>{
+    connection.query("SELECT a.USERNAME,a.EMAIL,a.FIRST_NAME,a.LAST_NAME, b.USER_ID FROM USER_ENTITY a, OFFLINE_USER_SESSION b WHERE a.ID = b.USER_ID",(err,result,fields)=>{
       res.json(result);   
     })
 
@@ -57,5 +58,6 @@ app.get('/api/activeusers',(req,res)=>{
 
 app.get('/api/keyboarddata:userid',(req,res)=>{
   //may end up deleting this one
+  res.json({"error":"this is not set up yet"})
 })
 app.listen(PORT,console.log(`app listening on port ${PORT}`))

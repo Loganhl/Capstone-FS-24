@@ -6,8 +6,9 @@ const DataTable = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:2500/api/users')
+    axios.get('http://localhost:2500/api/activeusers')
       .then(response => {
+        console.log(response.data)
         setData(response.data);
       })
       .catch(error => {
@@ -29,7 +30,7 @@ const DataTable = () => {
       <tbody>
         {data.map((item) => (
           <tr key={item.id}>
-            <td>{item.ID}</td>
+            <td>{item.USER_ID}</td>
             <td>{item.USERNAME}</td>
             <td>{item.EMAIL}</td>
             <td>{item.FIRST_NAME}</td>

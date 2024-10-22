@@ -61,6 +61,13 @@ services:
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
     entrypoint: ["/opt/keycloak/bin/kc.sh","start-dev" ]
-  
+  #custom keycloak container is not ready yet
+  # keycloak:
+  #   container_name: keycloak
+  #   build: ../keycloak/.
+  #   ports:
+  #     - "443:8443"
+  #     - "80:8080"
+  #   entrypoint: ["/opt/keycloak/bin/kc.sh","start-dev" ]
 volumes:
   mysql_data:
