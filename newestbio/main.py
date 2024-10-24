@@ -1,5 +1,6 @@
 import time
 import csv
+import os
 from pynput import keyboard, mouse
 from keyboard_metrics import calculate_metrics, on_press
 from mouse_metrics import calculate_mouse_metrics, calculate_double_click_speed, on_click, on_move
@@ -7,15 +8,19 @@ from mouse_metrics import calculate_mouse_metrics, calculate_double_click_speed,
 # Change tracking duration as needed
 tracking_duration = 10 
 
-# Define CSV file names for each metric
-wpm_file = 'wpm.csv'
-total_keys_file = 'total_keys.csv'
-keys_per_second_file = 'keys_per_second.csv'
-avg_time_between_keystrokes_file = 'avg_time_between_keystrokes.csv'
-error_count_file = 'error_count.csv'
-mouse_speed_file = 'mouse_speed.csv'
-click_count_file = 'click_count.csv'
-double_click_speed_file = 'double_click_speed.csv'
+# Create the directory if it doesn't exist
+data_directory = 'StoredData'
+os.makedirs(data_directory, exist_ok=True)
+
+# Define CSV file names for each metric in the StoredData folder
+wpm_file = os.path.join(data_directory, 'wpm.csv')
+total_keys_file = os.path.join(data_directory, 'total_keys.csv')
+keys_per_second_file = os.path.join(data_directory, 'keys_per_second.csv')
+avg_time_between_keystrokes_file = os.path.join(data_directory, 'avg_time_between_keystrokes.csv')
+error_count_file = os.path.join(data_directory, 'error_count.csv')
+mouse_speed_file = os.path.join(data_directory, 'mouse_speed.csv')
+click_count_file = os.path.join(data_directory, 'click_count.csv')
+double_click_speed_file = os.path.join(data_directory, 'double_click_speed.csv')
 
 listener_keyboard = keyboard.Listener(on_press=on_press)
 listener_mouse = mouse.Listener(on_click=on_click, on_move=on_move)
@@ -39,7 +44,7 @@ try:
                       error_count_file, mouse_speed_file, click_count_file, double_click_speed_file]:
         with open(file_name, mode='w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow([f"{file_name.split('.')[0]}"])  # Use the filename as the header
+            writer.writerow([f"{file_name.split('/')[-1].split('.')[0]}"])  # Use the filename as the header
 
     while True:
         start_time = time.time()
@@ -65,5 +70,8 @@ try:
 except KeyboardInterrupt:
     print("Stopping listeners...")
     listener_keyboard.stop()
+    listener_mouse.stop()
+    print("Tracking stopped.")
+
     listener_mouse.stop()
     print("Tracking stopped.")
