@@ -20,7 +20,7 @@ def check_csv_row_count_and_analyze(file_path):
         df = df.dropna()
 
         row_count = len(df)
-        logging.info(f"\nChecking {file_path.name}, found {row_count} rows.")
+        logging.info(f"Checking {file_path.name}, found {row_count} rows.")
 
         if row_count >= 5:
             # Initialize the Isolation Forest model
@@ -45,7 +45,7 @@ def check_csv_row_count_and_analyze(file_path):
             return anomaly_percentage
         else:
             logging.info(f"{file_path.name} has not reached 5 rows yet.")
-        logging.info('------------------------------------------------------------------------------------------------')
+        
         return None
 
     except Exception as e:
@@ -67,9 +67,10 @@ def main():
 
     while True:
         for csv_file in csv_files:
+            logging.info('------------------------------------------------------------------------------------------------')
             anomaly_percentage = check_csv_row_count_and_analyze(csv_file)
             if anomaly_percentage is not None:
-                logging.info(f"Processed {csv_file.name} with anomaly percentage: {anomaly_percentage:.2f}%\n")
+                logging.info(f"Processed {csv_file.name} with anomaly percentage: {anomaly_percentage:.2f}%")
 
         time.sleep(10)
 
