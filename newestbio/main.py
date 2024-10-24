@@ -8,8 +8,8 @@ from mouse_metrics import calculate_mouse_metrics, calculate_double_click_speed,
 # Change tracking duration as needed
 tracking_duration = 10 
 
-# Create the directory if it doesn't exist
 data_directory = 'StoredData'
+
 os.makedirs(data_directory, exist_ok=True)
 
 # Define CSV file names for each metric in the StoredData folder
@@ -70,8 +70,5 @@ try:
 except KeyboardInterrupt:
     print("Stopping listeners...")
     listener_keyboard.stop()
-    listener_mouse.stop()
-    print("Tracking stopped.")
-
     listener_mouse.stop()
     print("Tracking stopped.")
