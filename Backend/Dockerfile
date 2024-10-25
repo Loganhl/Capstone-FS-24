@@ -5,7 +5,7 @@ COPY package-lock.json .
 COPY package.json .
 COPY server.js .
 COPY biovault-backend.json .
-
+COPY keycloak.json .
 #install packages 
 RUN npm install
 

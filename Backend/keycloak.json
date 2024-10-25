@@ -1,0 +1,12 @@
+{
+  "realm": "biovault",
+  "auth-server-url": "http://localhost/",
+  "ssl-required": "external",
+  "resource": "backend",
+  "verify-token-audience": true,
+  "credentials": {
+    "secret": "RKKfai8k9Kq78TGoG9vs9grohehNkTWg"
+  },
+  "use-resource-role-mappings": true,
+  "confidential-port": 0
+}
