@@ -1,0 +1,10 @@
+{
+    "realm": "biovault",
+    "auth-server-url": "http://localhost/",
+    "ssl-required": "external",
+    "resource": "biovault-site",
+    "credentials": {
+      "secret": "CsPfyWNsCsjCHfuZaq95TVQg3jvmkV1u"
+    },
+    "confidential-port": 0
+  }

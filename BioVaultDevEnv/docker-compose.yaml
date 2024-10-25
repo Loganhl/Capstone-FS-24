@@ -11,26 +11,26 @@ services:
   #     - mysql
   #     - backend
   #   entrypoint: node 
-  backend:
-    build: ../backend/.
-    container_name: backend
-    restart: always
-    ports:
-      - "2500:2500"
-    depends_on:
-      - mysql
-    entrypoint: node server.js
-  web:
-    build: .
-    container_name: web_app
-    ports:
-      - "8000:5000"  
-    volumes:
-      - .:/app  
-    depends_on:
-      - mysql  
-    environment:
-      - FLASK_ENV=development
+  # backend:
+  #   build: ../backend/.
+  #   container_name: backend
+  #   restart: always
+  #   ports:
+  #     - "2500:2500"
+  #   depends_on:
+  #     - mysql
+  #   entrypoint: node server.js
+  # web:
+  #   build: .
+  #   container_name: web_app
+  #   ports:
+  #     - "8000:5000"  
+  #   volumes:
+  #     - .:/app  
+  #   depends_on:
+  #     - mysql  
+  #   environment:
+  #     - FLASK_ENV=development
 
   mysql:
     image: mysql:latest
@@ -48,26 +48,33 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql  
-  keycloak:
-    container_name: keycloak
-    ports:
-      - "80:8080"
-    image: quay.io/keycloak/keycloak:26.0.0
-    environment:
-      KC_DB: mysql
-      KC_DB_PASSWORD: secretsquirrels
-      KC_DB_URL: jdbc:mysql://mysql:3306/biometric_auth
-      KC_DB_USERNAME: root
-      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
-      KC_BOOTSTRAP_ADMIN_USERNAME: admin
-    entrypoint: ["/opt/keycloak/bin/kc.sh","start-dev" ]
-  #custom keycloak container is not ready yet
   # keycloak:
   #   container_name: keycloak
-  #   build: ../keycloak/.
   #   ports:
-  #     - "443:8443"
   #     - "80:8080"
+  #   image: quay.io/keycloak/keycloak:26.0.0
+  #   environment:
+  #     KC_DB: mysql
+  #     KC_DB_PASSWORD: secretsquirrels
+  #     KC_DB_URL: jdbc:mysql://mysql:3306/biometric_auth
+  #     KC_DB_USERNAME: root
+  #     KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+  #     KC_BOOTSTRAP_ADMIN_USERNAME: admin
   #   entrypoint: ["/opt/keycloak/bin/kc.sh","start-dev" ]
+  #custom keycloak container is not ready yet
+  keycloak:
+    container_name: keycloak
+    build: ../keycloak/.
+    ports:
+      - "80:8080"
+    environment:
+      - KC_DB=mysql
+      - KC_DB_PASSWORD=secretsquirrels
+      - KC_DB_URL=jdbc:mysql://mysql:3306/biometric_auth
+      - KC_DB_USERNAME=root
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_HTTPS_PORT=8443
+    entrypoint: ["/opt/keycloak/bin/kc.sh","start-dev" ]
 volumes:
   mysql_data:

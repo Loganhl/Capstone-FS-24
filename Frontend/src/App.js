@@ -5,38 +5,45 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React, { useEffect, useRef, useState } from 'react';
 import ActiveUsers from './components/activeusers';
 import getKeycloak from './components/kc';
+import useAuth from './hooks/useAuth';
+// function App() {
+//   const [authenticated, setAuthenticated] = useState(false);
+//   const didInit = useRef(false);
+//   const keycloak = getKeycloak();
 
-function App() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const didInit = useRef(false);
-  const keycloak = getKeycloak();
-
-  useEffect(() => {
-    if (!didInit.current) {
-      didInit.current = true;
-      keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
-        setAuthenticated(authenticated);
-      }).catch((error) => {
-        console.log("Error initializing Keycloak", error);
-      });
-    }
+//   useEffect(() => {
+//     if (!didInit.current) {
+//       didInit.current = true;
+//       keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+//         setAuthenticated(authenticated);
+//       }).catch((error) => {
+//         console.log("Error initializing Keycloak", error);
+//       });
+//     }
     
-  }, []); // Corrected useEffect for Keycloak initialization
-  if (!authenticated) {
-    return <div>Loading...</div>;
+//   }, []); // Corrected useEffect for Keycloak initialization
+//   if (!authenticated) {
+//     return <div>Loading...</div>;
+//   }
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <p>
+//           Edit <code>src/App.js</code> and save to reload.
+//         </p>
+//         {/* <ActiveUsers /> */}
+//         <Button variant='dark' onClick={() => keycloak.logout()}>Logout</Button> 
+//         <ActiveUsers></ActiveUsers>
+//       </header>
+//     </div>
+//   );
+// }
+function App(){
+  const [islogin,token] = useAuth();
+  if (islogin == true) {
+    return(<ActiveUsers token={token}></ActiveUsers>)
+  }else{
+    return(<div>loading...</div>)
   }
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        {/* <ActiveUsers /> */}
-        <Button variant='dark' onClick={() => keycloak.logout()}>Logout</Button> 
-        <ActiveUsers></ActiveUsers>
-      </header>
-    </div>
-  );
 }
-
 export default App;

