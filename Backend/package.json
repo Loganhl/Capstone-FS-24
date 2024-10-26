@@ -5,14 +5,13 @@
   "main": "indexs.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test2":"nodemon index.js",
-    "test3": "nodemon indexs.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@keycloak/keycloak-admin-client": "^26.0.2",
+    "axios": "^1.7.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
@@ -25,8 +24,7 @@
     "keycloak-request-token": "^0.1.0"
   },
   "imports": {
-  "#routes/*": "./routes/*.js",
-  "#middlewares/*": "./middlewares/*.js"
+    "#routes/*": "./routes/*.js",
+    "#middlewares/*": "./middlewares/*.js"
   }
-  
 }

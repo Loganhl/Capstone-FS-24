@@ -4,17 +4,40 @@ const app = express();
 const PORT = 2500
 const cors = require('cors')
 const keycloak = require('./middlewares/keycloak')
+const axios = require('axios')
+const http = require('http')
 keycloak.getConfig()
 keycloak.loginUrl()
+
+
+// const tokenreq = {
+//   hostname: 'localhost',
+//   port:80,
+//   path:'/realms/biovault/protocol/openid-connect/token',
+//   method: 'POST',
+//   headers:{
+//     'Content-Type':'x-www-form-urlencoded'
+//   }
+// }
 const connection = mysql.createConnection({
 
-  "user": "root",
-  "password":"secretsquirrels",
-  "database":"biometric_auth",
-  "host":"localhost",
-  "port":"3307"
+  "user":process.env.SQL_USER,
+  "password":process.env.SQL_PASS,
+  "database":process.env.SQL_DB,
+  "host":process.env.SQL_HOST,
+  "port":process.env.SQL_PORT
 })
 
+axios.post(process.env.TOKEN_URL,{
+   'grant_type':'client_credentials',
+   "client_id":process.env.KEYCLOAK_CLIENT,
+   "client_secret":process.env.KEYCLOAK_CLIENT_SECRET
+},{
+  "headers":{
+    "Content-Type":"application/x-www-form-urlencoded",
+    
+  }
+})
 app.use(cors())
 app.use(keycloak.middleware())
 app.use(express.json())
@@ -43,7 +66,7 @@ app.post('/api/mousedata:userid',(req,res)=>{
     })
   }
 })
-app.post('/api/keyboarddata:userid',(req,res)=>{
+app.post('/api/keyboarddata:userid',keycloak.protect(),(req,res)=>{
     if (req.params.userid != null) {
       let data_id = req.body.data_id
       let user_id = req.body.user_id
@@ -89,7 +112,7 @@ app.get('/api/userinfo:userid',keycloak.protect(),(req,res)=>{
     res.json({"Error":"not set up yet"})
   }
 })
-app.get('/api/keyboarddata:userid',(req,res)=>{
+app.get('/api/keyboarddata:userid',keycloak.protect(),(req,res)=>{
   //may end up deleting this one
   res.json({"error":"this is not set up yet"})
 })
