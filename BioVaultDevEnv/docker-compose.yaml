@@ -11,27 +11,27 @@ services:
   #     - mysql
   #     - backend
   #   entrypoint: node 
-  backend:
-    build: ../backend/.
-    container_name: backend
-    environment:
-      - KEYCLOAK_REALM=biovault
-      - KEYCLOAK_CLIENT=backend
-      - KEYCLOAK_CLIENT_SECRET=RKKfai8k9Kq78TGoG9vs9grohehNkTWg
-      - TOKEN_URL=http://keycloak:8080/realms/biovault/protocol/openid-connect/token
-      - KEYCLOAK_URL=http://keycloak
-      - SQL_PORT=3306
-      - SQL_USER=root
-      - SQL_DB=biometric_auth
-      - SQL_HOST=mysql
-      - SQL_PASS=secretsquirrels
-    restart: always
-    ports:
-      - "2500:2500"
-    depends_on:
-      - mysql
-      - keycloak
-    entrypoint: node server.js
+  # backend:
+  #   build: ../backend/.
+  #   container_name: backend
+  #   environment:
+  #     - KEYCLOAK_REALM=biovault
+  #     - KEYCLOAK_CLIENT=backend
+  #     - KEYCLOAK_CLIENT_SECRET=RKKfai8k9Kq78TGoG9vs9grohehNkTWg
+  #     - TOKEN_URL=http://keycloak:8080/realms/biovault/protocol/openid-connect/token
+  #     - KEYCLOAK_URL=http://keycloak
+  #     - SQL_PORT=3306
+  #     - SQL_USER=root
+  #     - SQL_DB=biometric_auth
+  #     - SQL_HOST=mysql
+  #     - SQL_PASS=secretsquirrels
+  #   restart: always
+  #   ports:
+  #     - "2500:2500"
+  #   depends_on:
+  #     - mysql
+  #     - keycloak
+  #   entrypoint: node server.js
   # web:
   #   build: .
   #   container_name: web_app
