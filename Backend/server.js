@@ -3,18 +3,26 @@ const mysql = require('mysql2')
 const app = express();
 const PORT = 2500
 const cors = require('cors')
-const keycloak = require('./middlewares/keycloak')
+// const keycloak = require('./middlewares/keycloak')
 const axios = require('axios')
-const http = require('http')
-keycloak.getConfig()
-keycloak.loginUrl()
 const session = require("express-session");
 const memorystore = new session.MemoryStore()
+const Keycloak  = require("keycloak-connect")
+const keycloak = new Keycloak({
+    
+})
 
-
-app.use(session({
-  
-}))
+// app.use(session({
+//   "secret":process.env.KEYCLOAK_CLIENT_SECRET,
+//   "resave":false,
+//   "saveUninitialized":true,
+//   "store":memorystore,
+//   "cookie":{
+//     "sameSite":"none"
+//   }
+// }))
+app.use(keycloak.middleware())
+// console.log(keycloak.checkSso())
 // const tokenreq = {
 //   hostname: 'localhost',
 //   port:80,
@@ -26,42 +34,45 @@ app.use(session({
 // }
 const connection = mysql.createConnection({
 
-  "user":process.env.SQL_USER,
-  "password":process.env.SQL_PASS,
-  "database":process.env.SQL_DB,
+  "user":"root",
+  "password":"secretsquirrels",
+  "database":"biometric_auth",
   "host":process.env.SQL_HOST,
-  "port":process.env.SQL_PORT
+  "port":3307
 })
-const config = keycloak.getConfig()
-console.log(config)
+// keycloak.storeGrant(keycloak.grantManager.createGrant({
+//   "access_token":""
+// }))
 
-const authreq = axios.post(process.env.TOKEN_URL,{
-   'grant_type':'client_credentials',
-   "client_id":process.env.KEYCLOAK_CLIENT,
-   "client_secret":process.env.KEYCLOAK_CLIENT_SECRET
-},{
-  "headers":{
-    "Content-Type":"application/x-www-form-urlencoded",
-  }
-})
+// const authreq = axios.post("http://localhost/realms/biovault/protocol/openid-connect/token",{
+//    'grant_type':'client_credentials',
+//    "client_id":"backend",
+//    "client_secret":"a8F6I5FV1O9VF1EdreOvOQGvVDP415cQ"
+// },{
+//   "headers":{
+//     "Content-Type":"application/x-www-form-urlencoded",
+//   }
+// }).then((resp => console.log(resp.data)))
+// keycloak.grantManager.obtainDirectly('gar7mn','Wand4511').then((resp=>keycloak.grantManager.ensureFreshness(resp)));
+keycloak.grantManager.obtainFromClientCredentials().then((grant=> keycloak.grantManager.validateGrant(grant).finally(keycloak.grantManager.ensureFreshness(grant))))
+
 // authreq.then((resp => console.log(resp.data)))
-
-authreq.then((resp)=>session({
-  "saveUninitialized":false,
-  "secret":resp.data.access_token,
-  "cookie":{
-    "secure":"auto",
-    "signed":true
-  }
-}))
+// authreq.then((resp)=>session({
+//   "saveUninitialized":false,
+//   "secret":resp.data.access_token,
+//   "cookie":{
+//     "secure":"auto",
+//     "signed":true
+//   }
+// }))
 
 // keycloak.storeGrant({
 //   "access_token":resp.data.access_token,
 //   "refresh_token":resp.data.refresh_token,
 //   "expires_in":60,
 // })
-app.use(cors())
-app.use(keycloak.middleware())
+app.use(cors({}))
+
 app.use(express.json())
 app.get('/api/users',keycloak.protect(),(req,res)=>{
   connection.query("SELECT * FROM USER_ENTITY;",(err,result,fields)=>{
@@ -75,7 +86,7 @@ app.get('/api',(req,res)=>{
 app.get('/api/sec',keycloak.protect(),(req,res)=>{
   res.json({"area":"secure"});
 })
-app.post('/api/mousedata:userid',(req,res)=>{
+app.post('/api/mousedata:userid',keycloak.protect(),(req,res)=>{
   if (req.params.userid != null) {
     let data_id = req.body.data_id;
     let user_id = req.params.userid;
@@ -120,13 +131,14 @@ app.post('/api/click_hotspots:user_id',keycloak.protect(),(req,res)=>{
     })
   }
 })
-app.get('/secured', keycloak.protect('realm:user'), (req, res) => {
+app.get('/secured',keycloak.protect(),(req, res) => {
+  console.log("hello");
   res.json({message: 'secured'});
 });
 
-app.get('/api/activeusers',(req,res)=>{
+app.get('/api/activeusers',keycloak.protect(),(req,res)=>{
   connection.query("SELECT a.USERNAME,a.EMAIL,a.FIRST_NAME,a.LAST_NAME, b.USER_ID FROM USER_ENTITY a, OFFLINE_USER_SESSION b WHERE a.ID = b.USER_ID",(err,result,fields)=>{
-      res.json(result);   
+      res.json(result);     
     })
 
 })
