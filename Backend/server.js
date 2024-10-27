@@ -8,8 +8,13 @@ const axios = require('axios')
 const http = require('http')
 keycloak.getConfig()
 keycloak.loginUrl()
+const session = require("express-session");
+const memorystore = new session.MemoryStore()
 
 
+app.use(session({
+  
+}))
 // const tokenreq = {
 //   hostname: 'localhost',
 //   port:80,
@@ -27,17 +32,34 @@ const connection = mysql.createConnection({
   "host":process.env.SQL_HOST,
   "port":process.env.SQL_PORT
 })
+const config = keycloak.getConfig()
+console.log(config)
 
-axios.post(process.env.TOKEN_URL,{
+const authreq = axios.post(process.env.TOKEN_URL,{
    'grant_type':'client_credentials',
    "client_id":process.env.KEYCLOAK_CLIENT,
    "client_secret":process.env.KEYCLOAK_CLIENT_SECRET
 },{
   "headers":{
     "Content-Type":"application/x-www-form-urlencoded",
-    
   }
 })
+// authreq.then((resp => console.log(resp.data)))
+
+authreq.then((resp)=>session({
+  "saveUninitialized":false,
+  "secret":resp.data.access_token,
+  "cookie":{
+    "secure":"auto",
+    "signed":true
+  }
+}))
+
+// keycloak.storeGrant({
+//   "access_token":resp.data.access_token,
+//   "refresh_token":resp.data.refresh_token,
+//   "expires_in":60,
+// })
 app.use(cors())
 app.use(keycloak.middleware())
 app.use(express.json())
@@ -101,7 +123,8 @@ app.post('/api/click_hotspots:user_id',keycloak.protect(),(req,res)=>{
 app.get('/secured', keycloak.protect('realm:user'), (req, res) => {
   res.json({message: 'secured'});
 });
-app.get('/api/activeusers',keycloak.protect(),(req,res)=>{
+
+app.get('/api/activeusers',(req,res)=>{
   connection.query("SELECT a.USERNAME,a.EMAIL,a.FIRST_NAME,a.LAST_NAME, b.USER_ID FROM USER_ENTITY a, OFFLINE_USER_SESSION b WHERE a.ID = b.USER_ID",(err,result,fields)=>{
       res.json(result);   
     })
