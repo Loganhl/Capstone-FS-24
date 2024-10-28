@@ -1,12 +1,5 @@
 import React,{useState,useEffect,useRef} from "react";
-import keycloak from 'keycloak-js';
-
-
-const client = new keycloak({
-    "realm":"biovault",
-    "clientId":"biovault-site",
-    "url":"http://localhost"
-})
+import client from "./kclient";
 
 const useAuth =  ()=>{
     const isRun  = useRef(false);
@@ -16,12 +9,12 @@ const useAuth =  ()=>{
         if (isRun.current) return;
         isRun.current = true;
         client.init({
-            "onLoad":"check-sso"
+            "onLoad":"login-required"
         }).then((res)=>{
             setLogin(res);
             setToken(client.token);
         })
     },[])
-    return [isLogin,token];
+    return [isLogin,token,client];
 }
 export default useAuth;

@@ -1,12 +1,12 @@
-import {Navbar,NavbarBrand,Container,Nav} from 'react-bootstrap'
+import React from "react";
+import client from "../hooks/kclient";
+import { Button,Navbar,Nav } from "react-bootstrap";
 
-const Navigation = ()=>{
-    return(
-        <Navbar>
-            <Container>
-                <Navbar.Brand href='#'></Navbar.Brand>
-            </Container>
-            <Nav.Link href='#login'>Login</Nav.Link>
-        </Navbar>
-    )
+const Navigation = ({token})=>{
+    return(<Navbar>
+        <Navbar.Brand></Navbar.Brand>
+        <Button variant="dark" onClick={()=> client.logout()}>Logout</Button>
+        </Navbar>)
 }
+
+export default Navigation;
