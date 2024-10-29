@@ -1,17 +1,20 @@
 import logo from './logo.svg';
 // import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import userMetrics from './components/Metrics/Keyspersec';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, LineElement, LinearScale, Title, PointElement, CategoryScale } from 'chart.js';
+import WordsPerMin from './components/Metrics/Wordspermin';
 import useAuth from './hooks/useAuth';
 import ActiveUsers from './components/activeusers';
 import Usermetrics from './components/Metrics/Keyspersec';
 import { Button } from 'react-bootstrap';
 import client from './hooks/kclient';
+import { MetricChanges } from './components/Metrics/MetricChanges';
+import Navigation from './components/navigation';
+
 // import UserStats from './components/userMetrics';
 
-const Apps = ({token})=>{
-  ChartJS.register(ArcElement, Tooltip, Legend);
+const Apps = ({token,client})=>{
+  ChartJS.register(ArcElement, Tooltip, Legend,LineElement,LinearScale,Title,PointElement,CategoryScale); 
   const datab = {
     labels:['TouchDowns','Yards per Carry','Yards per Game'],
     data:[4,7,30],
@@ -28,21 +31,15 @@ const Apps = ({token})=>{
     borderWidth: 1,
 }
   return(<div className='App'>
-    <header className='App-header'></header>
-      <div>
-        <Button variant='dark' onClick={()=>{
-          client.logout()
-        }}>Logout</Button>
-      </div>
-      <Usermetrics/>
-      <ActiveUsers token={token}></ActiveUsers>
-  
+    <header className='App-header'>
+      <Navigation  client={client} token={token}></Navigation>
+    </header>
   </div>)
 }
 function App() {
   const [isLogin,token] = useAuth();
   if (isLogin == true) {
-    return(<Apps token={token}></Apps>)
+    return(<Apps token={token} client={client}></Apps>)
   }
   return (
     <div className="App">

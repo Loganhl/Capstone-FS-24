@@ -16,7 +16,7 @@ const ActiveUsers = ({client,token})=>{
         }).then(res=>setUsers(res.data)).catch(err=>console.error(err));
     },[])
     return(
-        <Table striped bordered hover>
+        <Table variant="dark" striped bordered responsive hover>
         <thead>
             <tr>
             <th>Userid</th>
