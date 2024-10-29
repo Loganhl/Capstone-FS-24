@@ -1,6 +1,6 @@
 {
   "realm": "biovault",
-  "auth-server-url": "http://localhost/",
+  "auth-server-url": "http://localhost:8080/",
   "ssl-required": "external",
   "resource": "backend",
   "credentials": {

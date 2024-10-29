@@ -3,14 +3,16 @@ const mysql = require('mysql2')
 const app = express();
 const PORT = 2500
 const cors = require('cors')
-// const keycloak = require('./middlewares/keycloak')
+const keycloak = require('./middlewares/keycloak')
 const axios = require('axios')
 const session = require("express-session");
 const memorystore = new session.MemoryStore()
-const Keycloak  = require("keycloak-connect")
-const keycloak = new Keycloak({
+const dotenv = require('dotenv')
+dotenv.configDotenv('./.env')
+// const Keycloak  = require("keycloak-connect")
+// const keycloak = new Keycloak({
     
-})
+// })
 
 // app.use(session({
 //   "secret":process.env.KEYCLOAK_CLIENT_SECRET,
@@ -34,11 +36,11 @@ app.use(keycloak.middleware())
 // }
 const connection = mysql.createConnection({
 
-  "user":"root",
-  "password":"secretsquirrels",
-  "database":"biometric_auth",
+  "user":process.env.SQL_USER,
+  "password":process.env.SQL_PASS,
+  "database":process.env.SQL_DB,
   "host":process.env.SQL_HOST,
-  "port":3307
+  "port":process.env.SQL_PORT
 })
 // keycloak.storeGrant(keycloak.grantManager.createGrant({
 //   "access_token":""
@@ -54,7 +56,7 @@ const connection = mysql.createConnection({
 //   }
 // }).then((resp => console.log(resp.data)))
 // keycloak.grantManager.obtainDirectly('gar7mn','Wand4511').then((resp=>keycloak.grantManager.ensureFreshness(resp)));
-keycloak.grantManager.obtainFromClientCredentials().then((grant=> keycloak.grantManager.validateGrant(grant).finally(keycloak.grantManager.ensureFreshness(grant))))
+keycloak.grantManager.obtainFromClientCredentials().then((grant=> keycloak.grantManager.validateGrant(grant).then(keycloak.grantManager.ensureFreshness(grant))))
 
 // authreq.then((resp => console.log(resp.data)))
 // authreq.then((resp)=>session({
@@ -83,7 +85,7 @@ app.get('/api/users',keycloak.protect(),(req,res)=>{
 app.get('/api',(req,res)=>{
   res.json({"welcome":"To the biovault backend"});
 })
-app.get('/api/sec',keycloak.protect(),(req,res)=>{
+app.get('/api/sec',keycloak.protect("realm:admin"),(req,res)=>{
   res.json({"area":"secure"});
 })
 app.post('/api/mousedata:userid',keycloak.protect(),(req,res)=>{
