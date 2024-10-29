@@ -355,7 +355,16 @@
       "security-admin-console": [],
       "admin-cli": [],
       "biovault-site": [],
-      "backend": [],
+      "backend": [
+        {
+          "id": "fdf91054-2a34-4fd6-939d-9300eb75bbba",
+          "name": "uma_protection",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "dac2d3d4-866d-447d-9e40-64c121bc1814",
+          "attributes": {}
+        }
+      ],
       "account-console": [],
       "broker": [
         {
@@ -472,39 +481,15 @@
           "true"
         ]
       },
-      "realmRoles": [],
+      "realmRoles": [
+        "realm-admin"
+      ],
       "clientRoles": {
-        "realm-management": [
-          "impersonation",
-          "view-authorization",
-          "query-users",
-          "manage-realm",
-          "query-clients",
-          "view-realm",
-          "manage-clients",
-          "manage-identity-providers",
-          "view-events",
-          "view-clients",
-          "view-users",
-          "view-identity-providers",
-          "manage-authorization",
-          "create-client",
-          "query-realms",
-          "manage-events",
-          "realm-admin",
-          "query-groups",
-          "manage-users"
-        ],
-        "broker": [
-          "read-token"
-        ],
         "account": [
-          "view-profile",
           "view-consent",
-          "view-groups",
           "delete-account",
-          "manage-account-links",
           "manage-consent",
+          "manage-account-links",
           "view-applications",
           "manage-account"
         ]
@@ -627,9 +612,12 @@
       "clientRoles": {
         "realm-management": [
           "realm-admin"
+        ],
+        "backend": [
+          "uma_protection"
         ]
       },
-      "notBefore": 1730063283,
+      "notBefore": 1730076096,
       "groups": [
         "/users"
       ]
@@ -825,15 +813,17 @@
       "consentRequired": false,
       "standardFlowEnabled": false,
       "implicitFlowEnabled": false,
-      "directAccessGrantsEnabled": true,
+      "directAccessGrantsEnabled": false,
       "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": true,
       "publicClient": false,
-      "frontchannelLogout": true,
+      "frontchannelLogout": false,
       "protocol": "openid-connect",
       "attributes": {
         "client.secret.creation.time": "1730050394",
         "client.introspection.response.allow.jwt.claim.enabled": "false",
         "oauth2.device.authorization.grant.enabled": "false",
+        "use.jwks.url": "false",
         "backchannel.logout.revoke.offline.tokens": "false",
         "use.refresh.tokens": "true",
         "realm_client": "false",
@@ -906,12 +896,85 @@
         "email"
       ],
       "optionalClientScopes": [
-        "master_scope",
         "address",
         "phone",
         "offline_access",
         "microprofile-jwt"
-      ]
+      ],
+      "authorizationSettings": {
+        "allowRemoteResourceManagement": true,
+        "policyEnforcementMode": "ENFORCING",
+        "resources": [
+          {
+            "name": "active_users",
+            "type": "urn:backend:resources:admin-dash",
+            "ownerManagedAccess": false,
+            "displayName": "active users",
+            "attributes": {},
+            "uris": [
+              "/api/activeusers"
+            ],
+            "icon_uri": ""
+          },
+          {
+            "name": "Default Resource",
+            "type": "urn:backend:resources:default",
+            "ownerManagedAccess": false,
+            "attributes": {},
+            "uris": [
+              "/*"
+            ]
+          }
+        ],
+        "policies": [
+          {
+            "name": "Default Policy",
+            "description": "A policy that grants access only for users within this realm",
+            "type": "js",
+            "logic": "POSITIVE",
+            "decisionStrategy": "AFFIRMATIVE",
+            "config": {
+              "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
+            }
+          },
+          {
+            "name": "Admins Group",
+            "description": "Requires membership in the realm admins group",
+            "type": "group",
+            "logic": "POSITIVE",
+            "decisionStrategy": "UNANIMOUS",
+            "config": {
+              "groups": "[{\"path\":\"/Admins\",\"extendChildren\":false}]",
+              "groupsClaim": ""
+            }
+          },
+          {
+            "name": "Default Permission",
+            "description": "A permission that applies to the default resource type",
+            "type": "resource",
+            "logic": "POSITIVE",
+            "decisionStrategy": "UNANIMOUS",
+            "config": {
+              "defaultResourceType": "urn:backend:resources:default",
+              "applyPolicies": "[\"Default Policy\"]"
+            }
+          },
+          {
+            "name": "Realm Admin",
+            "description": "Requires realm admin role.",
+            "type": "resource",
+            "logic": "POSITIVE",
+            "decisionStrategy": "UNANIMOUS",
+            "config": {
+              "defaultResourceType": "",
+              "resources": "[\"active_users\"]",
+              "applyPolicies": "[\"Admins Group\"]"
+            }
+          }
+        ],
+        "scopes": [],
+        "decisionStrategy": "UNANIMOUS"
+      }
     },
     {
       "id": "210d8c51-6a3d-4019-a706-745949b93618",
