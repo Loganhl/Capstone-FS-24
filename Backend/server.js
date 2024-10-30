@@ -74,6 +74,11 @@ keycloak.grantManager.obtainFromClientCredentials().then((grant=> keycloak.grant
 //   "expires_in":60,
 // })
 app.use(cors({}))
+app.post('/api/forcelogout',keycloak.protect(),(req,res)=>{
+    let user = req.body.user;
+    //post logout message
+    res.status(200).send("success");
+})
 
 app.use(express.json())
 app.get('/api/users',keycloak.protect(),(req,res)=>{

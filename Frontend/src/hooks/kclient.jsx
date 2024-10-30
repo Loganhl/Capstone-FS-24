@@ -1,8 +1,8 @@
 import Keycloak from "keycloak-js";
 import paths from '../paths.json'
 const client = new Keycloak({
-    "clientId":paths.keycloakclient_id,
-    "realm":paths.keycloak_realm,
-    "url":paths.keycloakurl
+    "clientId":"biovault-site",
+    "realm":"biovault",
+    "url":"http://localhost:8080"
 })
 export default client;

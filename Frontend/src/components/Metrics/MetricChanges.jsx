@@ -47,6 +47,13 @@ export const options = {
         drawOnChartArea:false,
       },
     },
+    y3: {
+      type: 'linear',
+      display: false,
+      grid:{
+        drawOnChartArea:false,
+      },
+    },
   },
 };
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November'];
@@ -74,6 +81,13 @@ export const data = {
       borderColor: 'rgb(125,53,99)',
       backgroundColor:'rgba(125,53,99,0.5)',
       yAxisID:'y2'
+    },
+    {
+      label:'Jack',
+      data: labels.map(()=> faker.number.int({min:-1000, max:1000})),
+      borderColor: 'rgb(240,151,90)',
+      backgroundColor:'rgba(240,151,90,0.5)',
+      yAxisID:'y3'
     },
   ],
 };

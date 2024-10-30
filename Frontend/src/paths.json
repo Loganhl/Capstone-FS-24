@@ -2,7 +2,7 @@
     "activeusers":"/api/activeusers",
     "usersearch":"/api/usersearch:username",
     "users":"/api/users",
-    "keycloakurl":"http://localhost:8080/",
+    "keycloakurl":"http://keycloak:8080/",
     "keycloakclient_id":"biovault-site",
     "keycloak_realm":"biovault"
 

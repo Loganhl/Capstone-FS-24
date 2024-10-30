@@ -27,6 +27,7 @@ const Navigation = ({token,client})=>{
                 <Nav.Item>
                     <Nav.Link onClick={()=> client.logout()}>Log out</Nav.Link>
                 </Nav.Item>
+                <Navbar.Toggle >Light</Navbar.Toggle>
             </Nav>
             </Container>
             </Navbar>

