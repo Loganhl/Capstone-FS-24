@@ -28,7 +28,6 @@ class KeystrokeMetrics:
 
         # Check for idle time and adjust active typing time
         if self.last_key_time and (current_time - self.last_key_time) > self.idle_threshold:
-            # Reset the active typing time for idle periods
             self.active_typing_time -= (current_time - self.last_key_time)
 
         # Record time between keystrokes for metrics
@@ -47,28 +46,36 @@ class KeystrokeMetrics:
     def on_release(self, key):
         current_time = time.time()
 
-        # Calculate dwell time for key
+        # Check if the key is in the key_press_times
         if key in self.key_press_times:
+            # Calculate dwell time for key
             dwell_time = current_time - self.key_press_times[key]
             self.dwell_times.append(dwell_time)
             del self.key_press_times[key]
 
+
     def calculate_metrics(self):
         words_typed = self.char_count / self.avg_word_length
+
         active_time_minutes = (self.active_typing_time / 60) if self.active_typing_time > 0 else 1
+
         wpm = (words_typed / active_time_minutes) if active_time_minutes > 0 else 0
 
-        # Adjusting for idle periods when calculating keys per second
+        avg_dwell_time = sum(self.dwell_times) / len(self.dwell_times) if self.dwell_times else 0
+        
+
         if self.active_typing_time > 0:
             keys_per_sec = self.key_count / self.active_typing_time
         else:
             keys_per_sec = 0
 
-        # Adjusting for idle periods when calculating average time between keystrokes
+
         if self.key_intervals:
             avg_time_between_keystrokes = sum(self.key_intervals) / len(self.key_intervals)
         else:
             avg_time_between_keystrokes = 0
+
+        
 
         # Reset metrics for the next interval
         self.start_time = time.time()
@@ -83,6 +90,6 @@ class KeystrokeMetrics:
         return {
             'wpm': wpm,
             'keys_per_sec': keys_per_sec,
-            'avg_dwell_time': sum(self.dwell_times) / len(self.dwell_times) if self.dwell_times else 0,
+            'avg_dwell_time': avg_dwell_time,
             'avg_time_between_keystrokes': avg_time_between_keystrokes
         }
