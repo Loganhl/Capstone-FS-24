@@ -1,602 +1,78 @@
-2024-10-23 22:59:45,751:INFO:Checking avg_time_between_keystrokes.csv, found 6 rows.
-2024-10-23 22:59:45,811:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:45,811:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 16.67%
-
-2024-10-23 22:59:45,816:INFO:Checking click_count.csv, found 11 rows.
-2024-10-23 22:59:45,873:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 9.09%
-2024-10-23 22:59:45,873:INFO:Processed click_count.csv with anomaly percentage: 9.09%
-
-2024-10-23 22:59:45,873:INFO:Checking double_click_speed.csv, found 0 rows.
-2024-10-23 22:59:45,873:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 22:59:45,876:INFO:Checking error_count.csv, found 0 rows.
-2024-10-23 22:59:45,876:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 22:59:45,877:INFO:Checking keys_per_second.csv, found 6 rows.
-2024-10-23 22:59:45,938:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:45,938:INFO:Processed keys_per_second.csv with anomaly percentage: 16.67%
-
-2024-10-23 22:59:45,938:INFO:Checking mouse_speed.csv, found 12 rows.
-2024-10-23 22:59:46,000:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:46,000:INFO:Processed mouse_speed.csv with anomaly percentage: 16.67%
-
-2024-10-23 22:59:46,001:INFO:Checking total_keys.csv, found 6 rows.
-2024-10-23 22:59:46,059:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:46,059:INFO:Processed total_keys.csv with anomaly percentage: 16.67%
-
-2024-10-23 22:59:46,060:INFO:Checking wpm.csv, found 6 rows.
-2024-10-23 22:59:46,116:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:46,116:INFO:Processed wpm.csv with anomaly percentage: 16.67%
-
-2024-10-23 22:59:56,119:INFO:Checking avg_time_between_keystrokes.csv, found 6 rows.
-2024-10-23 22:59:56,182:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:56,182:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 16.67%
-
-2024-10-23 22:59:56,183:INFO:Checking click_count.csv, found 11 rows.
-2024-10-23 22:59:56,242:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 9.09%
-2024-10-23 22:59:56,242:INFO:Processed click_count.csv with anomaly percentage: 9.09%
-
-2024-10-23 22:59:56,243:INFO:Checking double_click_speed.csv, found 0 rows.
-2024-10-23 22:59:56,243:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 22:59:56,245:INFO:Checking error_count.csv, found 0 rows.
-2024-10-23 22:59:56,245:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 22:59:56,246:INFO:Checking keys_per_second.csv, found 6 rows.
-2024-10-23 22:59:56,306:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:56,306:INFO:Processed keys_per_second.csv with anomaly percentage: 16.67%
-
-2024-10-23 22:59:56,307:INFO:Checking mouse_speed.csv, found 12 rows.
-2024-10-23 22:59:56,367:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:56,367:INFO:Processed mouse_speed.csv with anomaly percentage: 16.67%
-
-2024-10-23 22:59:56,367:INFO:Checking total_keys.csv, found 6 rows.
-2024-10-23 22:59:56,426:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:56,426:INFO:Processed total_keys.csv with anomaly percentage: 16.67%
-
-2024-10-23 22:59:56,427:INFO:Checking wpm.csv, found 6 rows.
-2024-10-23 22:59:56,487:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 22:59:56,487:INFO:Processed wpm.csv with anomaly percentage: 16.67%
-
-----------------------------------------------------------------2024-10-23 23:00:17,865:INFO:Checking avg_time_between_keystrokes.csv, found 6 rows.
-2024-10-23 23:00:17,929:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:17,929:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:17,930:INFO:Checking click_count.csv, found 11 rows.
-2024-10-23 23:00:17,989:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 9.09%
-2024-10-23 23:00:17,989:INFO:Processed click_count.csv with anomaly percentage: 9.09%
-
-2024-10-23 23:00:17,991:INFO:Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:00:17,991:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:00:17,992:INFO:Checking error_count.csv, found 0 rows.
-2024-10-23 23:00:17,992:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:00:17,993:INFO:Checking keys_per_second.csv, found 6 rows.
-2024-10-23 23:00:18,055:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:18,055:INFO:Processed keys_per_second.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:18,056:INFO:Checking mouse_speed.csv, found 12 rows.
-2024-10-23 23:00:18,117:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:18,117:INFO:Processed mouse_speed.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:18,120:INFO:Checking total_keys.csv, found 6 rows.
-2024-10-23 23:00:18,179:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:18,179:INFO:Processed total_keys.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:18,180:INFO:Checking wpm.csv, found 6 rows.
-2024-10-23 23:00:18,240:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:18,240:INFO:Processed wpm.csv with anomaly percentage: 16.67%
-
-------------------------------------------------------------------------------------------------2024-10-23 23:00:32,858:INFO:Checking avg_time_between_keystrokes.csv, found 6 rows.
-2024-10-23 23:00:32,920:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:32,920:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:32,922:INFO:Checking click_count.csv, found 11 rows.
-2024-10-23 23:00:32,980:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 9.09%
-2024-10-23 23:00:32,981:INFO:Processed click_count.csv with anomaly percentage: 9.09%
-
-2024-10-23 23:00:32,981:INFO:Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:00:32,981:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:00:32,983:INFO:Checking error_count.csv, found 0 rows.
-2024-10-23 23:00:32,983:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:00:32,984:INFO:Checking keys_per_second.csv, found 6 rows.
-2024-10-23 23:00:33,042:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:33,043:INFO:Processed keys_per_second.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:33,044:INFO:Checking mouse_speed.csv, found 12 rows.
-2024-10-23 23:00:33,105:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:33,105:INFO:Processed mouse_speed.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:33,107:INFO:Checking total_keys.csv, found 6 rows.
-2024-10-23 23:00:33,167:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:33,167:INFO:Processed total_keys.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:33,168:INFO:Checking wpm.csv, found 6 rows.
-2024-10-23 23:00:33,227:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:33,227:INFO:Processed wpm.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:43,229:INFO:Checking avg_time_between_keystrokes.csv, found 6 rows.
-2024-10-23 23:00:43,288:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:43,288:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:43,293:INFO:Checking click_count.csv, found 12 rows.
-2024-10-23 23:00:43,349:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:43,349:INFO:Processed click_count.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:43,351:INFO:Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:00:43,351:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:00:43,353:INFO:Checking error_count.csv, found 0 rows.
-2024-10-23 23:00:43,353:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:00:43,354:INFO:Checking keys_per_second.csv, found 6 rows.
-2024-10-23 23:00:43,417:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:43,417:INFO:Processed keys_per_second.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:43,419:INFO:Checking mouse_speed.csv, found 13 rows.
-2024-10-23 23:00:43,483:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 15.38%
-2024-10-23 23:00:43,483:INFO:Processed mouse_speed.csv with anomaly percentage: 15.38%
-
-2024-10-23 23:00:43,485:INFO:Checking total_keys.csv, found 6 rows.
-2024-10-23 23:00:43,550:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:43,550:INFO:Processed total_keys.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:43,551:INFO:Checking wpm.csv, found 6 rows.
-2024-10-23 23:00:43,611:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 16.67%
-2024-10-23 23:00:43,611:INFO:Processed wpm.csv with anomaly percentage: 16.67%
-
-2024-10-23 23:00:53,623:INFO:Checking avg_time_between_keystrokes.csv, found 7 rows.
-2024-10-23 23:00:53,690:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:00:53,690:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:00:53,700:INFO:Checking click_count.csv, found 13 rows.
-2024-10-23 23:00:53,801:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 15.38%
-2024-10-23 23:00:53,802:INFO:Processed click_count.csv with anomaly percentage: 15.38%
-
-2024-10-23 23:00:53,803:INFO:Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:00:53,803:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:00:53,805:INFO:Checking error_count.csv, found 0 rows.
-2024-10-23 23:00:53,805:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:00:53,810:INFO:Checking keys_per_second.csv, found 7 rows.
-2024-10-23 23:00:53,869:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:00:53,869:INFO:Processed keys_per_second.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:00:53,870:INFO:Checking mouse_speed.csv, found 14 rows.
-2024-10-23 23:00:53,955:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:00:53,955:INFO:Processed mouse_speed.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:00:53,966:INFO:Checking total_keys.csv, found 7 rows.
-2024-10-23 23:00:54,036:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:00:54,036:INFO:Processed total_keys.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:00:54,040:INFO:Checking wpm.csv, found 7 rows.
-2024-10-23 23:00:54,114:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:00:54,115:INFO:Processed wpm.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:01:04,119:INFO:Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:01:04,182:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:01:04,183:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:01:04,183:INFO:Checking click_count.csv, found 13 rows.
-2024-10-23 23:01:04,245:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 15.38%
-2024-10-23 23:01:04,245:INFO:Processed click_count.csv with anomaly percentage: 15.38%
-
-2024-10-23 23:01:04,246:INFO:Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:01:04,246:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:01:04,248:INFO:Checking error_count.csv, found 0 rows.
-2024-10-23 23:01:04,248:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:01:04,253:INFO:Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:01:04,316:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:01:04,316:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:01:04,317:INFO:Checking mouse_speed.csv, found 14 rows.
-2024-10-23 23:01:04,378:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:01:04,378:INFO:Processed mouse_speed.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:01:04,383:INFO:Checking total_keys.csv, found 8 rows.
-2024-10-23 23:01:04,443:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:01:04,444:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:01:04,449:INFO:Checking wpm.csv, found 8 rows.
-2024-10-23 23:01:04,508:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:01:04,508:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:07:07,064:INFO:
-Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:07:07,126:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:07:07,127:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:07:07,128:INFO:
-Checking click_count.csv, found 13 rows.
-2024-10-23 23:07:07,185:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 15.38%
-2024-10-23 23:07:07,185:INFO:Processed click_count.csv with anomaly percentage: 15.38%
-
-2024-10-23 23:07:07,186:INFO:
-Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:07:07,186:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:07:07,186:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:07:07,188:INFO:
-Checking error_count.csv, found 0 rows.
-2024-10-23 23:07:07,188:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:07:07,188:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:07:07,189:INFO:
-Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:07:07,246:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:07:07,246:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:07:07,247:INFO:
-Checking mouse_speed.csv, found 14 rows.
-2024-10-23 23:07:07,305:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:07:07,305:INFO:Processed mouse_speed.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:07:07,307:INFO:
-Checking total_keys.csv, found 8 rows.
-2024-10-23 23:07:07,364:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:07:07,364:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:07:07,367:INFO:
-Checking wpm.csv, found 8 rows.
-2024-10-23 23:07:07,425:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:07:07,425:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:16,292:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:16,295:INFO:
-Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:08:16,360:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:16,360:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:16,360:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:16,362:INFO:
-Checking click_count.csv, found 13 rows.
-2024-10-23 23:08:16,421:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 15.38%
-2024-10-23 23:08:16,421:INFO:Processed click_count.csv with anomaly percentage: 15.38%
-
-2024-10-23 23:08:16,421:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:16,422:INFO:
-Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:08:16,422:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:08:16,422:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:16,423:INFO:
-Checking error_count.csv, found 0 rows.
-2024-10-23 23:08:16,423:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:08:16,423:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:16,425:INFO:
-Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:08:16,482:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:16,482:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:16,482:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:16,483:INFO:
-Checking mouse_speed.csv, found 14 rows.
-2024-10-23 23:08:16,544:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:08:16,544:INFO:Processed mouse_speed.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:08:16,544:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:16,546:INFO:
-Checking total_keys.csv, found 8 rows.
-2024-10-23 23:08:16,603:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:16,604:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:16,604:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:16,605:INFO:
-Checking wpm.csv, found 8 rows.
-2024-10-23 23:08:16,663:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:16,663:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:26,664:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:26,665:INFO:
-Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:08:26,724:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:26,724:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:26,724:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:26,730:INFO:
-Checking click_count.csv, found 14 rows.
-2024-10-23 23:08:26,788:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:08:26,789:INFO:Processed click_count.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:08:26,789:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:26,790:INFO:
-Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:08:26,790:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:08:26,790:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:26,791:INFO:
-Checking error_count.csv, found 0 rows.
-2024-10-23 23:08:26,792:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:08:26,792:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:26,793:INFO:
-Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:08:26,853:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:26,853:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:26,853:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:26,859:INFO:
-Checking mouse_speed.csv, found 15 rows.
-2024-10-23 23:08:26,919:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 13.33%
-2024-10-23 23:08:26,919:INFO:Processed mouse_speed.csv with anomaly percentage: 13.33%
-
-2024-10-23 23:08:26,919:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:26,920:INFO:
-Checking total_keys.csv, found 8 rows.
-2024-10-23 23:08:26,980:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:26,980:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:26,980:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:26,982:INFO:
-Checking wpm.csv, found 8 rows.
-2024-10-23 23:08:27,043:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:27,043:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:37,044:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:37,045:INFO:
-Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:08:37,105:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:37,105:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:37,105:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:37,106:INFO:
-Checking click_count.csv, found 14 rows.
-2024-10-23 23:08:37,164:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:08:37,164:INFO:Processed click_count.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:08:37,164:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:37,165:INFO:
-Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:08:37,165:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:08:37,165:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:37,166:INFO:
-Checking error_count.csv, found 0 rows.
-2024-10-23 23:08:37,166:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:08:37,166:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:37,167:INFO:
-Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:08:37,225:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:37,225:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:37,225:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:37,227:INFO:
-Checking mouse_speed.csv, found 15 rows.
-2024-10-23 23:08:37,288:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 13.33%
-2024-10-23 23:08:37,288:INFO:Processed mouse_speed.csv with anomaly percentage: 13.33%
-
-2024-10-23 23:08:37,288:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:37,290:INFO:
-Checking total_keys.csv, found 8 rows.
-2024-10-23 23:08:37,350:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:37,350:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:37,350:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:37,351:INFO:
-Checking wpm.csv, found 8 rows.
-2024-10-23 23:08:37,412:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:37,413:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:47,413:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:47,414:INFO:
-Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:08:47,474:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:47,475:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:47,475:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:47,476:INFO:
-Checking click_count.csv, found 14 rows.
-2024-10-23 23:08:47,534:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:08:47,534:INFO:Processed click_count.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:08:47,534:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:47,535:INFO:
-Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:08:47,535:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:08:47,535:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:47,536:INFO:
-Checking error_count.csv, found 0 rows.
-2024-10-23 23:08:47,536:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:08:47,536:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:47,538:INFO:
-Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:08:47,600:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:47,600:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:47,600:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:47,602:INFO:
-Checking mouse_speed.csv, found 15 rows.
-2024-10-23 23:08:47,665:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 13.33%
-2024-10-23 23:08:47,665:INFO:Processed mouse_speed.csv with anomaly percentage: 13.33%
-
-2024-10-23 23:08:47,665:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:47,666:INFO:
-Checking total_keys.csv, found 8 rows.
-2024-10-23 23:08:47,725:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:47,725:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:47,725:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:47,726:INFO:
-Checking wpm.csv, found 8 rows.
-2024-10-23 23:08:47,788:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:47,788:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:57,789:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:57,790:INFO:
-Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:08:57,848:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:57,849:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:57,849:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:57,850:INFO:
-Checking click_count.csv, found 14 rows.
-2024-10-23 23:08:57,909:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:08:57,909:INFO:Processed click_count.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:08:57,909:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:57,910:INFO:
-Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:08:57,910:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:08:57,910:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:57,911:INFO:
-Checking error_count.csv, found 0 rows.
-2024-10-23 23:08:57,911:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:08:57,911:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:57,913:INFO:
-Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:08:57,973:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:57,973:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:57,973:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:57,974:INFO:
-Checking mouse_speed.csv, found 15 rows.
-2024-10-23 23:08:58,035:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 13.33%
-2024-10-23 23:08:58,035:INFO:Processed mouse_speed.csv with anomaly percentage: 13.33%
-
-2024-10-23 23:08:58,035:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:58,037:INFO:
-Checking total_keys.csv, found 8 rows.
-2024-10-23 23:08:58,096:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:58,097:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:08:58,097:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:08:58,098:INFO:
-Checking wpm.csv, found 8 rows.
-2024-10-23 23:08:58,156:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:08:58,156:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:09:08,156:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:08,158:INFO:
-Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:09:08,221:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:09:08,221:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:09:08,221:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:08,223:INFO:
-Checking click_count.csv, found 14 rows.
-2024-10-23 23:09:08,284:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 14.29%
-2024-10-23 23:09:08,284:INFO:Processed click_count.csv with anomaly percentage: 14.29%
-
-2024-10-23 23:09:08,284:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:08,285:INFO:
-Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:09:08,285:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:09:08,286:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:08,286:INFO:
-Checking error_count.csv, found 0 rows.
-2024-10-23 23:09:08,286:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:09:08,286:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:08,287:INFO:
-Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:09:08,348:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:09:08,348:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:09:08,348:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:08,349:INFO:
-Checking mouse_speed.csv, found 15 rows.
-2024-10-23 23:09:08,413:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 13.33%
-2024-10-23 23:09:08,413:INFO:Processed mouse_speed.csv with anomaly percentage: 13.33%
-
-2024-10-23 23:09:08,413:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:08,414:INFO:
-Checking total_keys.csv, found 8 rows.
-2024-10-23 23:09:08,477:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:09:08,477:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:09:08,477:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:08,478:INFO:
-Checking wpm.csv, found 8 rows.
-2024-10-23 23:09:08,543:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:09:08,543:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:09:18,544:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:18,546:INFO:
-Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:09:18,607:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:09:18,607:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:09:18,607:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:18,611:INFO:
-Checking click_count.csv, found 15 rows.
-2024-10-23 23:09:18,679:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 13.33%
-2024-10-23 23:09:18,679:INFO:Processed click_count.csv with anomaly percentage: 13.33%
-
-2024-10-23 23:09:18,679:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:18,680:INFO:
-Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:09:18,680:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:09:18,680:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:18,681:INFO:
-Checking error_count.csv, found 0 rows.
-2024-10-23 23:09:18,681:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:09:18,681:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:18,683:INFO:
-Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:09:18,744:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:09:18,745:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:09:18,745:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:18,749:INFO:
-Checking mouse_speed.csv, found 16 rows.
-2024-10-23 23:09:18,811:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:09:18,811:INFO:Processed mouse_speed.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:09:18,811:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:18,813:INFO:
-Checking total_keys.csv, found 8 rows.
-2024-10-23 23:09:18,869:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:09:18,869:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:09:18,869:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:09:18,870:INFO:
-Checking wpm.csv, found 8 rows.
-2024-10-23 23:09:18,928:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:09:18,928:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-
-2024-10-23 23:10:16,749:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:16,753:INFO:Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:10:16,813:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:10:16,813:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-2024-10-23 23:10:16,813:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:16,818:INFO:Checking click_count.csv, found 16 rows.
-2024-10-23 23:10:16,880:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:10:16,880:INFO:Processed click_count.csv with anomaly percentage: 12.50%
-2024-10-23 23:10:16,880:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:16,882:INFO:Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:10:16,882:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:10:16,882:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:16,883:INFO:Checking error_count.csv, found 0 rows.
-2024-10-23 23:10:16,883:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:10:16,883:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:16,885:INFO:Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:10:16,953:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:10:16,953:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-2024-10-23 23:10:16,953:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:16,959:INFO:Checking mouse_speed.csv, found 17 rows.
-2024-10-23 23:10:17,020:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 11.76%
-2024-10-23 23:10:17,020:INFO:Processed mouse_speed.csv with anomaly percentage: 11.76%
-2024-10-23 23:10:17,020:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:17,022:INFO:Checking total_keys.csv, found 8 rows.
-2024-10-23 23:10:17,079:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:10:17,079:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-2024-10-23 23:10:17,079:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:17,080:INFO:Checking wpm.csv, found 8 rows.
-2024-10-23 23:10:17,137:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:10:17,137:INFO:Processed wpm.csv with anomaly percentage: 12.50%
-2024-10-23 23:10:27,138:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:27,140:INFO:Checking avg_time_between_keystrokes.csv, found 8 rows.
-2024-10-23 23:10:27,202:INFO:avg_time_between_keystrokes.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:10:27,202:INFO:Processed avg_time_between_keystrokes.csv with anomaly percentage: 12.50%
-2024-10-23 23:10:27,202:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:27,207:INFO:Checking click_count.csv, found 17 rows.
-2024-10-23 23:10:27,265:INFO:click_count.csv has reached 5 rows. Anomaly percentage: 11.76%
-2024-10-23 23:10:27,265:INFO:Processed click_count.csv with anomaly percentage: 11.76%
-2024-10-23 23:10:27,265:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:27,267:INFO:Checking double_click_speed.csv, found 0 rows.
-2024-10-23 23:10:27,267:INFO:double_click_speed.csv has not reached 5 rows yet.
-2024-10-23 23:10:27,267:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:27,268:INFO:Checking error_count.csv, found 0 rows.
-2024-10-23 23:10:27,268:INFO:error_count.csv has not reached 5 rows yet.
-2024-10-23 23:10:27,268:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:27,268:INFO:Checking keys_per_second.csv, found 8 rows.
-2024-10-23 23:10:27,329:INFO:keys_per_second.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:10:27,329:INFO:Processed keys_per_second.csv with anomaly percentage: 12.50%
-2024-10-23 23:10:27,329:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:27,334:INFO:Checking mouse_speed.csv, found 18 rows.
-2024-10-23 23:10:27,394:INFO:mouse_speed.csv has reached 5 rows. Anomaly percentage: 11.11%
-2024-10-23 23:10:27,394:INFO:Processed mouse_speed.csv with anomaly percentage: 11.11%
-2024-10-23 23:10:27,394:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:27,395:INFO:Checking total_keys.csv, found 8 rows.
-2024-10-23 23:10:27,458:INFO:total_keys.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:10:27,459:INFO:Processed total_keys.csv with anomaly percentage: 12.50%
-2024-10-23 23:10:27,459:INFO:------------------------------------------------------------------------------------------------
-2024-10-23 23:10:27,460:INFO:Checking wpm.csv, found 8 rows.
-2024-10-23 23:10:27,519:INFO:wpm.csv has reached 5 rows. Anomaly percentage: 12.50%
-2024-10-23 23:10:27,519:INFO:Processed wpm.csv with anomaly percentage: 12.50%
+2024-11-01 09:34:20,505:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:20,509:DEBUG:Data from wpm:         value
+0  188.389116
+1  107.209715
+2  100.000000
+3  101.000000
+4   15.000000
+2024-11-01 09:34:20,516:INFO:Checking wpm, found 5 rows.
+2024-11-01 09:34:20,582:INFO:wpm has reached 5 rows. Anomaly percentage: 20.00%
+2024-11-01 09:34:20,582:INFO:Processed wpm with anomaly percentage: 20.00%
+2024-11-01 09:34:20,582:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:20,585:DEBUG:Data from mouse_speed:        value
+0  75.124961
+1  90.932260
+2024-11-01 09:34:20,586:INFO:Checking mouse_speed, found 2 rows.
+2024-11-01 09:34:20,586:INFO:mouse_speed has not reached 5 rows yet.
+2024-11-01 09:34:20,586:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:20,587:DEBUG:Data from keys_per_sec:        value
+0  19.187780
+1  11.699473
+2024-11-01 09:34:20,588:INFO:Checking keys_per_sec, found 2 rows.
+2024-11-01 09:34:20,588:INFO:keys_per_sec has not reached 5 rows yet.
+2024-11-01 09:34:20,588:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:20,589:DEBUG:Data from avg_time_between_keystrokes:       value
+0  0.054598
+1  0.086258
+2024-11-01 09:34:20,590:INFO:Checking avg_time_between_keystrokes, found 2 rows.
+2024-11-01 09:34:20,590:INFO:avg_time_between_keystrokes has not reached 5 rows yet.
+2024-11-01 09:34:20,590:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:20,591:DEBUG:Data from avg_dwell_time: Empty DataFrame
+Columns: [value]
+Index: []
+2024-11-01 09:34:20,591:INFO:avg_dwell_time is empty.
+2024-11-01 09:34:20,591:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:20,593:DEBUG:Data from avg_click_dwell_time:       value
+0  1.597304
+1  0.074822
+2024-11-01 09:34:20,593:INFO:Checking avg_click_dwell_time, found 2 rows.
+2024-11-01 09:34:20,593:INFO:avg_click_dwell_time has not reached 5 rows yet.
+2024-11-01 09:34:30,594:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:30,596:DEBUG:Data from wpm:         value
+0  188.389116
+1  107.209715
+2  100.000000
+3  101.000000
+4   15.000000
+2024-11-01 09:34:30,597:INFO:Checking wpm, found 5 rows.
+2024-11-01 09:34:30,656:INFO:wpm has reached 5 rows. Anomaly percentage: 20.00%
+2024-11-01 09:34:30,656:INFO:Processed wpm with anomaly percentage: 20.00%
+2024-11-01 09:34:30,656:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:30,657:DEBUG:Data from mouse_speed:        value
+0  75.124961
+1  90.932260
+2024-11-01 09:34:30,659:INFO:Checking mouse_speed, found 2 rows.
+2024-11-01 09:34:30,659:INFO:mouse_speed has not reached 5 rows yet.
+2024-11-01 09:34:30,659:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:30,660:DEBUG:Data from keys_per_sec:        value
+0  19.187780
+1  11.699473
+2024-11-01 09:34:30,661:INFO:Checking keys_per_sec, found 2 rows.
+2024-11-01 09:34:30,661:INFO:keys_per_sec has not reached 5 rows yet.
+2024-11-01 09:34:30,661:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:30,663:DEBUG:Data from avg_time_between_keystrokes:       value
+0  0.054598
+1  0.086258
+2024-11-01 09:34:30,664:INFO:Checking avg_time_between_keystrokes, found 2 rows.
+2024-11-01 09:34:30,664:INFO:avg_time_between_keystrokes has not reached 5 rows yet.
+2024-11-01 09:34:30,664:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:30,664:DEBUG:Data from avg_dwell_time: Empty DataFrame
+Columns: [value]
+Index: []
+2024-11-01 09:34:30,664:INFO:avg_dwell_time is empty.
+2024-11-01 09:34:30,664:INFO:------------------------------------------------------------------------------------------------
+2024-11-01 09:34:30,666:DEBUG:Data from avg_click_dwell_time:       value
+0  1.597304
+1  0.074822
+2024-11-01 09:34:30,667:INFO:Checking avg_click_dwell_time, found 2 rows.
+2024-11-01 09:34:30,667:INFO:avg_click_dwell_time has not reached 5 rows yet.

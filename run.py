@@ -10,7 +10,7 @@ def run_script(script_path):
 
 def main():
     scripts = [
-        'newestbio/main.py',
+        'BioVaultDataCollection/main.py',
         'AutomatedAlgorithm/autoalg.py'
     ]
 
