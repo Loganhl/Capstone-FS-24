@@ -1,7 +1,9 @@
 import sqlite3
+import os
 
-def setup_database():
-    conn = sqlite3.connect('data/biometric_data.db')
+def setup_database(db_path):
+    db_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'biometric_data.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     # Create tables

@@ -4,6 +4,7 @@ from metrics.keystroke_metrics import KeystrokeMetrics
 from metrics.mouse_metrics import MouseMetrics
 from utils.database import setup_database, insert_metric
 from pynput import keyboard, mouse
+import os
 
 
 def collect_metrics(keystroke_metrics, mouse_metrics):
@@ -55,12 +56,20 @@ def collect_metrics(keystroke_metrics, mouse_metrics):
         conn.close()
 
 
+db_path = os.path.join(os.path.dirname(__file__), 'data', 'biometric_data.db')
+
+setup_database(db_path)
+
+
+try:
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    print("Database connection established successfully.")
+except sqlite3.OperationalError as e:
+    print(f"Error: {e}")
+    exit(1)
+
 if __name__ == "__main__":
-    setup_database()
     keystroke_metrics = KeystrokeMetrics()
     mouse_metrics = MouseMetrics()
-
-    conn = sqlite3.connect('data/biometric_data.db')
-    cursor = conn.cursor()
-    
     collect_metrics(keystroke_metrics, mouse_metrics)
