@@ -1,12 +1,20 @@
-import sqlite3
+import mysql.connector
 import time
 from metrics.keystroke_metrics import KeystrokeMetrics
 from metrics.mouse_metrics import MouseMetrics
 from utils.database import setup_database, insert_metric
 from pynput import keyboard, mouse
+import os
 
+# Database connection parameters
+config = {
+    'user': 'mashedsnake',         
+    'password': 'ilovelamp',     
+    'host': 'mysql',             
+    'database': 'biometric_auth'     
+}
 
-def collect_metrics(keystroke_metrics, mouse_metrics):
+def collect_metrics(keystroke_metrics, mouse_metrics, cursor):
     # Collects key presses
     def on_key_press(key):
         keystroke_metrics.on_press(key)
@@ -52,15 +60,22 @@ def collect_metrics(keystroke_metrics, mouse_metrics):
     finally:
         listener_k.stop()
         listener_m.stop()
-        conn.close()
-
 
 if __name__ == "__main__":
-    setup_database()
+    setup_database()  # Set up the database
+
+    # Create a connection to MySQL
+    try:
+        conn = mysql.connector.connect(**config)
+        cursor = conn.cursor()
+        print("Database connection established successfully.")
+    except mysql.connector.Error as e:
+        print(f"Error: {e}")
+        exit(1)
+
     keystroke_metrics = KeystrokeMetrics()
     mouse_metrics = MouseMetrics()
+    collect_metrics(keystroke_metrics, mouse_metrics, cursor)
 
-    conn = sqlite3.connect('data/biometric_data.db')
-    cursor = conn.cursor()
-    
-    collect_metrics(keystroke_metrics, mouse_metrics)
+    # Close the connection at the end of the program
+    conn.close()
