@@ -37,6 +37,23 @@ services:
   #     - mysql
   #     - keycloak
   #   entrypoint: node server.js
+  keycloak:
+    build: ./../keycloak
+    container_name: keycloak
+    depends_on:
+      - mysql
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    environment:
+      - KC_DB=mysql
+      - KC_DB_URL=jdbc:mysql://mysql:3306/biometric_auth
+      - KC_DB_USERNAME=root
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_HTTPS_PORT=8443
+    entrypoint: ["/opt/keycloak/bin/kc.sh","start-dev" ]
   mysql:
     build: ../MySQL/.
     # image: mysql:latest

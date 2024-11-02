@@ -1,6 +1,6 @@
 FROM quay.io/keycloak/keycloak:26.0.0 as builder
 #import the biovault-realm to the data import folder
-COPY  ./biovault-realm.json /opt/keycloak/data/import
+# COPY  ./biovaultrealm.json /opt/keycloak/data/import
 
 WORKDIR /opt/keycloak
 
@@ -20,5 +20,5 @@ ENV KC_BOOTSTRAP_ADMIN_PASSWORD=admin
 ENV KC_BOOTSTRAP_ADMIN_USERNAME=admin
 ENV KC_FEATURES=client-types
 # ENV KC_HTTP_ENABLED=false
-ONBUILD RUN /opt/keycloak/bin/kc.sh import --file /opt/keycloak/data/import/biovault-realm.json
+# ONBUILD RUN /opt/keycloak/bin/kc.sh import --file /opt/keycloak/data/import/biovault-realm.json
 ENTRYPOINT [ "/opt/keycloak/bin/kc.sh" ]

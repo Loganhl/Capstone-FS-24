@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS biometric_auth.USER_ENTITY (
 
 CREATE TABLE IF NOT EXISTS biometric_auth.wpm (
  wpm_id PRIMARY KEY AUTO_INCREMENT,
+n
+
  value REAL
  FOREIGN KEY (ID) REFERENCES USER_ENTITY(ID)
 );
@@ -14,6 +16,7 @@ CREATE TABLE IF NOT EXISTS biometric_auth.wpm (
 CREATE TABLE IF NOT EXISTS biometric_auth.keys_per_sec (
  keys_per_sec_id PRIMARY KEY AUTO_INCREMENT,
  value REAL,
+ 
  FOREIGN KEY (ID) REFERENCES USER_ENTITY(ID)
 );
 
