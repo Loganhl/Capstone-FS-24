@@ -1,11 +1,9 @@
 import React from "react";
-import client from "../hooks/kclient";
 import { Button,Navbar,Nav, Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from "../pages/home";
 import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
-import useAuth from "../hooks/useAuth";
 const Navigation = ({token,client})=>{
 
     return(
