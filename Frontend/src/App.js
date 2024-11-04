@@ -3,15 +3,16 @@ import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, LineElement, LinearScale, Title, PointElement, CategoryScale } from 'chart.js';
 import WordsPerMin from './components/Metrics/Wordspermin';
-
+import useAuth from './hooks/useAuth'
 import Usermetrics from './components/Metrics/Keyspersec';
 import { Button } from 'react-bootstrap';
 import { MetricChanges } from './components/Metrics/MetricChanges';
 import Navigation from './components/navigation';
 
 // import UserStats from './components/userMetrics';
+import client from './hooks/kclient';
 
-const Apps = ()=>{
+const Apps = ({token,client})=>{
   ChartJS.register(ArcElement, Tooltip, Legend,LineElement,LinearScale,Title,PointElement,CategoryScale); 
   const datab = {
     labels:['TouchDowns','Yards per Carry','Yards per Game'],
@@ -30,14 +31,14 @@ const Apps = ()=>{
 }
   return(<div className='App'>
     <header className='App-header'>
-      <Navigation></Navigation>
+      <Navigation  client={client} token={token}></Navigation>
     </header>
   </div>)
 }
 function App() {
-  const isLogin = true
+  const [isLogin,token] = useAuth();
   if (isLogin == true) {
-    return(<Apps></Apps>)
+    return(<Apps token={token} client={client}></Apps>)
   }
   return (
     <div className="App">
