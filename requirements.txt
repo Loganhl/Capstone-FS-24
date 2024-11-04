@@ -1,7 +1,7 @@
 pynput==1.7.7
 Flask
 pywin32
-MySQL-python=1.2.5
+MySQL-python==1.2.5
 fastapi==0.112.0
 numpy==1.26.4
 openpyxl==3.1.2
@@ -11,3 +11,4 @@ scipy==1.13.0
 pathlib==1.0.1
 scikit-learn
 pathlib
+mysql-connector-python

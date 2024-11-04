@@ -2,16 +2,17 @@ import mysql.connector
 import time
 from metrics.keystroke_metrics import KeystrokeMetrics
 from metrics.mouse_metrics import MouseMetrics
-from utils.database import setup_database, insert_metric
+from utils.database import insert_metric
 from pynput import keyboard, mouse
 import os
 
-# Database connection parameters
+print(mysql.connector.__version__)
 config = {
-    'user': 'mashedsnake',         
-    'password': 'ilovelamp',     
-    'host': 'mysql',             
-    'database': 'biometric_auth'     
+    'user': 'root',         
+    'password': 'secretsquirrels',     
+    'host': 'localhost',             
+    'database': 'biometric_auth',
+    'port': '3307'     
 }
 
 def collect_metrics(keystroke_metrics, mouse_metrics, cursor):
@@ -62,7 +63,6 @@ def collect_metrics(keystroke_metrics, mouse_metrics, cursor):
         listener_m.stop()
 
 if __name__ == "__main__":
-    setup_database()  # Set up the database
 
     # Create a connection to MySQL
     try:
