@@ -9,16 +9,19 @@ const Dashboard = ({token,client})=>{
         <br></br>
         <br></br>
         <br></br>
-        <br></br>
     <Container fluid='md'>
+        
         <Container>
+        <br></br>    
         <Row xs={1} style={{height:400}}>
-            <MetricChanges/>
+            <Col xs={10}>
+                <MetricChanges/>
+            </Col>
+            <Col xs={3}>
+                <Keysperec/>
+            </Col>
         </Row>
-        <Row xs={1} style={{height:400}}>
-            <Keysperec/>
-        </Row>
-
+        
         </Container>
     </Container>
     </div>)

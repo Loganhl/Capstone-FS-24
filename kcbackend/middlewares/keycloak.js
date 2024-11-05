@@ -1,7 +1,7 @@
 const Keycloak = require("keycloak-connect");
 const dotenv = require('dotenv').config();
 // const config = require("../keycloak.json")
-
+//keycloak configuration variables so that tha backend connects with keycloak and secures the api.
 const config = {
   "realm": process.env.KEYCLOAK_REALM,
   "auth-server-url": `${process.env.KEYCLOAK_URL}`,

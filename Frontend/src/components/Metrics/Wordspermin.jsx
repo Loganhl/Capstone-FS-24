@@ -1,8 +1,21 @@
+import React,{useEffect,useState} from "react";
+import axios from 'axios'
 import { CategoryScale } from "chart.js";
-import React from "react";
 import { Bar, Doughnut } from "react-chartjs-2";
+
 //returns graph showing words per minute by user.
-const WordsPerMin = ()=>{
+const WordsPerMin = ({token,user})=>{
+    const [wpm,setWPM] = useState([]);
+    useEffect(()=>{
+      axios.get('http://localhost:2500/api/wpm',{
+        "headers":{
+          "Authorization":`Bearer ${token}`,
+        },
+        "responseType":'json',
+        'withXSRFToken':true        
+      }).then(res=> setWPM(res.data)).catch((err=> console.error(err)));
+    })
+    //need to get this fixed so it isnt junk data
     const  data = {
         labels: ['Brady Cook', 'Chase Daniel', 'Drew Lock', 'Brad Smith', 'Sam Horn', 'Blaine Gabbert'],
         datasets: [

@@ -30,6 +30,7 @@ const AvgDwellTime = ({token,client})=>{
                 "Authorization":`Bearer ${token}`,
             },
             'responseType':'json',
+            'withXSRFToken':true
         }).then(resp=> setData(resp.data)).catch(err=> console.error(err));
     },[])
     var options = {
@@ -73,22 +74,6 @@ const AvgDwellTime = ({token,client})=>{
         <br></br>
         <br></br>
         <Line height={90} options={options} data={adataset}></Line>
-        <Table variant="dark" striped bordered responsive hover align="center">
-            <thead>
-                <tr>
-                <th>User Id</th>
-                <th>Average Dwell Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                {data.map((item)=>(
-                    <tr key={item.id}>
-                        <td>{item.avg_dwell_time_id}</td>
-                        <td>{item.value}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </Table>
     </div>
     )
 
