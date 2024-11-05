@@ -25,9 +25,6 @@ const Navigation = ({token,client})=>{
                     <Nav.Link as={Link} to='/dashboard'>Admin Dashboard</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link as={Link} to='/login'>Login</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
                     <Nav.Link onClick={()=> client.logout()}>Log out</Nav.Link>
                 </Nav.Item>
                 <Navbar.Toggle >Light</Navbar.Toggle>
@@ -36,9 +33,9 @@ const Navigation = ({token,client})=>{
             </Navbar>
             <Routes>
                 <Route exact path="/"  element={<Home/>}/>
-                <Route path="/biometrics" element={<MyBiometrics/>}/>
+                <Route path="/biometrics" element={<MyBiometrics token={token} client={client} />}/>
                 <Route path="/dashboard" element={<Dashboard/>}/>
-                <Route path="/login" element={<Login/>}/>
+                
             </Routes>
         </Router>
         )

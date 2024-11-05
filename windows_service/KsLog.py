@@ -1,4 +1,4 @@
-import newestbio.main
+
 import pywin.framework
 import pywin32_system32
 import pywin
@@ -9,7 +9,7 @@ import socket
 import servicemanager
 import os
 from logger import keyboard_listen
-
+from kc import get_userid,keycloak_openid,KC_OID
 
 class KsLogService(win32serviceutil.ServiceFramework):
     """base class to create a windows service python"""
@@ -38,6 +38,7 @@ class KsLogService(win32serviceutil.ServiceFramework):
         '''
         Called when the service is asked to stop
         '''
+
         self.stop()
         self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
         win32event.SetEvent(self.hWaitStop)
@@ -47,6 +48,7 @@ class KsLogService(win32serviceutil.ServiceFramework):
         Called when the service is asked to start
         '''
         self.start()
+        self.keycloak = KC_OID('gar7mn','Wand4511','http://localhost:8080','biovault','biovault-client','VxW35Qjm8NEs2V9aoheEHTkvEVd3hVXv')
         servicemanager.LogMsg(servicemanager.EVENTLOG_INFORMATION_TYPE,
                               servicemanager.PYS_SERVICE_STARTED,
                               (self._svc_name_, ''))
@@ -66,7 +68,7 @@ class KsLogService(win32serviceutil.ServiceFramework):
         Override to add logic before the start
         eg. running condition
         '''
-    
+        self.keycloak.logout(self.keycloak.usertoken['refresh_token'])
     def main(self):
         #need  to  figure out how to stop the process
         pass

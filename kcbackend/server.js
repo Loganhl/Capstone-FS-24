@@ -4,7 +4,8 @@ const app = express()
 const Maketables = require('./db/queries')
 const mysql = require('mysql2')
 const keycloak = require('./middlewares/keycloak')
-const cors = require('cors')
+const cors = require('cors');
+const connection = require('./db/connect');
 app.use(express.json())
 app.use(keycloak.middleware())
 app.use(cors())
@@ -22,6 +23,14 @@ app.get('/api',(req,res)=>{
 app.get('/api/users',keycloak.protect(),(req,res)=>{
     res.json({
         "resp":"Access Granted"
+    })
+})
+app.get('/api/mousespeed',keycloak.protect(),(req,res)=>{
+    res.send("continue work here");
+})
+app.get('/api/avgdwelltime',keycloak.protect(),(req,res)=>{
+    connection.query('SELECT * FROM avg_dwell_time;',(err,result,fields)=>{
+        res.json(result);
     })
 })
 
