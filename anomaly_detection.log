@@ -76,3 +76,27 @@ Index: []
 1  0.074822
 2024-11-01 09:34:30,667:INFO:Checking avg_click_dwell_time, found 2 rows.
 2024-11-01 09:34:30,667:INFO:avg_click_dwell_time has not reached 5 rows yet.
+2024-11-05 20:03:49,168:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:49,172:ERROR:Error processing wpm: unable to open database file
+2024-11-05 20:03:49,172:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:49,172:ERROR:Error processing mouse_speed: unable to open database file
+2024-11-05 20:03:49,173:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:49,173:ERROR:Error processing keys_per_sec: unable to open database file
+2024-11-05 20:03:49,173:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:49,173:ERROR:Error processing avg_time_between_keystrokes: unable to open database file
+2024-11-05 20:03:49,173:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:49,173:ERROR:Error processing avg_dwell_time: unable to open database file
+2024-11-05 20:03:49,173:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:49,174:ERROR:Error processing avg_click_dwell_time: unable to open database file
+2024-11-05 20:03:59,175:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:59,175:ERROR:Error processing wpm: unable to open database file
+2024-11-05 20:03:59,176:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:59,176:ERROR:Error processing mouse_speed: unable to open database file
+2024-11-05 20:03:59,176:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:59,176:ERROR:Error processing keys_per_sec: unable to open database file
+2024-11-05 20:03:59,176:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:59,177:ERROR:Error processing avg_time_between_keystrokes: unable to open database file
+2024-11-05 20:03:59,177:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:59,177:ERROR:Error processing avg_dwell_time: unable to open database file
+2024-11-05 20:03:59,177:INFO:------------------------------------------------------------------------------------------------
+2024-11-05 20:03:59,177:ERROR:Error processing avg_click_dwell_time: unable to open database file

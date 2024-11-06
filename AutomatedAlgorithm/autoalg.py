@@ -1,29 +1,43 @@
-import sqlite3
+import mysql.connector
 import pandas as pd
 from sklearn.ensemble import IsolationForest
 import logging
 import time
 
-# Initialize logging
+# Initialize logging.
 logging.basicConfig(filename='anomaly_detection.log', level=logging.DEBUG,
                     format='%(asctime)s:%(levelname)s:%(message)s')
 
-def check_sql_table_and_analyze(db_path, table_name):
+# Database configuration.
+config = {
+    'user': 'root',
+    'password': 'secretsquirrels',
+    'host': 'localhost',
+    'database': 'biometric_auth',
+    'port': '3307'
+}
+
+def check_sql_table_and_analyze(config, table_name):
     try:
-        # Connect to the database
-        conn = sqlite3.connect(db_path)
+        # Connect to the database.
+        conn = mysql.connector.connect(**config)
+        cursor = conn.cursor(dictionary=True)
         query = f"SELECT * FROM {table_name}"
         
-        df = pd.read_sql_query(query, conn)
+        cursor.execute(query)
+        result = cursor.fetchall()
         
+        df = pd.DataFrame(result)
+        
+        cursor.close()
         conn.close()
         
-        # Empty Check
+        # Empty Check.
         if df.empty:
             logging.info(f"{table_name} is empty.")
             return None
         
-        # Convert numeric and drop NaN values
+        # Convert numeric and drop NaN values.
         df.iloc[:, 0] = pd.to_numeric(df.iloc[:, 0], errors='coerce')
         df = df.dropna()
         
@@ -39,13 +53,13 @@ def check_sql_table_and_analyze(db_path, table_name):
             
             iso_forest = IsolationForest(contamination=0.1, random_state=42)
             
-            # Fit the model on the data
+            # Fit the model on the data.
             iso_forest.fit(df)
             
             # Predict Anomaly
             df['anomaly'] = iso_forest.predict(df)
             
-            # Set Predictions to Binary
+            # Set Predictions to Binary.
             df['anomaly'] = df['anomaly'].map({1: 0, -1: 1})
             
             anomalies_count = df['anomaly'].sum()
@@ -54,7 +68,7 @@ def check_sql_table_and_analyze(db_path, table_name):
             logging.info(f"{table_name} has reached 5 rows. Anomaly percentage: {anomaly_percentage:.2f}%")
             
             if anomalies_count > 0:
-                print(f"Warning: {anomalies_count} anomalies detected in {table_name}.")
+                logging.info(f"Warning: {anomalies_count} anomalies detected in {table_name}.")
             return anomaly_percentage
         else:
             logging.info(f"{table_name} has not reached 5 rows yet.")
@@ -64,9 +78,33 @@ def check_sql_table_and_analyze(db_path, table_name):
     except Exception as e:
         logging.error(f"Error processing {table_name}: {str(e)}")
 
-def main():
-    db_path = 'BioVaultDataCollection/data/biometric_data.db'
+def insert_percentage(config, table_name, anomaly_percentage):
+    if anomaly_percentage is None:
+        return
     
+    try:
+        # Connect to the database.
+        conn = mysql.connector.connect(**config)
+        cursor = conn.cursor()
+        
+        # Construct the column name.
+        column_name = f'{table_name}_perc'
+        
+        # Insert the percentage into the constructed column.
+        cursor.execute(f"""
+            INSERT INTO percentages ({column_name}) VALUES (%s)
+        """, (anomaly_percentage,))
+        
+        # Commit.
+        conn.commit()
+        
+        cursor.close()
+        conn.close()
+
+    except mysql.connector.Error as e:
+        logging.error(f"Error inserting percentage into {table_name}: {e}")
+
+def main():
     table_names = [
         'wpm',
         'mouse_speed',
@@ -79,7 +117,9 @@ def main():
     while True:
         for table_name in table_names:
             logging.info('------------------------------------------------------------------------------------------------')
-            anomaly_percentage = check_sql_table_and_analyze(db_path, table_name)
+            anomaly_percentage = check_sql_table_and_analyze(config, table_name)
+
+            insert_percentage(config, table_name, anomaly_percentage)
             if anomaly_percentage is not None:
                 logging.info(f"Processed {table_name} with anomaly percentage: {anomaly_percentage:.2f}%")
         
