@@ -15,7 +15,7 @@ services:
   #     - backend
   #   entrypoint: npm run start.
   # backend:
-  #   build: ../backend/.
+  #   build: ../kcbackend
   #   container_name: backend
   #   environment:
   #     - KEYCLOAK_REALM=biovault

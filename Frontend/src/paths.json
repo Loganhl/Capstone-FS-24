@@ -2,6 +2,7 @@
     "activeusers":"/api/activeusers",
     "usersearch":"/api/usersearch:username",
     "users":"/api/users",
+    "wpm":"/api/wpm",
     "keycloakurl":"http://keycloak:8080/",
     "keycloakclient_id":"biovault-site",
     "keycloak_realm":"biovault"

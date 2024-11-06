@@ -4,7 +4,7 @@ keycloak_openid = KeycloakOpenID(server_url="http://localhost:8080/",
                                   client_id="biovault-client",
                                   realm_name="biovault",
                                   client_secret_key="VxW35Qjm8NEs2V9aoheEHTkvEVd3hVXv")
-token = keycloak_openid.token('gar7mn',password='Wand4511',grant_type='password'),
+token = keycloak_openid.token('user',password='user',grant_type='password'),
 
 def get_userid(access_token):
     useinfo = keycloak_openid.userinfo(access_token)

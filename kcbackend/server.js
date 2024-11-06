@@ -29,7 +29,7 @@ app.get('/api/users',keycloak.protect(),(req,res)=>{
 })
 //words per min api endpoint
 app.get('/api/wpm',keycloak.protect(),(req,res)=>{
-
+    
     connection.query('SELECT * FROM wpm;',(err,result,fields)=>{
         res.json(result)
     })
