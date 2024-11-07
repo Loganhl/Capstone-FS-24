@@ -62,7 +62,7 @@ const Navigation = ({ token, client }) => {
           path="/biometrics"
           element={<MyBiometrics token={token} client={client} />}
         />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard token={token} client={client} />} />
       </Routes>
     </Router>
   );

@@ -52,5 +52,10 @@ app.get('/api/keys_per_sec',keycloak.protect(),(req,res)=>{
         res.json(result);
     })
 })
+app.get('/api/percentages',keycloak.protect(),(req,res)=>{
+    connection.query('SELECT * FROM percentages;',(err,result,fields)=>{
+        
+    })
+})
 //listen on the port
 app.listen(port,console.log(`listening on port: ${port}`));

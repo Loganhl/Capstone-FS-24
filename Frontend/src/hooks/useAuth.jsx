@@ -7,9 +7,10 @@ const useAuth =  ()=>{
     const [token,setToken] = useState(null);
     useEffect(()=>{
         if (isRun.current) return;
+        
         isRun.current = true;
         client.init({
-            "onLoad":"login-required"
+            "onLoad":"login-required","enableLogging":true
         }).then((res)=>{
             setLogin(res);
             setToken(client.token);
