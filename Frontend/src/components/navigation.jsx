@@ -4,27 +4,32 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from "../pages/home";
 import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
-import Login from "../pages/login";
 
 const Navigation = ({ token, client }) => {
+  const [theme, setTheme] = useState("light");
 
-    const [theme, setTheme] = useState('light');
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
-    useEffect(() => {
-        document.body.className = theme;
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
-
-    }
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
   return (
     <Router>
-      <Navbar fixed="top" expand="lg" className={`navbar-${theme} bg-body-${theme}`} variant={theme === 'light' ? 'light' : 'dark'}>
+      <Navbar
+        fixed="top"
+        expand="lg"
+        className={`navbar-${theme} bg-body-${theme}`}
+        variant={theme === "light" ? "light" : "dark"}
+      >
         <Container>
           <Nav variant="tabs" defaultActiveKey="/">
-            <Navbar.Brand href="">Biovault</Navbar.Brand>
-            <Navbar.Collapse>
+            <div className="d-flex align-items-center">
+              <Navbar.Brand href="">Biovault</Navbar.Brand>
+              <Navbar.Toggle aria-controls="navbar-nav">Collapse</Navbar.Toggle>
+            </div>
+            <Navbar.Collapse id="navbar-nav">
               <Nav.Item>
                 <Nav.Link as={Link} to="/">
                   Home
@@ -44,15 +49,14 @@ const Navigation = ({ token, client }) => {
                 <Nav.Link onClick={() => client.logout()}>Log out</Nav.Link>
               </Nav.Item>
               <Form.Check
-                type = "switch"
+                type="switch"
                 id="theme-switch"
                 label="Dark Mode"
-                checked={theme === 'dark'}
+                checked={theme === "dark"}
                 onChange={toggleTheme}
                 className="ms-3"
-                />
+              />
             </Navbar.Collapse>
-            <Navbar.Toggle>Collapse</Navbar.Toggle>
           </Nav>
         </Container>
       </Navbar>
