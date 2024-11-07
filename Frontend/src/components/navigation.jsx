@@ -15,6 +15,9 @@ const Navigation = ({ token, client }) => {
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
+
+
+
   return (
     <Router>
       <Navbar
@@ -40,11 +43,13 @@ const Navigation = ({ token, client }) => {
                   My Biometrics
                 </Nav.Link>
               </Nav.Item>
+              {client.hasRealmRole('Admin') && (
               <Nav.Item>
                 <Nav.Link as={Link} to="/dashboard">
                   Admin Dashboard
                 </Nav.Link>
               </Nav.Item>
+              )}
               <Nav.Item>
                 <Nav.Link onClick={() => client.logout()}>Log out</Nav.Link>
               </Nav.Item>

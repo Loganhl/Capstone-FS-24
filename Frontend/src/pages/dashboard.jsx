@@ -3,9 +3,10 @@ import { MetricChanges } from "../components/Metrics/MetricChanges";
 
 import { Container,Row,Col } from "react-bootstrap";
 import Keysperec from '../components/Metrics/Keyspersec'
+
 const Dashboard = ({token,client})=>{
-    if (client.hasRealmRole('Admin') == false) {
-        return( <h1>ACCESS DENIED</h1>)
+    if (client.hasRealmRole('Admin') === false) {
+        return( <div className="access-denied"> <br/><br/><br/><h1>ACCESS DENIED</h1> </div>)
     }
     
     
