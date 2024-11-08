@@ -53,15 +53,18 @@ const Apps = ({ token, client }) => {
     borderWidth: 1,
   };
 
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
 
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
 
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme)
+  };
 
   return (
     <div className="App">

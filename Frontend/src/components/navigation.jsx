@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Navbar, Nav, Container, Form } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from "../pages/home";
@@ -6,9 +6,30 @@ import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
 
 const Navigation = ({ token, client, theme, toggleTheme }) => {
+const navbarRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        const navbarToggle = navbarRef.current.querySelector(".navbar-toggler");
+        if (navbarToggle && navbarToggle.classList.contains("collapsed")) {
+          return;
+        }
+        navbarToggle.click();
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  })
+
   return (
     <Router>
       <Navbar
+        ref = {navbarRef}
         position="sticky"
         expand="lg"
         className={`navbar-${theme} bg-body-${theme}`}
@@ -31,13 +52,13 @@ const Navigation = ({ token, client, theme, toggleTheme }) => {
                   My Biometrics
                 </Nav.Link>
               </Nav.Item>
-              
+              {client.hasRealmRole &&
               <Nav.Item>
                 <Nav.Link as={Link} to="/dashboard">
                   Admin Dashboard
                 </Nav.Link>
               </Nav.Item>
-              
+              }
               <Nav.Item>
                 <Nav.Link onClick={() => client.logout()}>Log out</Nav.Link>
               </Nav.Item>
