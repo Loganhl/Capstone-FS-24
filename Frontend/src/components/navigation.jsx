@@ -5,23 +5,11 @@ import Home from "../pages/home";
 import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
 
-const Navigation = ({ token, client }) => {
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
-
-
-
+const Navigation = ({ token, client, theme, toggleTheme }) => {
   return (
     <Router>
       <Navbar
-        fixed="top"
+        position="sticky"
         expand="lg"
         className={`navbar-${theme} bg-body-${theme}`}
         variant={theme === "light" ? "light" : "dark"}
@@ -43,13 +31,13 @@ const Navigation = ({ token, client }) => {
                   My Biometrics
                 </Nav.Link>
               </Nav.Item>
-              {client.hasRealmRole('Admin') && (
+              
               <Nav.Item>
                 <Nav.Link as={Link} to="/dashboard">
                   Admin Dashboard
                 </Nav.Link>
               </Nav.Item>
-              )}
+              
               <Nav.Item>
                 <Nav.Link onClick={() => client.logout()}>Log out</Nav.Link>
               </Nav.Item>
