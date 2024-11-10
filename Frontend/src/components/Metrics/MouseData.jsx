@@ -5,7 +5,7 @@ import { Line,Pie } from "react-chartjs-2";
 const MouseData = ({token,client,userid}) =>{
     const [data,setData] = useState([]);
     useEffect(()=>{
-        axios.get('http://localhost:2500/api/mousedata',{
+        axios.get('http://localhost:2500/api/mousespeed',{
             "headers":{
                 "Authorization":`Bearer ${token}`,
             },
@@ -49,9 +49,7 @@ const MouseData = ({token,client,userid}) =>{
     }
     return(
         <div>
-            <br></br>
-            <br></br>
-            <br></br>
+        
             <Line options={options} data={adataset}></Line>
         </div>
     )

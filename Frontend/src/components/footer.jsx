@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
-import { DiGithubBadge } from "react-icons/di";
+import { DiGithubBadge } from 'react-icons/di'
 
 const Footer = ({ theme }) => {
   const openGithub = () => {

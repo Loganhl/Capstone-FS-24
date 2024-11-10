@@ -13,6 +13,9 @@ const MyBiometrics = ({token,client})=>{
                 <WordsPerMin token={token} client={client}></WordsPerMin>
             </Col>
         </Row>
+        <Row>
+            <Col><MouseData token={token} client={client}></MouseData></Col>
+        </Row>
         
     </Container>)
 }

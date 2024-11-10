@@ -29,32 +29,35 @@ app.get('/api/users',keycloak.protect(),(req,res)=>{
 })
 //words per min api endpoint
 app.get('/api/wpm',keycloak.protect(),(req,res)=>{
-    
-    connection.query('SELECT * FROM wpm;',(err,result,fields)=>{
+    let query = 'SELECT a.USERNAME, b.value FROM USER_ENTITY a, wpm b WHERE a.ID = b.USER_ID and a.USERNAME =(?)';
+    connection.query('SELECT * FROM wpm ORDER BY created_at DESC LIMIT 30;',(err,result,fields)=>{
         res.json(result)
     })
 })
 //mouse speed endpoint
 app.get('/api/mousespeed',keycloak.protect(),(req,res)=>{
+    let query = 'SELECT a.USERNAME, b.value,b.created_at FROM USER_ENTITY a ,mouse_speed b WHERE a.ID = b.USER_ID AND a.USERNAME = (?);';
     connection.query('SELECT * FROM mouse_speed;',(err,result,fields)=>{
         res.json(result);
     })
 })
 //aver dwell time api endpoint
 app.get('/api/avgdwelltime',keycloak.protect(),(req,res)=>{
-    connection.query('SELECT * FROM avg_dwell_time;',(err,result,fields)=>{
+    let query = 'SELECT a.USERNAME,b.VALUE FROM USER_ENTITY a, avg_dwell_time b WHERE a.ID = b.USER_ID AND a.USERNAME = (?);';
+    connection.query('SELECT * FROM avg_dwell_time ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
         res.json(result);
     })
 });
 
 app.get('/api/keys_per_sec',keycloak.protect(),(req,res)=>{
-    connection.query('SELECT * FROM keys_per_sec;',(err,result,fields)=>{
+    let query = 'SELECT a.USERNAME, b.value,b.created_at FROM USER_ENTITY a , keys_per_sec b WHERE a.ID = b.USER_ID AND a.USERNAME = (?);';
+    connection.query('SELECT * FROM keys_per_sec ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
         res.json(result);
     })
 })
 app.get('/api/percentages',keycloak.protect(),(req,res)=>{
     connection.query('SELECT * FROM percentages;',(err,result,fields)=>{
-        
+        res.json(result);
     })
 })
 //listen on the port
