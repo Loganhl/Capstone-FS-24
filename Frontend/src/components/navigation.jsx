@@ -1,30 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Navbar, Nav, Container, Form } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from "../pages/home";
 import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
-import Login from "../pages/login";
 
-const Navigation = ({ token, client }) => {
+const Navigation = ({ token, client, theme, toggleTheme }) => {
+const navbarRef = useRef(null);
 
-    const [theme, setTheme] = useState('light');
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        const navbarToggle = navbarRef.current.querySelector(".navbar-toggler");
+        if (navbarToggle && navbarToggle.classList.contains("collapsed")) {
+          return;
+        }
+        navbarToggle.click();
+      }
+    };
 
-    useEffect(() => {
-        document.body.className = theme;
-    }, [theme]);
+    document.addEventListener("click", handleClickOutside);
 
-    const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  })
 
-    }
   return (
     <Router>
-      <Navbar fixed="top" expand="lg" className={`navbar-${theme} bg-body-${theme}`} variant={theme === 'light' ? 'light' : 'dark'}>
+      <Navbar
+        ref = {navbarRef}
+        position="sticky"
+        expand="lg"
+        className={`navbar-${theme} bg-body-${theme}`}
+        variant={theme === "light" ? "light" : "dark"}
+      >
         <Container>
           <Nav variant="tabs" defaultActiveKey="/">
-            <Navbar.Brand href="">Biovault</Navbar.Brand>
-            <Navbar.Collapse>
+            <div className="d-flex align-items-center">
+              <Navbar.Brand href="">Biovault</Navbar.Brand>
+              <Navbar.Toggle aria-controls="navbar-nav">Collapse</Navbar.Toggle>
+            </div>
+            <Navbar.Collapse id="navbar-nav">
               <Nav.Item>
                 <Nav.Link as={Link} to="/">
                   Home
@@ -35,24 +52,25 @@ const Navigation = ({ token, client }) => {
                   My Biometrics
                 </Nav.Link>
               </Nav.Item>
+              {client.hasRealmRole &&
               <Nav.Item>
                 <Nav.Link as={Link} to="/dashboard">
                   Admin Dashboard
                 </Nav.Link>
               </Nav.Item>
+              }
               <Nav.Item>
                 <Nav.Link onClick={() => client.logout()}>Log out</Nav.Link>
               </Nav.Item>
               <Form.Check
-                type = "switch"
+                type="switch"
                 id="theme-switch"
                 label="Dark Mode"
-                checked={theme === 'dark'}
+                checked={theme === "dark"}
                 onChange={toggleTheme}
                 className="ms-3"
-                />
+              />
             </Navbar.Collapse>
-            <Navbar.Toggle>Collapse</Navbar.Toggle>
           </Nav>
         </Container>
       </Navbar>
