@@ -41,6 +41,13 @@ app.get('/api/mousespeed',keycloak.protect(),(req,res)=>{
         res.json(result);
     })
 })
+app.get('/api/clickdwelltime',keycloak.protect(),(req,res)=>{
+    //will likely change the 30 after I talk with Jack.
+    let query = 'SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 30;';
+    connection.query('SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 30;',(err,result,fields)=>{
+        res.json(result);
+    })
+})
 //aver dwell time api endpoint
 app.get('/api/avgdwelltime',keycloak.protect(),(req,res)=>{
     let query = 'SELECT a.USERNAME,b.VALUE FROM USER_ENTITY a, avg_dwell_time b WHERE a.ID = b.USER_ID AND a.USERNAME = (?);';
