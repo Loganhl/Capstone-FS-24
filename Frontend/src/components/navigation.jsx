@@ -5,7 +5,7 @@ import Home from "../pages/home";
 import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
 
-const Navigation = ({ token, client, theme, toggleTheme }) => {
+const Navigation = ({ token, client, userinfo, theme, toggleTheme }) => {
 const navbarRef = useRef(null);
 
   useEffect(() => {
@@ -78,9 +78,9 @@ const navbarRef = useRef(null);
         <Route exact path="/" element={<Home />} />
         <Route
           path="/biometrics"
-          element={<MyBiometrics token={token} client={client} />}
+          element={<MyBiometrics token={token} client={client} userinfo={userinfo}/>}
         />
-        <Route path="/dashboard" element={<Dashboard token={token} client={client} />} />
+        <Route path="/dashboard" element={<Dashboard token={token} client={client} userinfo={userinfo} />} />
       </Routes>
     </Router>
   );

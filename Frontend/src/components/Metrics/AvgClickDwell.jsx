@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Line } from "react-chartjs-2";
 import { scales } from "chart.js";
 
-const AvgClickDwell = ({token,client})=>{
+const AvgClickDwell = ({token,client,userinfo})=>{
     const [metrics,setmetrics] = useState([]);
     useEffect(()=>{
-        axios.get('http://localhost:2500/clickdwelltime',{
+        axios.get('http://localhost:2500/api/clickdwelltime',{
             "headers":{
                 "Authorization":`Bearer ${token}`,
             },
@@ -15,22 +15,22 @@ const AvgClickDwell = ({token,client})=>{
     },[])
     var options = {
         responsive: true,
-        interaction:{
-            mode:'index',
-            intersect:false,
-        },
-        stacked:false,
-        plugins:{
-            title:{
+        interaction: {
+        mode: 'index',
+        intersect: false,
+    },
+    stacked:false,
+    plugins:{
+        title:{
                 display:true,
-                text:"Average Click Dwelling Times",
+                text:'Average Clck Dwell times Over the last 60 seconds',
             },
-            scales:{
-                y:{
-                    type:'linear',
-                    display:true,
-                    position:'left',
-                }
+        },
+        scales:{
+            y:{
+                type: 'linear',
+                display:true,
+                position:'left',
             }
         }
     }
@@ -42,7 +42,7 @@ const AvgClickDwell = ({token,client})=>{
                 label:'user',
                 data:metrics.map((item)=> item.value),
                 borderColor:'rgb(86,127,51)',
-                backgroundColor:'rgba:(86,127,51,.05)',
+                backgroundColor:'rgba:(86,127,51,.5)',
                 yAxisID:'y',
             }
         ]

@@ -4,7 +4,7 @@ import { MetricChanges } from "../components/Metrics/MetricChanges";
 import { Container, Row, Col } from "react-bootstrap";
 import Keysperec from "../components/Metrics/Keyspersec";
 
-const Dashboard = ({ token, client }) => {
+const Dashboard = ({ token, client,userinfo }) => {
   if (client.hasRealmRole("Admin") === false) {
     return (
       <div className="access-denied">

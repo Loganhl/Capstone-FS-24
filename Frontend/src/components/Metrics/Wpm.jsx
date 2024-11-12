@@ -1,13 +1,15 @@
 import React,{useState,useRef,useEffect} from "react";
 import axios from 'axios';
 import { Line } from "react-chartjs-2";
-const WordsPerMin = ({token,client})=>{
+const WordsPerMin = ({token,client,userinfo})=>{
     const [wpm,setwpm] = useState([]);
     useEffect(()=>{
         axios.get('http://localhost:2500/api/wpm',{
             "headers":{
                 "Authorization":`Bearer ${token}`,
+            
             },
+            "data":userinfo,
             'responseType':"json",
             "withXSRFToken":true
         }).then(res => setwpm(res.data)).catch(err=> console.log(err));

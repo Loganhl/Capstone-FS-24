@@ -22,15 +22,16 @@ function convertResptoarray(array){
         
     }
 }
-const AvgDwellTime = ({token,client})=>{
+const AvgDwellTime = ({token,client,userinfo})=>{
+    console.log(userinfo);
     var [data,setData] = useState([])
     useEffect(()=>{
-        axios.get('http://localhost:2500/api/avgdwelltime',{
+        axios.get(`http://localhost:2500/api/avgdwelltime`,{
             'headers':{
                 "Authorization":`Bearer ${token}`,
             },
             'responseType':'json',
-            'withXSRFToken':true
+            'withXSRFToken':true,
         }).then(resp=> setData(resp.data)).catch(err=> console.error(err));
     },[])
     var options = {

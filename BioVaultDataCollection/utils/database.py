@@ -1,6 +1,6 @@
 import mysql.connector
 import os
-def insert_metric(cursor, table, value,user_id):
+def insert_metric(cursor, table, value):
     if value > 0:  # Only insert if there is activity
         try:
             cursor.execute(f"INSERT INTO {table} (value) VALUES (%s)", (value,))

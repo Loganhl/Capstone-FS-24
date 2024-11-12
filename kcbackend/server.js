@@ -21,6 +21,9 @@ app.get('/api',(req,res)=>{
         "Luke":"I am Your Father."
     });
 })
+app.get('/api/activeusers',keycloak.protect(),(req,res)=>{
+    connection.query('SELECT * FROM ')
+})
 //endpoint that lists all users
 app.get('/api/users',keycloak.protect(),(req,res)=>{
     res.json({
@@ -41,11 +44,15 @@ app.get('/api/mousespeed',keycloak.protect(),(req,res)=>{
         res.json(result);
     })
 })
+
+
+
 app.get('/api/clickdwelltime',keycloak.protect(),(req,res)=>{
     //will likely change the 30 after I talk with Jack.
     let query = 'SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 30;';
-    connection.query('SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 30;',(err,result,fields)=>{
+    connection.query('SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
         res.json(result);
+    
     })
 })
 //aver dwell time api endpoint
@@ -65,6 +72,7 @@ app.get('/api/keys_per_sec',keycloak.protect(),(req,res)=>{
 app.get('/api/percentages',keycloak.protect(),(req,res)=>{
     connection.query('SELECT * FROM percentages;',(err,result,fields)=>{
         res.json(result);
+    
     })
 })
 //listen on the port
