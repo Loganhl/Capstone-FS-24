@@ -7,6 +7,7 @@ const keycloak = require('./middlewares/keycloak')
 const cors = require('cors');
 const connection = require('./db/connect');
 app.use(express.json())
+//enable the keycloak middleware
 app.use(keycloak.middleware())
 app.use(cors())
 
@@ -25,11 +26,12 @@ app.get('/api/activeusers',keycloak.protect(),(req,res)=>{
     connection.query('SELECT * FROM ')
 })
 //endpoint that lists all users
-app.get('/api/users',keycloak.protect(),(req,res)=>{
-    res.json({
-        "resp":"Access Granted"
+app.get('/api/users',keycloak.protect('realm:Admin'),(req,res)=>{
+    connection.query('SELECT * FROM USER_ENTITY;',(err,result,fields)=>{
+        res.status(200).json(result);
     })
 })
+app.get('/api/user:username',keycloak.protect('realm:Admin'))
 //words per min api endpoint
 app.get('/api/wpm',keycloak.protect(),(req,res)=>{
     let query = 'SELECT a.USERNAME, b.value FROM USER_ENTITY a, wpm b WHERE a.ID = b.USER_ID and a.USERNAME =(?)';
@@ -44,12 +46,16 @@ app.get('/api/mousespeed',keycloak.protect(),(req,res)=>{
         res.json(result);
     })
 })
+//test methods of selecting users to display their metrics for the admin dashboard
+app.get('/api/userselect',keycloak.protect('realm:Admin'),(req,res)=>{
 
 
+})  
 
 app.get('/api/clickdwelltime',keycloak.protect(),(req,res)=>{
     //will likely change the 30 after I talk with Jack.
     let query = 'SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 30;';
+
     connection.query('SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
         res.json(result);
     
@@ -69,6 +75,7 @@ app.get('/api/keys_per_sec',keycloak.protect(),(req,res)=>{
         res.json(result);
     })
 })
+//figure out how we are displaying percentages
 app.get('/api/percentages',keycloak.protect(),(req,res)=>{
     connection.query('SELECT * FROM percentages;',(err,result,fields)=>{
         res.json(result);

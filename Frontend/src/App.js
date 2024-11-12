@@ -79,9 +79,11 @@ const Apps = ({ token, client,userinfo }) => {
 
 function App() {
   const [isLogin, token] = useAuth();
+
   if (isLogin == true) {
-    var userinfo = 'gar7mn'
-    return <Apps token={token} client={client} userinfo={userinfo}></Apps>;
+    
+
+    return <Apps token={token} client={client} ></Apps>;
   }
   return (
     <div className="App">

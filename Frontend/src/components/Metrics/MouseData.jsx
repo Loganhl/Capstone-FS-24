@@ -2,7 +2,7 @@ import React,{useEffect,useState,useRef} from "react";
 import axios from 'axios';
 import { Line,Pie } from "react-chartjs-2";
 
-const MouseData = ({token,client,userid}) =>{
+const MouseData = ({token,client}) =>{
     const [data,setData] = useState([]);
     useEffect(()=>{
         axios.get('http://localhost:2500/api/mousespeed',{

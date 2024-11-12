@@ -1,6 +1,6 @@
 import React from "react";
 import { MetricChanges } from "../components/Metrics/MetricChanges";
-
+import SelectUser from "../components/users";
 import { Container, Row, Col } from "react-bootstrap";
 import Keysperec from "../components/Metrics/Keyspersec";
 
@@ -25,6 +25,10 @@ const Dashboard = ({ token, client,userinfo }) => {
             <Col xs={3}>
               <Keysperec />
             </Col>
+          </Row>
+            <SelectUser token={token} client={client}></SelectUser>
+          <Row>
+            
           </Row>
         </Container>
       </Container>

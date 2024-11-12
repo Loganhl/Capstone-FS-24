@@ -4,6 +4,7 @@ import WordsPerMin from "../components/Metrics/Wpm";
 import { Row,Col,Container } from "react-bootstrap";
 import MouseData from "../components/Metrics/MouseData";
 import AvgClickDwell from "../components/Metrics/AvgClickDwell";
+import RealmUsers from "../components/users";
 const MyBiometrics = ({token,client,userinfo})=>{
     return (<Container fluid>
         <Row>
