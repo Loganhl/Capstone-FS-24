@@ -5,6 +5,7 @@ import { Row,Col,Container } from "react-bootstrap";
 import MouseData from "../components/Metrics/MouseData";
 import AvgClickDwell from "../components/Metrics/AvgClickDwell";
 import RealmUsers from "../components/users";
+import BetweenStroke from "../components/Metrics/BetweenStroke";
 const MyBiometrics = ({token,client,userinfo})=>{
     return (<Container fluid>
         <Row>
@@ -21,6 +22,9 @@ const MyBiometrics = ({token,client,userinfo})=>{
             </Col>
             <Col>
                 <WordsPerMin token={token} client={client} userinfo={userinfo}></WordsPerMin>
+            </Col>
+            <Col>
+            <BetweenStroke token={token} client={client}></BetweenStroke>
             </Col>
         </Row>
         

@@ -15,9 +15,18 @@ const useAuth =  ()=>{
         }).then((res)=>{
             setLogin(res);
             setToken(client.token);
+            const userProfile ={
+                userid:client.idTokenParsed.sub,
+                username:client.idTokenParsed.preferred_username,
+                firstname: client.idTokenParsed.given_name,
+                lastname:client.idTokenParsed.family_name,
+            };
+            handleProfile(userProfile);
         })
     },[])
-
+    const handleProfile = (userProfile)=>{
+        console.log("user:",userProfile);
+    }
     return [isLogin,token];
 }
 export default useAuth;

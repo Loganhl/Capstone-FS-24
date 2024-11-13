@@ -1,10 +1,10 @@
 {
-    "activeusers":"/api/activeusers",
+    "activeusers":"admin/realms/biovault/sessions",
     "usersearch":"/api/usersearch:username",
-    "users":"/api/users",
-    "wpm":"/api/wpm",
-    "keycloakurl":"http://keycloak:8080/",
-    "keycloakclient_id":"biovault-site",
+    "users":"api/users",
+    "wpm":"api/wpm",
+    "api_url":"http://localhost:2500/",
+    "keycloakurl":"http://localhost:8080/",
+    "keycloakclient_id":"frontend",
     "keycloak_realm":"biovault"
-
 }
