@@ -68,7 +68,10 @@ app.get('/api/avgdwelltime',keycloak.protect(),(req,res)=>{
         res.json(result);
     })
 });
-
+//api method for getting the average time between keystrokes.
+app.get('/api/time_between_strokes',keycloak.protect(),(req,res)=>{
+    res.json({"ERROR":"NOT FINISHED YET"});
+})
 app.get('/api/keys_per_sec',keycloak.protect(),(req,res)=>{
     let query = 'SELECT a.USERNAME, b.value,b.created_at FROM USER_ENTITY a , keys_per_sec b WHERE a.ID = b.USER_ID AND a.USERNAME = (?);';
     connection.query('SELECT * FROM keys_per_sec ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{

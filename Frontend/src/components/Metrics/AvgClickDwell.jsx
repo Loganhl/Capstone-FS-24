@@ -20,11 +20,10 @@ const AvgClickDwell = ({ token, client, userinfo }) => {
       })).pipe(
         map(response => response)
       ).subscribe({
-        next: responseData => setMetrics(responseData || []),
+        next: responseData => setMetrics(responseData.response || []),
         error: error => console.error('Error:', error),
         complete: () => console.log('Request complete')
       });
-
       return () => subscription.unsubscribe(); // Cleanup subscription on unmount
     };
 
