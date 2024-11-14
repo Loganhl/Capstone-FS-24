@@ -16,6 +16,7 @@ config = {
 }
 
 def collect_metrics(keystroke_metrics, mouse_metrics, cursor):
+    user_id = get_userid('user','user')
     # Collects key presses
     def on_key_press(key):
         keystroke_metrics.on_press(key)
@@ -47,12 +48,12 @@ def collect_metrics(keystroke_metrics, mouse_metrics, cursor):
                 mouse_data = mouse_metrics.calculate_metrics()
               
                 # Insert metrics into the database
-                insert_metric(cursor, 'wpm', keystroke_data['wpm'])
-                insert_metric(cursor, 'keys_per_sec', keystroke_data['keys_per_sec'])
-                insert_metric(cursor, 'avg_dwell_time', keystroke_data['avg_dwell_time'])
-                insert_metric(cursor, 'avg_time_between_keystrokes', keystroke_data['avg_time_between_keystrokes'])
-                insert_metric(cursor, 'avg_click_dwell_time', mouse_data['avg_click_dwell_time'])
-                insert_metric(cursor, 'mouse_speed', mouse_data['mouse_speed'])
+                insert_metric(cursor, 'wpm', keystroke_data['wpm'],user_id)
+                insert_metric(cursor, 'keys_per_sec', keystroke_data['keys_per_sec'],user_id)
+                insert_metric(cursor, 'avg_dwell_time', keystroke_data['avg_dwell_time'],user_id)
+                insert_metric(cursor, 'avg_time_between_keystrokes', keystroke_data['avg_time_between_keystrokes'],user_id)
+                insert_metric(cursor, 'avg_click_dwell_time', mouse_data['avg_click_dwell_time'],user_id)
+                insert_metric(cursor, 'mouse_speed', mouse_data['mouse_speed'],user_id)
                 print("Inserting metrics...")
                 conn.commit()
 
