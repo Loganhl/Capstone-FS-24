@@ -22,8 +22,22 @@ Repeat this process with `biovault-client.json` and `backend.json`
 
 # accessing the dashboard
 When This project is ready the dashboard will hopefully be started when docker compose up is run but for now we are started it manually in their local folders.
+## getting the backend api ready
 To start the backend make sure you have completed the steps above steps correctly when it comes to creating your keycloak realm and importing the clients.
-
+You will also need to create a `.env` file with the following values:
+```
+DB=biometric_auth
+DB_USER=root
+DB_PASS=secretsquirrels
+DB_PORT=3307
+DB_HOST=localhost
+KEYCLOAK_CLIENT=backend
+KEYCLOAK_CLIENT_SECRET=YOUR_CLIENT_SECRET_HERE
+KEYCLOAK_URL=http://localhost:8080
+KEYCLOAK_REALM=biovault
+```
+To Retrieve your client secret you will need to go to your keycloak administration console and select the backend client and go to the credentials tab and copy the client secret and add it to the `.env` file.
+### start the backend
 From the main repo folder run:
 ```
 cd kcbackend

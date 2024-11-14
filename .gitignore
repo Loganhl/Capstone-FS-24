@@ -3,3 +3,4 @@
 /kcbackend/node_modules
 .env
 *.pyc
+*.log
