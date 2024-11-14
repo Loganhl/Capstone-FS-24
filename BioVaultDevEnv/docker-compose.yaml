@@ -55,8 +55,7 @@ services:
       - KC_HTTPS_PORT=8443
     entrypoint: ["/opt/keycloak/bin/kc.sh","start-dev" ]
   mysql:
-    build: ../MySQL/.
-    # image: mysql:latest
+    image: mysql:latest
     container_name: BioVault
     restart: always
     expose:
