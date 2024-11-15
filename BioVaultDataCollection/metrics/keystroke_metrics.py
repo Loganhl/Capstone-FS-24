@@ -1,95 +1,39 @@
 import time
-from pynput import keyboard
 
 class KeystrokeMetrics:
-    def __init__(self, interval_duration=10, idle_threshold=1, avg_word_length=5):
-        self.interval_duration = interval_duration
-        self.idle_threshold = idle_threshold
-        self.avg_word_length = avg_word_length
+    def __init__(self):
+        self.start_time = None
+        self.key_press_count = 0
+        self.key_durations = []
+
+    def start(self):
         self.start_time = time.time()
-        self.key_count = 0
-        self.char_count = 0
-        self.dwell_times = []
-        self.key_intervals = []
-        self.key_press_times = {}
-        self.last_key_time = None
-        self.active_typing_time = 0
-        self.activity_flag = False
+        self.key_press_count = 0
+        self.key_durations = []
 
-        # Start the keyboard listener
-        self.listener = keyboard.Listener(
-            on_press=self.on_press,
-            on_release=self.on_release
-        )
-        self.listener.start()
+    def on_key_press(self):
+        self.key_press_start_time = time.time()
 
-    def on_press(self, key):
-        current_time = time.time()
+    def on_key_release(self):
+        duration = time.time() - self.key_press_start_time
+        self.key_durations.append(duration)
+        self.key_press_count += 1
 
-        # Check for idle time and adjust active typing time
-        if self.last_key_time and (current_time - self.last_key_time) > self.idle_threshold:
-            self.active_typing_time -= (current_time - self.last_key_time)
-
-        # Record time between keystrokes for metrics
-        if self.last_key_time:
-            self.key_intervals.append(current_time - self.last_key_time)
-
-        # Update key count and active typing time
-        self.key_count += 1
-        if hasattr(key, 'char') and key.char is not None:
-            self.char_count += 1
-        self.active_typing_time += current_time - (self.last_key_time or current_time)
-        self.last_key_time = current_time
-        self.key_press_times[key] = current_time
-        self.activity_flag = True
-
-    def on_release(self, key):
-        current_time = time.time()
-
-        # Check if the key is in the key_press_times
-        if key in self.key_press_times:
-            # Calculate dwell time for key
-            dwell_time = current_time - self.key_press_times[key]
-            self.dwell_times.append(dwell_time)
-            del self.key_press_times[key]
-
-
-    def calculate_metrics(self):
-        words_typed = self.char_count / self.avg_word_length
-
-        active_time_minutes = (self.active_typing_time / 60) if self.active_typing_time > 0 else 1
-
-        wpm = (words_typed / active_time_minutes) if active_time_minutes > 0 else 0
-
-        avg_dwell_time = sum(self.dwell_times) / len(self.dwell_times) if self.dwell_times else 0
-        
-
-        if self.active_typing_time > 0:
-            keys_per_sec = self.key_count / self.active_typing_time
-        else:
-            keys_per_sec = 0
-
-
-        if self.key_intervals:
-            avg_time_between_keystrokes = sum(self.key_intervals) / len(self.key_intervals)
-        else:
-            avg_time_between_keystrokes = 0
-
-        
-
-        # Reset metrics for the next interval
-        self.start_time = time.time()
-        self.key_count = 0
-        self.char_count = 0
-        self.dwell_times.clear()
-        self.key_intervals.clear()
-        self.active_typing_time = 0
-        self.activity_flag = False
-        self.last_key_time = None
-
+    def stop(self):
+        if self.start_time is None:
+            return None
+        elapsed_time = (time.time() - self.start_time) - 3  
+    
+        wpm = (self.key_press_count / 5) / (elapsed_time / 60)
+        keys_per_second = self.key_press_count / elapsed_time
+        avg_key_dwell = sum(self.key_durations) / len(self.key_durations) if self.key_durations else 0
         return {
             'wpm': wpm,
-            'keys_per_sec': keys_per_sec,
-            'avg_dwell_time': avg_dwell_time,
-            'avg_time_between_keystrokes': avg_time_between_keystrokes
+            'keys_per_sec': keys_per_second,
+            'avg_dwell_time': avg_key_dwell
         }
+
+    def reset(self):
+        self.start_time = None
+        self.key_press_count = 0
+        self.key_durations = []
