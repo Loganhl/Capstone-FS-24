@@ -6,6 +6,7 @@ from utils.database import insert_metric
 from pynput import keyboard, mouse
 import os
 from kc import get_userid
+from security import prompt_for_credentials
 print(mysql.connector.__version__)
 config = {
     'user': 'root',         
@@ -16,7 +17,8 @@ config = {
 }
 
 def collect_metrics(keystroke_metrics, mouse_metrics, cursor):
-    user_id = get_userid('user','user')
+    username,password = prompt_for_credentials()
+    user_id = get_userid(username,password)
     # Collects key presses
     def on_key_press(key):
         keystroke_metrics.on_press(key)
