@@ -30,9 +30,13 @@ class MouseMetrics:
             self.distance_moved += (dx**2 + dy**2) ** 0.5
         self.last_position = (x, y)
 
-    def stop(self):
+    def stop(self, is_switch=False):
         if self.start_time is None:
             return None
+        
+        if is_switch:
+            elapsed_time -=3
+
         elapsed_time = (time.time() - self.start_time) - 3
         avg_click_dwell = sum(self.click_durations) / len(self.click_durations) if self.click_durations else 0
         mouse_speed = self.distance_moved / elapsed_time if elapsed_time > 0 else 0

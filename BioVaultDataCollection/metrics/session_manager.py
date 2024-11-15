@@ -28,7 +28,7 @@ class SessionManager:
             self.current_session = 'mouse'
 
     def end_session(self):
-        user_id = get_userid
+        user_id = get_userid('user@user.com', 'user')
         if self.current_session == 'keyboard':
             metrics = self.keyboard_metrics.stop()
             if metrics and metrics['wpm'] > 0:

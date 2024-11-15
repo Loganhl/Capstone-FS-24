@@ -19,10 +19,16 @@ class KeystrokeMetrics:
         self.key_durations.append(duration)
         self.key_press_count += 1
 
-    def stop(self):
+    def stop(self, is_switch=False):
         if self.start_time is None:
             return None
-        elapsed_time = (time.time() - self.start_time) - 3  
+        
+    
+
+        elapsed_time = time.time() - self.start_time
+
+        if is_switch:
+            elapsed_time -= 3
     
         wpm = (self.key_press_count / 5) / (elapsed_time / 60)
         keys_per_second = self.key_press_count / elapsed_time

@@ -1,4 +1,6 @@
 import mysql.connector
+from kc import get_userid
+
 
 class Database:
     def __init__(self):
@@ -24,7 +26,7 @@ class Database:
 
     def insert_metric(self, table_name, value, user_id):
 
-
+        user_id = get_userid('user@user.com', 'user')
         if self.conn is None:
             print("Database connection not established. Cannot insert data.")
             return
