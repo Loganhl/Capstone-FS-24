@@ -3,13 +3,15 @@ import axios from "axios";
 import paths from '../paths.json'
 import { Button,Table } from "react-bootstrap";
 
+//need to decide wheer to put the function that switches between users
+
 const RealmUsers = ({client,token})=>{
     const isRun = useRef(false);
     const [users,setUsers] = useState([]);
     useEffect(()=>{
         if(isRun.current) return;
         isRun.current = true;
-        axios.get(`http://localhost:2500/api/users`,{
+        axios.get(`${paths.api_url}api/users`,{
             "headers":{
                 "Authorization":`Bearer ${token}`
             }
@@ -34,7 +36,7 @@ const RealmUsers = ({client,token})=>{
                 <td>{item.EMAIL}</td>
                 <td>{item.FIRST_NAME}</td>
                 <td>{item.LAST_NAME}</td>
-                <td>method for changing to users metrics</td>
+                <td><Button>View Metrics</Button></td>
             </tr>
             ))}
         </tbody>

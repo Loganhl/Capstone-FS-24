@@ -15,6 +15,7 @@ import {
     plugins,
     scales,
   } from 'chart.js';
+import paths from './../../paths.json'
 import { it } from "@faker-js/faker";
 import { Line } from "react-chartjs-2";
 
@@ -93,7 +94,7 @@ const AvgCDwellTime = ({ token, client, userinfo }) => {
   useEffect(() => {
     const fetchData = () => {
       const subscription = from(ajax({
-        url: 'http://localhost:2500/api/avgdwelltime',
+        url: `${paths.api_url}api/avgdwelltime`,
         method: 'GET',
         headers: {
           "Authorization": `Bearer ${token}`,

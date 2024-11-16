@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2";
 import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
-
+import paths from '../../paths.json'
 const AvgClickDwell = ({ token, client, userinfo }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
@@ -12,7 +12,7 @@ const AvgClickDwell = ({ token, client, userinfo }) => {
   useEffect(() => {
     const fetchData = () => {
       const subscription = from(ajax({
-        url: 'http://localhost:2500/api/clickdwelltime',
+        url: `${paths.api_url}api/clickdwelltime`,
         method: 'GET',
         headers: {
           "Authorization": `Bearer ${token}`,

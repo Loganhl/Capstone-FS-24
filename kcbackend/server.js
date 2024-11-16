@@ -26,11 +26,11 @@ app.get('/api/activeusers',keycloak.protect(),(req,res)=>{
 })
 //endpoint that lists all users
 app.get('/api/users',keycloak.protect('realm:Admin'),(req,res)=>{
-    connection.query('SELECT * FROM USER_ENTITY;',(err,result,fields)=>{
+    connection.query('select a.username, a.EMAIL,a.FIRST_NAME,a.LAST_NAME  ,a.ID from USER_ENTITY a, REALM b WHERE  a.REALM_ID = b.ID AND b.NAME = "biovault" AND a.LAST_NAME =0;',(err,result,fields)=>{
         res.status(200).json(result);
     })
 })
-app.get('/api/user/:username',keycloak.protect('realm:Admin'),(req,res)=>{
+app.get('/api/user/:username',(req,res)=>{
     try{
         //Ensure the username parameter is not null
         if (req.params.username != null) {

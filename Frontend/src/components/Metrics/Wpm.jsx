@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2";
 import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
-
+import paths from '../../paths.json'
 // const WordsPerMin = ({token,client,userinfo})=>{
 //     const [wpm,setwpm] = useState([]);
 //     useEffect(()=>{
@@ -59,14 +59,14 @@ import { ajax } from 'rxjs/ajax';
 //         <Line height={90} options={options} data={ds}></Line>
 //     </div>)
 // }
-const WordsPerMin = ({ token, client, userinfo }) => {
+const WordsPerMin = ({ token, client, userid }) => {
     const [metrics, setMetrics] = useState([]);
     const [data, setData] = useState([]);
   
     useEffect(() => {
       const fetchData = () => {
         const subscription = from(ajax({
-          url: 'http://localhost:2500/api/wpm',
+          url: `${paths.api_url}api/wpm/`,
           method: 'GET',
           headers: {
             "Authorization": `Bearer ${token}`,
