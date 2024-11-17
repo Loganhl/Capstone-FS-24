@@ -10,15 +10,14 @@ docker compose up
 Once keycloak and the containers are finished initializing you can reach keycloak at http://localhost:8080
 The default username and password  is  `admin`
 ## Setting up Your keycloak realm
-Create a realm called biovault.
-You will need to create at least one Account for your realm.
+go click on the realms dropdown form the control panel and select 'Create Realm'  a form should appear where you can name or your realm or browse for a realm config file. We will go to our project `CAPSTONE-FS-24/keycloak` folder and select `realm-export.json` then just click create at the bottom and your realm will be created. 
+You will need to create at least one User  Account for your realm.
 
 ### importing the clients into your realm.
 go to the clients tab in the keycloak admin console in the realm you created click import client
 
 <img src="/Docs/client-import1.PNG"><img>
-click browse and go to the keycloak folder in your cloned repo and select `frontend.json` and then click save at the bottom
-Repeat this process with `biovault-client.json` and `backend.json`
+click browse and go to the keycloak folder in your cloned repo and select `backend.json` and then click save at the bottom. You should now have clients called `frontend` and `backend` as well as `biovault-client`.
 
 # accessing the dashboard
 When This project is ready the dashboard will hopefully be started when docker compose up is run but for now we are started it manually in their local folders.

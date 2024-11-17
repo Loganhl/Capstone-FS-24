@@ -18,14 +18,14 @@ const Dashboard = ({ token, client,userid }) => {
       <Container fluid="md">
         <Container>
           <br></br>
-          <Row xs={1} style={{ height: 400 }}>
+          {/* <Row xs={1} style={{ height: 400 }}>
             <Col xs={10}>
               <MetricChanges />
             </Col>
             <Col xs={3}>
               <Keysperec />
             </Col>
-          </Row>
+          </Row> */}
             <SelectUser token={token} client={client}></SelectUser>
           <Row>
             

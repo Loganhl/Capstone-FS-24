@@ -94,7 +94,7 @@ const AvgCDwellTime = ({ token, client, userinfo }) => {
   useEffect(() => {
     const fetchData = () => {
       const subscription = from(ajax({
-        url: `${paths.api_url}api/avgdwelltime`,
+        url: `${process.env.REACT_APP_API_URL}api/avgdwelltime`,
         method: 'GET',
         headers: {
           "Authorization": `Bearer ${token}`,

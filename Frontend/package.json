@@ -11,6 +11,7 @@
     "axios-observable": "^2.1.0",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.6",
+    "dotenv": "^16.4.5",
     "faker": "^6.6.6",
     "frontend": "file:",
     "keycloak-js": "^26.0.2",
