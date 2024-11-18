@@ -1,9 +1,12 @@
-import React,{useRef,useState,useEffect} from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 
 
-const Home = ()=>{
-    return(<div style={{alignContent:"center", backgroundColor:"darkgray",height:600}}>
+const Home = ({ theme })=>{
+
+    const backgroundColor = theme === "dark" ? "#343a40" : "darkgray";
+
+    return(<div style={{alignContent:"center", backgroundColor, height:600}}>
         <Container>
             <h1>Welcome to Biovault</h1>
             <p>Here is where you can view metrics such as Words typed per minute and even average mouse dwell time!</p>

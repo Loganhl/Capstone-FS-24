@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Navbar, Nav, Container, Form } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from "../pages/home";
@@ -6,7 +6,12 @@ import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
 
 const Navigation = ({ token, client, theme, toggleTheme }) => {
-const navbarRef = useRef(null);
+  const navbarRef = useRef(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -39,7 +44,9 @@ const navbarRef = useRef(null);
           <Nav variant="tabs" defaultActiveKey="/">
             <div className="d-flex align-items-center">
               <Navbar.Brand href="">Biovault</Navbar.Brand>
-              <Navbar.Toggle aria-controls="navbar-nav">Collapse</Navbar.Toggle>
+              <Navbar.Toggle onClick={handleToggle}>
+                {isExpanded ? 'Collapse' : 'Expand'}
+              </Navbar.Toggle>
             </div>
             <Navbar.Collapse id="navbar-nav">
               <Nav.Item>

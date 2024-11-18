@@ -2,9 +2,9 @@
 import Home from './pages/home'
 import Dashboard from './pages/dashboard'
 import NotFound from './pages/notfound'
-import client from './hooks/kclient'
-import useAuth from './hooks/useAuth'
-import {BrowserRouter as  Router,Route,Switch} from  'react-router-dom'
+//import client from './hooks/kclient'
+//import useAuth from './hooks/useAuth'
+import {BrowserRouter as  Router,Route,Routes} from  'react-router-dom'
 // const Routing = ()=>{
 //     const [isLogin,token] = useAuth();
 //     return(
@@ -20,14 +20,14 @@ import {BrowserRouter as  Router,Route,Switch} from  'react-router-dom'
 //     </Router>
 // )}
 
-const AppRouter = ({token,client})=>{
+const AppRouter = ({ token, client, theme })=>{
     return(
         <Router>
-            <Switch>
-                <Route exact path='/' Component={<Home/>}/>
-                <Route path='/dashboard' Component={<Dashboard/>}/>
-                <Route path='/notfound' Component={<NotFound/>}/>
-            </Switch>
+            <Routes>
+                <Route exact path='/' element={<Home theme={theme}/>}/>
+                <Route path='/dashboard' element={<Dashboard/>}/>
+                <Route path='/notfound' element={<NotFound/>}/>
+            </Routes>
         </Router>
     )
 }
