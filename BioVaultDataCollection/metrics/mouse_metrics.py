@@ -51,7 +51,6 @@ class MouseMetrics:
                 time_delta = current_time - self.last_time if self.last_time else 0
                 if time_delta > 0:
                     instant_speed = distance / time_delta
-                    # Update EMA speed
                     self.ema_speed = (self.EMA_ALPHA * instant_speed) + ((1 - self.EMA_ALPHA) * self.ema_speed)
 
                     self.distance_moved += distance
