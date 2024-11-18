@@ -5,18 +5,13 @@ import Home from "../pages/home";
 import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
 
-<<<<<<< HEAD
-const Navigation = ({ token, client, theme, toggleTheme }) => {
+const Navigation = ({ token, client, userinfo, theme, toggleTheme }) => {
   const navbarRef = useRef(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
   }
-=======
-const Navigation = ({ token, client, userinfo, theme, toggleTheme }) => {
-const navbarRef = useRef(null);
->>>>>>> 74cdc85363d7e04b5d019d6cbe43de55e3050b66
 
   useEffect(() => {
     const handleClickOutside = (event) => {
