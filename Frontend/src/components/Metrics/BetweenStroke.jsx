@@ -4,66 +4,15 @@ import { Line,Pie } from "react-chartjs-2";
 import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
-// const MouseData = ({token,client}) =>{
-//     const [data,setData] = useState([]);
-//     useEffect(()=>{
-//         axios.get('http://localhost:2500/api/mousespeed',{
-//             "headers":{
-//                 "Authorization":`Bearer ${token}`,
-//             },
-//             'withXSRFToken':true
-//         }).then((res=> setData(res.data))).catch((err=> console.error(err)));
-//     },[])
-//     var options = {
-//         responsive: true,
-//         interaction: {
-//         mode: 'index',
-//         intersect: false,
-//     },
-//     stacked:false,
-//     plugins:{
-//         title:{
-//                 display:true,
-//                 text:'Mouse Data',
-//             },
-//         },
-//         scales:{
-//             y:{
-//                 type: 'linear',
-//                 display:true,
-//                 position:'left',
-//             }
-//         }
-//     }
-//     //needs to be changed
-//     var labels = ['10 Seconds ago','20 Seconds ago','30 Seconds ago','40 Seconds ago','50 Seconds ago','60 Seconds ago'];
-//     var adataset = {
-//         labels,
-//         datasets:[
-//             {
-//                 label:'user',
-//                 data:data.map((item)=> item.value),
-//                 borderColor: 'rgb(10, 205, 235)',
-//                 backgroundColor: 'rgba(10, 205, 235, 0.5)',
-//                 yAxisID:'y',
-//             },
-//         ],
-//     }
-//     return(
-//         <div>
-        
-//             <Line options={options} data={adataset}></Line>
-//         </div>
-//     )
-// }
-const MouseData = ({ token, client, userinfo }) => {
+import paths from '../../paths.json'
+const BetweenStroke = ({ token, client, userinfo }) => {
     const [metrics, setMetrics] = useState([]);
     const [data, setData] = useState([]);
   
     useEffect(() => {
       const fetchData = () => {
         const subscription = from(ajax({
-          url: 'http://localhost:2500/api/mousespeed',
+          url: `${paths.api_url}api/time_between_strokes`,
           method: 'GET',
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -92,7 +41,7 @@ const MouseData = ({ token, client, userinfo }) => {
         setData(metrics);
       }
     }, [metrics]);
-    //GET NEWEST DATA TO APPEAR FIRST
+    //GET THE NEWEST ENTRIES TO APPEAR FIRST
     data.reverse()
     const options = {
       responsive: true,
@@ -104,7 +53,7 @@ const MouseData = ({ token, client, userinfo }) => {
       plugins: {
         title: {
           display: true,
-          text: 'Mouse Speed',
+          text: 'Average Time between keystrokes Over the last 60 seconds',
         },
       },
       scales: {
@@ -115,8 +64,7 @@ const MouseData = ({ token, client, userinfo }) => {
         },
       },
     };
-  
-    const labels = ['10 Seconds ago','20 Seconds ago','30 Seconds ago','40 Seconds ago','50 Seconds ago','60 Seconds ago'];
+    const labels = [10, 20, 30, 40, 50, 60];
     const ds = {
       labels,
       datasets: [
@@ -132,4 +80,5 @@ const MouseData = ({ token, client, userinfo }) => {
   
     return <Line data={ds} options={options} />;
   };
-export default MouseData;
+
+  export default BetweenStroke;

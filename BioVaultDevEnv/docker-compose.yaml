@@ -6,7 +6,7 @@ services:
   #   build: ../frontend
   #   container_name: frontend
   #   environment:
-  #     - Backend_URL=http://backend:2500 #this is only the backend url when the frontend is containerized inside docker compose!
+  #     - BACKEND_URL=http://backend:2500 #this is only the backend url when the frontend is containerized inside docker compose!
   #     - KEYCLOAK_URL=http://keycloak:8080 #this is only the keycloak url when the frontend is containerized inside docker compose!
   #   ports:
   #     - "80:3000"
@@ -14,29 +14,29 @@ services:
   #     - mysql
   #     - backend
   #   entrypoint: npm run start.
-  # backend:
-  #   build: ../kcbackend
-  #   container_name: backend
-  #   environment:
-  #     - KEYCLOAK_REALM=biovault
-  #     - KEYCLOAK_CLIENT=backend
-  #     - KEYCLOAK_CLIENT_SECRET=a8F6I5FV1O9VF1EdreOvOQGvVDP415cQ
-  #     - TOKEN_URL=http://keycloak:8080/realms/biovault/protocol/openid-connect/token
-  #     - KEYCLOAK_URL=http://keycloak:8080 #this is only the keycloak url when the backend is containerized inside docker compose!
-  #     - SQL_PORT=3306
-  #     - SQL_USER=root
-  #     - SQL_DB=biometric_auth
-  #     - SQL_HOST=mysql
-  #     - SQL_PASS=secretsquirrels
-  #   restart: always
-  #   ports:
-  #     - "2500:2500"
-  #   expose:
-  #     - 2500
-  #   depends_on:
-  #     - mysql
-  #     - keycloak
-  #   entrypoint: node server.js
+  backend:
+    build: ../kcbackend
+    container_name: backend
+    environment:
+      - KEYCLOAK_REALM=biovault
+      - KEYCLOAK_CLIENT=backend
+      - KEYCLOAK_CLIENT_SECRET=Qi96ntCsIBvnX4RFydt3zCmTeJZ7jbSR
+      # - TOKEN_URL=http://keycloak:8080/realms/biovault/protocol/openid-connect/token
+      - KEYCLOAK_URL=http://keycloak:8080 #this is only the keycloak url when the backend is containerized inside docker compose!
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB=biometric_auth
+      - DB_HOST=mysql
+      - DB_PASS=secretsquirrels
+    restart: always
+    ports:
+      - "2500:2500"
+    expose:
+      - 2500
+    depends_on:
+      - mysql
+      - keycloak
+    entrypoint: node server.js
   keycloak:
     build: ./../keycloak
     container_name: keycloak
@@ -55,8 +55,8 @@ services:
       - KC_HTTPS_PORT=8443
     entrypoint: ["/opt/keycloak/bin/kc.sh","start-dev" ]
   mysql:
-    build: ../MySQL/.
     # image: mysql:latest
+    build: ../mysql/.
     container_name: BioVault
     restart: always
     expose:

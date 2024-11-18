@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.ensemble import IsolationForest
 import logging
 import time
+from BioVaultDataCollection.kc import get_userid
 
 # Initialize logging.
 logging.basicConfig(filename='anomaly_detection.log', level=logging.DEBUG,
@@ -18,11 +19,14 @@ config = {
 }
 
 def check_sql_table_and_analyze(config, table_name):
+
+
     try:
         # Connect to the database.
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor(dictionary=True)
-        query = f"SELECT * FROM {table_name}"
+        user_id = get_userid()
+        query = f"SELECT value FROM {table_name} WHERE USER_ID = {user_id}"
         
         cursor.execute(query)
         result = cursor.fetchall()

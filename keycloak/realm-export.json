@@ -317,16 +317,6 @@
       ],
       "security-admin-console": [],
       "admin-cli": [],
-      "backend": [
-        {
-          "id": "304e55d3-bfdc-4c00-8569-6e3091d5fc24",
-          "name": "uma_protection",
-          "composite": false,
-          "clientRole": true,
-          "containerId": "08c35eb0-6647-40a9-a22b-64092effbc7a",
-          "attributes": {}
-        }
-      ],
       "account-console": [],
       "broker": [
         {
@@ -502,29 +492,6 @@
   "webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister": false,
   "webAuthnPolicyPasswordlessAcceptableAaguids": [],
   "webAuthnPolicyPasswordlessExtraOrigins": [],
-  "users": [
-    {
-      "id": "b80e54b7-8787-421e-aef9-8533face73ee",
-      "username": "service-account-backend",
-      "emailVerified": false,
-      "createdTimestamp": 1730584671816,
-      "enabled": true,
-      "totp": false,
-      "serviceAccountClientId": "backend",
-      "disableableCredentialTypes": [],
-      "requiredActions": [],
-      "realmRoles": [
-        "default-roles-biovault"
-      ],
-      "clientRoles": {
-        "backend": [
-          "uma_protection"
-        ]
-      },
-      "notBefore": 0,
-      "groups": []
-    }
-  ],
   "scopeMappings": [
     {
       "clientScope": "offline_access",
@@ -692,159 +659,6 @@
         "organization",
         "microprofile-jwt"
       ]
-    },
-    {
-      "id": "08c35eb0-6647-40a9-a22b-64092effbc7a",
-      "clientId": "backend",
-      "name": "",
-      "description": "",
-      "rootUrl": "",
-      "adminUrl": "",
-      "baseUrl": "",
-      "surrogateAuthRequired": false,
-      "enabled": true,
-      "alwaysDisplayInConsole": false,
-      "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
-      "redirectUris": [
-        "/*"
-      ],
-      "webOrigins": [
-        "/*"
-      ],
-      "notBefore": 0,
-      "bearerOnly": false,
-      "consentRequired": false,
-      "standardFlowEnabled": false,
-      "implicitFlowEnabled": false,
-      "directAccessGrantsEnabled": false,
-      "serviceAccountsEnabled": true,
-      "authorizationServicesEnabled": true,
-      "publicClient": false,
-      "frontchannelLogout": true,
-      "protocol": "openid-connect",
-      "attributes": {
-        "client.secret.creation.time": "1730584671",
-        "client.introspection.response.allow.jwt.claim.enabled": "false",
-        "oauth2.device.authorization.grant.enabled": "false",
-        "backchannel.logout.revoke.offline.tokens": "false",
-        "use.refresh.tokens": "true",
-        "realm_client": "false",
-        "oidc.ciba.grant.enabled": "false",
-        "client.use.lightweight.access.token.enabled": "false",
-        "backchannel.logout.session.required": "true",
-        "client_credentials.use_refresh_token": "true",
-        "acr.loa.map": "{}",
-        "require.pushed.authorization.requests": "false",
-        "tls.client.certificate.bound.access.tokens": "false",
-        "display.on.consent.screen": "false",
-        "token.response.type.bearer.lower-case": "false"
-      },
-      "authenticationFlowBindingOverrides": {},
-      "fullScopeAllowed": true,
-      "nodeReRegistrationTimeout": -1,
-      "protocolMappers": [
-        {
-          "id": "4ec71cdf-10bb-4d30-b134-957ea27149cf",
-          "name": "Client ID",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usersessionmodel-note-mapper",
-          "consentRequired": false,
-          "config": {
-            "user.session.note": "client_id",
-            "id.token.claim": "true",
-            "introspection.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "client_id",
-            "jsonType.label": "String"
-          }
-        },
-        {
-          "id": "9d1149f7-fca9-4248-b487-ec458e947c73",
-          "name": "Client Host",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usersessionmodel-note-mapper",
-          "consentRequired": false,
-          "config": {
-            "user.session.note": "clientHost",
-            "id.token.claim": "true",
-            "introspection.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "clientHost",
-            "jsonType.label": "String"
-          }
-        },
-        {
-          "id": "a21b5d27-b445-42f7-b1b3-dce844b1738b",
-          "name": "Client IP Address",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usersessionmodel-note-mapper",
-          "consentRequired": false,
-          "config": {
-            "user.session.note": "clientAddress",
-            "id.token.claim": "true",
-            "introspection.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "clientAddress",
-            "jsonType.label": "String"
-          }
-        }
-      ],
-      "defaultClientScopes": [
-        "web-origins",
-        "acr",
-        "roles",
-        "profile",
-        "basic",
-        "email"
-      ],
-      "optionalClientScopes": [
-        "address",
-        "phone",
-        "offline_access",
-        "organization",
-        "microprofile-jwt"
-      ],
-      "authorizationSettings": {
-        "allowRemoteResourceManagement": true,
-        "policyEnforcementMode": "ENFORCING",
-        "resources": [
-          {
-            "name": "Default Resource",
-            "type": "urn:backend:resources:default",
-            "ownerManagedAccess": false,
-            "attributes": {},
-            "uris": [
-              "/*"
-            ]
-          }
-        ],
-        "policies": [
-          {
-            "name": "Default Policy",
-            "description": "A policy that grants access only for users within this realm",
-            "type": "js",
-            "logic": "POSITIVE",
-            "decisionStrategy": "AFFIRMATIVE",
-            "config": {
-              "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
-            }
-          },
-          {
-            "name": "Default Permission",
-            "description": "A permission that applies to the default resource type",
-            "type": "resource",
-            "logic": "POSITIVE",
-            "decisionStrategy": "UNANIMOUS",
-            "config": {
-              "defaultResourceType": "urn:backend:resources:default",
-              "applyPolicies": "[\"Default Policy\"]"
-            }
-          }
-        ],
-        "scopes": [],
-        "decisionStrategy": "UNANIMOUS"
-      }
     },
     {
       "id": "ae0e2b30-b59a-4861-bf86-a06bab2535dd",

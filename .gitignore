@@ -2,3 +2,5 @@
 /frontend/node_modules
 /kcbackend/node_modules
 .env
+*.pyc
+*.log

@@ -5,6 +5,7 @@ import Home from "../pages/home";
 import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
 
+<<<<<<< HEAD
 const Navigation = ({ token, client, theme, toggleTheme }) => {
   const navbarRef = useRef(null);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -12,6 +13,10 @@ const Navigation = ({ token, client, theme, toggleTheme }) => {
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
   }
+=======
+const Navigation = ({ token, client, userinfo, theme, toggleTheme }) => {
+const navbarRef = useRef(null);
+>>>>>>> 74cdc85363d7e04b5d019d6cbe43de55e3050b66
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -85,9 +90,9 @@ const Navigation = ({ token, client, theme, toggleTheme }) => {
         <Route exact path="/" element={<Home />} />
         <Route
           path="/biometrics"
-          element={<MyBiometrics token={token} client={client} />}
+          element={<MyBiometrics token={token} client={client} userinfo={userinfo}/>}
         />
-        <Route path="/dashboard" element={<Dashboard token={token} client={client} />} />
+        <Route path="/dashboard" element={<Dashboard token={token} client={client} userinfo={userinfo} />} />
       </Routes>
     </Router>
   );

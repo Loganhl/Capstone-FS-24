@@ -1,58 +1,52 @@
 import time
-from pynput import mouse
+from pynput.mouse import Listener
 
 class MouseMetrics:
-    def __init__(self, interval_duration=10):
-        self.interval_duration = interval_duration
-        self.start_time = time.time()
-        self.activity_time = 0
-        self.move_count = 0
-        self.click_count = 0
+    def __init__(self):
+        self.start_time = None
         self.click_durations = []
-        self.last_move_time = None
-        self.activity_flag = False
+        self.click_start_time = None
+        self.distance_moved = 0
+        self.last_position = None
 
-        # Start mouse listener
-        self.listener = mouse.Listener(
-            on_click=self.on_click,
-            on_move=self.on_move
-        )
-        self.listener.start()
+    def start(self):
+        self.start_time = time.time()
+        self.click_durations = []
+        self.distance_moved = 0
+        self.last_position = None
 
     def on_click(self, x, y, button, pressed):
-        current_time = time.time()
         if pressed:
-            self.click_start_time = current_time
+            self.click_start_time = time.time()
         else:
-            if hasattr(self, 'click_start_time'):
-                dwell_time = current_time - self.click_start_time
-                self.click_durations.append(dwell_time)
-                self.click_count += 1
-                self.activity_flag = True
-                del self.click_start_time
+            if self.click_start_time:
+                duration = time.time() - self.click_start_time
+                self.click_durations.append(duration)
 
     def on_move(self, x, y):
-        current_time = time.time()
-        if self.last_move_time:
-            self.activity_time += current_time - self.last_move_time
-        self.move_count += 1
-        self.last_move_time = current_time
-        self.activity_flag = True
+        if self.last_position is not None:
+            dx = x - self.last_position[0]
+            dy = y - self.last_position[1]
+            self.distance_moved += (dx**2 + dy**2) ** 0.5
+        self.last_position = (x, y)
 
-    def calculate_metrics(self):
-        movement_ratio = self.activity_time / self.interval_duration if self.activity_time > 0 else 1
-        mouse_speed = (self.move_count / self.interval_duration) / movement_ratio
-        avg_click_dwell_time = sum(self.click_durations) / len(self.click_durations) if self.click_durations else 0
+    def stop(self, is_switch=False):
+        if self.start_time is None:
+            return None
+        
+        if is_switch:
+            elapsed_time -=3
 
-        # Reset metrics
-        self.start_time = time.time()
-        self.move_count = 0
-        self.click_count = 0
-        self.click_durations.clear()
-        self.activity_time = 0
-        self.activity_flag = False
-
+        elapsed_time = (time.time() - self.start_time) - 3
+        avg_click_dwell = sum(self.click_durations) / len(self.click_durations) if self.click_durations else 0
+        mouse_speed = self.distance_moved / elapsed_time if elapsed_time > 0 else 0
         return {
-            'mouse_speed': mouse_speed,
-            'avg_click_dwell_time': avg_click_dwell_time
+            'avg_click_dwell_time': avg_click_dwell,
+            'mouse_speed': mouse_speed
         }
+
+    def reset(self):
+        self.start_time = None
+        self.click_durations = []
+        self.distance_moved = 0
+        self.last_position = None

@@ -24,7 +24,7 @@ import React, { useState, useEffect } from "react";
 // import UserStats from './components/userMetrics';
 import client from "./hooks/kclient";
 
-const Apps = ({ token, client }) => {
+const Apps = ({ token, client,userinfo }) => {
   ChartJS.register(
     ArcElement,
     Tooltip,
@@ -35,7 +35,6 @@ const Apps = ({ token, client }) => {
     PointElement,
     CategoryScale
   );
-
 
   const datab = {
     labels: ["TouchDowns", "Yards per Carry", "Yards per Game"],
@@ -69,7 +68,7 @@ const Apps = ({ token, client }) => {
   return (
     <div className="App">
       <header className="App-header">
-        <Navigation client={client} token={token} theme={theme} toggleTheme={toggleTheme} />
+        <Navigation client={client} token={token} userinfo={userinfo} theme={theme} toggleTheme={toggleTheme} />
       </header>
       <footer className="App-footer">
         <Footer theme={theme} />
@@ -79,9 +78,13 @@ const Apps = ({ token, client }) => {
 };
 
 function App() {
+
   const [isLogin, token] = useAuth();
+
   if (isLogin == true) {
-    return <Apps token={token} client={client}></Apps>;
+    
+
+    return <Apps token={token} client={client} ></Apps>;
   }
   return (
     <div className="App">
