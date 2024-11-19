@@ -3,8 +3,8 @@ import pandas as pd
 from sklearn.ensemble import IsolationForest
 import logging
 import time
-from BioVaultDataCollection.kc import get_userid
-
+# from BioVaultDataCollection.kc import get_userid
+from kc import get_userid
 # Initialize logging.
 logging.basicConfig(filename='anomaly_detection.log', level=logging.DEBUG,
                     format='%(asctime)s:%(levelname)s:%(message)s')
@@ -25,14 +25,14 @@ def check_sql_table_and_analyze(config, table_name):
         # Connect to the database.
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor(dictionary=True)
-        user_id = get_userid()
-        query = f"SELECT value FROM {table_name} WHERE USER_ID = {user_id}"
+        user_id = get_userid(username='user',password='user')
+        
+        query = f"SELECT value FROM {table_name} WHERE USER_ID ='{user_id}';"
         
         cursor.execute(query)
         result = cursor.fetchall()
         
         df = pd.DataFrame(result)
-        
         cursor.close()
         conn.close()
         
@@ -119,7 +119,9 @@ def main():
     ]
     
     while True:
+        
         for table_name in table_names:
+            print(table_name)
             logging.info('------------------------------------------------------------------------------------------------')
             anomaly_percentage = check_sql_table_and_analyze(config, table_name)
 

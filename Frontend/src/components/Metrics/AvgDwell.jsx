@@ -87,14 +87,16 @@ function convertResptoarray(array){
 
 
 
-const AvgCDwellTime = ({ token, client, userinfo }) => {
+const AvgCDwellTime = ({ token, client, userid }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
-
+  
+  // userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
   useEffect(() => {
     const fetchData = () => {
+      //api parameters works!
       const subscription = from(ajax({
-        url: `${process.env.REACT_APP_API_URL}api/avgdwelltime`,
+        url: `${process.env.REACT_APP_API_URL}api/avgdwelltime/${userid}`,
         method: 'GET',
         headers: {
           "Authorization": `Bearer ${token}`,

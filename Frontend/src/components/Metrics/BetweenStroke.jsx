@@ -5,14 +5,15 @@ import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import paths from '../../paths.json'
-const BetweenStroke = ({ token, client, userinfo }) => {
+const BetweenStroke = ({ token, client, userid }) => {
     const [metrics, setMetrics] = useState([]);
     const [data, setData] = useState([]);
   
     useEffect(() => {
       const fetchData = () => {
+        userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
         const subscription = from(ajax({
-          url: `${paths.api_url}api/time_between_strokes`,
+          url: `${process.env.REACT_APP_API_URL}api/time_between_strokes/${userid}`,
           method: 'GET',
           headers: {
             "Authorization": `Bearer ${token}`,

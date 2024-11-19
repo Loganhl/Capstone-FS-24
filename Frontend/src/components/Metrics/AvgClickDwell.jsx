@@ -5,14 +5,14 @@ import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import paths from '../../paths.json'
-const AvgClickDwell = ({ token, client, userinfo }) => {
+const AvgClickDwell = ({ token, client, userid }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
-
+  userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
   useEffect(() => {
     const fetchData = () => {
       const subscription = from(ajax({
-        url: `${paths.api_url}api/clickdwelltime`,
+        url: `${process.env.REACT_APP_API_URL}api/clickdwelltime/${userid}`,
         method: 'GET',
         headers: {
           "Authorization": `Bearer ${token}`,
