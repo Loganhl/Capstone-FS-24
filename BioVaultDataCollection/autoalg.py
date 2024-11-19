@@ -25,9 +25,8 @@ def check_sql_table_and_analyze(config, table_name):
         # Connect to the database.
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor(dictionary=True)
-        user_id = get_userid(username='user',password='user')
-        
-        query = f"SELECT value FROM {table_name} WHERE USER_ID ='{user_id}';"
+        user_id = get_userid('user@user.com', 'user')
+        query = f"SELECT value FROM {table_name} WHERE USER_ID = '{user_id}'"
         
         cursor.execute(query)
         result = cursor.fetchall()
@@ -109,6 +108,8 @@ def insert_percentage(config, table_name, anomaly_percentage):
         logging.error(f"Error inserting percentage into {table_name}: {e}")
 
 def main():
+    print("BLAH")
+    logging.info("MAIN")
     table_names = [
         'wpm',
         'mouse_speed',
