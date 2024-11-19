@@ -3,7 +3,7 @@ const connection = require('./connect')
 
 function Maketables(){
     //create keys per second
-    let q1 = 'CREATE TABLE IF NOT EXISTS avg_click_dwell_time (    avg_click_dwell_time_id INT PRIMARY KEY AUTO_INCREMENT,value REAL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, USER_ID VARCHAR(36),FOREIGN KEY (USER_ID) REFERENCES USER_ENTITY(ID));';
+    let q1 = 'CREATE TABLE IF NOT EXISTS avg_click_dwell (    avg_click_dwell_time_id INT PRIMARY KEY AUTO_INCREMENT,value REAL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, USER_ID VARCHAR(36),FOREIGN KEY (USER_ID) REFERENCES USER_ENTITY(ID));';
     connection.query(q1);
     // connection.query('CREATE TABLE IF NOT EXISTS keys_per_sec (keys_per_sec_id INT PRIMARY KEY AUTO_INCREMENT,value REAL,USER_ID VARCHAR(36)  FOREIGN KEY (USER_ID) REFERENCES USER_ENTITY(ID));')
 

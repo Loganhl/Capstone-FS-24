@@ -116,7 +116,7 @@ def main():
         'keys_per_sec',
         'avg_time_between_keystrokes',
         'avg_dwell_time',
-        'avg_click_dwell_time'
+        'avg_click_dwell'
     ]
     
     while True:

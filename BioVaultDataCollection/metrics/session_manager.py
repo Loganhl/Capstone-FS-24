@@ -48,7 +48,7 @@ class SessionManager:
         elif self.current_session == 'mouse':
             metrics = self.mouse_metrics.stop()
             if metrics and 20000 > metrics['mouse_speed'] > 0:
-                self.db.insert_metric('avg_click_dwell_time', metrics['avg_click_dwell_time'], user_id)
+                self.db.insert_metric('avg_click_dwell', metrics['avg_click_dwell_time'], user_id)
                 self.db.insert_metric('mouse_speed', metrics['mouse_speed'], user_id)
             self.mouse_metrics.reset()
         self.current_session = None
