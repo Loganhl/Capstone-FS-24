@@ -111,16 +111,16 @@ app.get('/api/userselect',(req,res)=>{
 
 app.get('/api/clickdwelltime',(req,res)=>{
     //will likely change the 30 after I talk with Jack.
-    let query = 'SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 30;';
+    let query = 'SELECT * FROM  avg_click_dwell ORDER BY created_at DESC LIMIT 30;';
 
-    connection.query('SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
+    connection.query('SELECT * FROM  avg_click_dwell ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
         res.json(result);
     
     })
 })
 app.get('/api/clickdwelltime/:userid',(req,res)=>{
     if (req.params.userid) {
-        connection.query('SELECT * FROM avg_click_dwell_time WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 6;',[req.params.userid],(err,result,fields)=>{
+        connection.query('SELECT * FROM avg_click_dwell WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 6;',[req.params.userid],(err,result,fields)=>{
             res.json(result);
         })
     }

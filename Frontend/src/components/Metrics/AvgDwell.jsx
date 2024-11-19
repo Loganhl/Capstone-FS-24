@@ -91,7 +91,7 @@ const AvgCDwellTime = ({ token, client, userid }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
   
-  // userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
+  userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
   useEffect(() => {
     const fetchData = () => {
       //api parameters works!
