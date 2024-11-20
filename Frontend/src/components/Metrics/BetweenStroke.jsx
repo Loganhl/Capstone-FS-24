@@ -11,7 +11,6 @@ const BetweenStroke = ({ token, client, userid }) => {
   
     useEffect(() => {
       const fetchData = () => {
-        userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
         const subscription = from(ajax({
           url: `${process.env.REACT_APP_API_URL}api/time_between_strokes/${userid}`,
           method: 'GET',
@@ -35,7 +34,7 @@ const BetweenStroke = ({ token, client, userid }) => {
       const interval = setInterval(fetchData, 5000); // Fetch new data every 5 seconds
   
       return () => clearInterval(interval); // Cleanup interval on unmount
-    }, [token]);
+    }, [token,userid]);
   
     useEffect(() => {
       if (metrics.length > 0) {

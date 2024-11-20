@@ -118,7 +118,7 @@ app.get('/api/clickdwelltime',(req,res)=>{
     
     })
 })
-app.get('/api/clickdwelltime/:userid',(req,res)=>{
+app.get('/api/clickdwelltime/:userid',keycloak.protect(),(req,res)=>{
     if (req.params.userid) {
         connection.query('SELECT * FROM avg_click_dwell WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 6;',[req.params.userid],(err,result,fields)=>{
             res.json(result);
@@ -152,7 +152,7 @@ app.get('/api/time_between_strokes',(req,res)=>{
         res.json(result);
     })
 })
-app.get('/api/time_between_strokes/:userid',(req,res)=>{
+app.get('/api/time_between_strokes/:userid',keycloak.protect(),(req,res)=>{
     if (req.params.userid) {
         connection.query('SELECT * FROM avg_time_between_keystrokes WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 6;',[req.params.userid],(err,result,fields)=>{
             res.json(result);
@@ -168,7 +168,7 @@ app.get('/api/keys_per_sec',(req,res)=>{
         res.json(result);
     })
 })
-app.get('/api/keys_per_sec:userid',(req,res)=>{
+app.get('/api/keys_per_sec:userid',keycloak.protect(),(req,res)=>{
     try{
         if (req.params.userid) {
             connection.query("SELECT * FROM keys_per_sec WHERE a.USERID = ? ORDER BY DESC LIMIT 60;",[req.params.userid],(err,result,fields)=>{

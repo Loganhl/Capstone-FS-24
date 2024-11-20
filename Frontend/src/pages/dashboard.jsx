@@ -3,9 +3,12 @@ import axios from "axios";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import AvgCDwellTime from "../components/Metrics/AvgDwell";
 import AvgClickDwell from "../components/Metrics/AvgClickDwell";
+import MouseData from "../components/Metrics/MouseData";
+import WordsPerMin from "../components/Metrics/Wpm";
+import BetweenStroke from "../components/Metrics/BetweenStroke";
 const UserContext = createContext();
 
-const RealmUsers = ({ token, setValue }) => {
+const RealmUsers = ({ token, setValue,theme }) => {
   const [users, setUsers] = useState([]);
   const isRun = useRef(false);
 
@@ -28,7 +31,7 @@ const RealmUsers = ({ token, setValue }) => {
     console.log(`user id should now be set to:${newval} `);
   }
   return (
-    <Table>
+    <Table variant={theme} striped hover>
       <tbody>
         {users.map((item) => (
           <tr key={item.ID}>
@@ -46,7 +49,7 @@ const RealmUsers = ({ token, setValue }) => {
   );
 };
 
-const Dashboard = ({ token, client }) => {
+const Dashboard = ({ token, client,theme }) => {
   const [userid, setUserid] = useState('d7d75e80-39e6-4882-9b1b-e6e29dca1e70');
 
   if (!client.hasRealmRole("Admin")) {
@@ -65,11 +68,17 @@ const Dashboard = ({ token, client }) => {
         </Row>
         <Row>
           <Col>
-
+              <MouseData token={token} userid={userid}/>
+          </Col>
+          <Col>
+            <WordsPerMin token={token} userid={userid}/>
+          </Col>
+          <Col>
+            <BetweenStroke token={token} userid={userid}/>
           </Col>
         </Row>
         <Row>
-          <RealmUsers token={token} setValue={setUserid} />
+          <RealmUsers token={token} setValue={setUserid} theme={theme} />
         </Row>
       
     </div>

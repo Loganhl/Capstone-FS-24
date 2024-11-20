@@ -59,7 +59,7 @@ import { ajax } from 'rxjs/ajax';
 const MouseData = ({ token, client, userid }) => {
     const [metrics, setMetrics] = useState([]);
     const [data, setData] = useState([]);
-    userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
+    // userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
     useEffect(() => {
       const fetchData = () => {
         const subscription = from(ajax({
@@ -85,7 +85,7 @@ const MouseData = ({ token, client, userid }) => {
       const interval = setInterval(fetchData, 5000); // Fetch new data every 5 seconds
   
       return () => clearInterval(interval); // Cleanup interval on unmount
-    }, [token]);
+    }, [token,userid]);
   
     useEffect(() => {
       if (metrics.length > 0) {
