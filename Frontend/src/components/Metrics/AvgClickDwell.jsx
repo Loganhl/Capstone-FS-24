@@ -5,9 +5,12 @@ import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import paths from '../../paths.json'
+import { useTheme } from '../../hooks/ThemeProvider';
+
 const AvgClickDwell = ({ token, client, userinfo }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
+  const theme = useTheme();
 
   useEffect(() => {
     const fetchData = () => {
@@ -65,6 +68,7 @@ const AvgClickDwell = ({ token, client, userinfo }) => {
   };
 
   const labels = [10, 20, 30, 40, 50, 60];
+    
   const ds = {
     labels,
     datasets: [
