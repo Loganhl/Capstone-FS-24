@@ -70,7 +70,6 @@ app.get('/api/wpm',(req,res)=>{
 })
 //needs testing
 app.get('/api/wpm/:userid',keycloak.protect(),(req,res)=>{
-    console.log("check");
     try{
         if (req.params.userid) {
             connection.query('SELECT * FROM  wpm WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 30;',[req.params.userid],(err,results,fields)=>{

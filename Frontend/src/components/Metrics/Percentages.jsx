@@ -5,6 +5,7 @@ import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import paths from '../../paths.json'
+import { useTheme } from '../../hooks/ThemeProvider';
 const Percentages = ({ token, client, userid }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
@@ -81,6 +82,13 @@ const Percentages = ({ token, client, userid }) => {
         borderColor: 'rgb(145, 220,95)',
         backgroundColor:'rgba(145, 220,95,0.5)',
         yAxisID: 'y1'
+      },
+      {
+        label:'avg_dwell_time_perc',
+        data:(data.length >0 ? data.map((item)=> item.avg_dwell_time_perc):[]),
+        borderColor: 'rgb(129,45,201)',
+        backgroundColor: 'rgba(129,45,201,0.5)',
+        yAxisID:'y2',
       }
     ],
   };
