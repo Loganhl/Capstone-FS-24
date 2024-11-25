@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from "../pages/home";
 import MyBiometrics from "../pages/UserBiometrics";
 import Dashboard from "../pages/dashboard";
+import {ReactComponent as Logo} from '../logo.svg';
 
-const Navigation = ({ token, client, userinfo, theme, toggleTheme }) => {
+const Navigation = ({ token, client, userinfo, theme, toggleTheme}) => {
   const navbarRef = useRef(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -43,6 +44,7 @@ const Navigation = ({ token, client, userinfo, theme, toggleTheme }) => {
         <Container>
           <Nav variant="tabs" defaultActiveKey="/">
             <div className="d-flex align-items-center">
+              <Logo style={{ width: '50px', height: '50px' }} />
               <Navbar.Brand href="">Biovault</Navbar.Brand>
               <Navbar.Toggle onClick={handleToggle}>
                 {isExpanded ? 'Collapse' : 'Expand'}

@@ -2,12 +2,15 @@ import React,{useState,useEffect,useRef} from "react";
 import axios from "axios";
 import paths from '../paths.json'
 import { Button,Table } from "react-bootstrap";
+import { useTheme } from "../hooks/ThemeProvider";
 
 //need to decide wheer to put the function that switches between users
 
 const RealmUsers = ({client,token})=>{
     const isRun = useRef(false);
     const [users,setUsers] = useState([]);
+    const { theme } = useTheme();
+
     useEffect(()=>{
         if(isRun.current) return;
         isRun.current = true;
@@ -19,7 +22,7 @@ const RealmUsers = ({client,token})=>{
     },[])
     
     return(
-        <Table variant="dark" striped bordered responsive hover>
+        <Table variant={theme === "dark" ? "dark" : "light"} striped bordered responsive hover>
         <thead>
             <tr>
             <th>User</th>
