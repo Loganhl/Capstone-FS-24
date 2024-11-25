@@ -56,11 +56,11 @@ const Navigation = ({ token, client, userinfo, theme, toggleTheme}) => {
                   Home
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item>
+              {/* <Nav.Item>
                 <Nav.Link as={Link} to="/biometrics">
                   My Biometrics
                 </Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
               {client.hasRealmRole &&
               <Nav.Item>
                 <Nav.Link as={Link} to="/dashboard">
@@ -85,10 +85,10 @@ const Navigation = ({ token, client, userinfo, theme, toggleTheme}) => {
       </Navbar>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route
+        {/* <Route
           path="/biometrics"
           element={<MyBiometrics token={token} client={client} userinfo={userinfo}/>}
-        />
+        /> */}
         <Route path="/dashboard" element={<Dashboard token={token} client={client} userinfo={userinfo} theme={theme}/>} />
       </Routes>
     </Router>

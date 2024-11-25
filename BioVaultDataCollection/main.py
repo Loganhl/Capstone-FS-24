@@ -6,12 +6,13 @@ from database.database import Database
 from pynput import keyboard
 from pynput.mouse import Listener as MouseListener
 from metrics.session_manager import SessionManager
-
+from kc import get_userid
 
 
 def main():
     db = Database()
-    session_manager = SessionManager(db)
+    user_id = get_userid('user@user.com','user')
+    session_manager = SessionManager(db,user_id)
     
 
     def on_key_press(key):
