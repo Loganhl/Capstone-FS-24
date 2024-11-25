@@ -4,7 +4,7 @@ import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import { Line } from "react-chartjs-2";
 
-const AvgCDwellTime = ({ token, client, userid }) => {
+const AvgCDwellTime = ({ token, client, userid,username }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
 
@@ -68,7 +68,7 @@ const AvgCDwellTime = ({ token, client, userid }) => {
     labels,
     datasets: [
       {
-        label: 'User',
+        label: username,
         data: data.length > 0 ? data.map(item => item.value) : [],
         borderColor: 'rgb(86, 127, 51)',
         backgroundColor: 'rgba(86, 127, 51, 0.5)',

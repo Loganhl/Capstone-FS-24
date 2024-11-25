@@ -69,7 +69,7 @@ app.get('/api/wpm',(req,res)=>{
     })
 })
 //needs testing
-app.get('/api/wpm/:userid',(req,res)=>{
+app.get('/api/wpm/:userid',keycloak.protect(),(req,res)=>{
     console.log("check");
     try{
         if (req.params.userid) {
@@ -89,7 +89,7 @@ app.get('/api/mousespeed',(req,res)=>{
         res.json(result);
     })
 })
-app.get('/api/mousespeed/:userid',(req,res)=>{
+app.get('/api/mousespeed/:userid',keycloak.protect(),(req,res)=>{
     try{
         if (req.params.userid) {
             //new insertions every ten seconds of activity.
@@ -104,8 +104,15 @@ app.get('/api/mousespeed/:userid',(req,res)=>{
     }
 })
 //test methods of selecting users to display their metrics for the admin dashboard
-app.get('/api/userselect',(req,res)=>{
-
+app.get('/api/username/:userid',(req,res)=>{
+    if (req.params.userid) {
+        connection.query('SELECT USERNAME FROM USER_ENTITY WHERE ID = ?',[req.params.userid],(err,result,fields)=>{
+            res.send(result[0].USERNAME);
+        })
+    }
+    else{
+        res.status(500).json({"ERROR":"Internal Server Error"});
+    }
     
 })  
 
@@ -183,11 +190,15 @@ app.get('/api/keys_per_sec:userid',keycloak.protect(),(req,res)=>{
     }
 })
 //figure out how we are displaying percentages
-app.get('/api/percentages',(req,res)=>{
-    connection.query('SELECT * FROM percentages;',(err,result,fields)=>{
-        res.json(result);
-    
-    })
+app.get('/api/percentages/:userid',(req,res)=>{
+    if (req.params.userid) {
+        connection.query('SELECT * FROM percentages WHERE USER_ID = ?;',[req.params.userid],(err,result,fields)=>{
+            res.json(result);
+        })
+    }
+    else{
+        res.status(500).json({"Error":"Internal Server Error"});
+    }
 })
 //listen on the port
 app.listen(port,console.log(`listening on port: ${port}`));

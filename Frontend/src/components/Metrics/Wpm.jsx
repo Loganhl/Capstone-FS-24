@@ -5,6 +5,7 @@ import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import paths from '../../paths.json'
+import GetUsernameFromID from "../getusername";
 // const WordsPerMin = ({token,client,userinfo})=>{
 //     const [wpm,setwpm] = useState([]);
 //     useEffect(()=>{
@@ -59,7 +60,7 @@ import paths from '../../paths.json'
 //         <Line height={90} options={options} data={ds}></Line>
 //     </div>)
 // }
-const WordsPerMin = ({ token, client, userid }) => {
+const WordsPerMin = ({ token, client, userid,username }) => {
     const [metrics, setMetrics] = useState([]);
     const [data, setData] = useState([]);
     // userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
@@ -80,21 +81,22 @@ const WordsPerMin = ({ token, client, userid }) => {
         });
         return () => subscription.unsubscribe(); // Cleanup subscription on unmount
       };
-  
+      
       // Fetch data immediately
       fetchData();
   
       // Fetch data at intervals
-      const interval = setInterval(fetchData, 30000); // Fetch new data every 5 seconds
+      const interval = setInterval(fetchData, 5000); // Fetch new data every 30 seconds
   
       return () => clearInterval(interval); // Cleanup interval on unmount
     }, [token,userid]);
-  
+    // var username =GetUsernameFromID(token,userid);
     useEffect(() => {
       if (metrics.length > 0) {
         setData(metrics);
       }
     }, [metrics]);
+    
     //get newest data to appear first
     data.reverse()
     const options = {
@@ -124,11 +126,12 @@ const WordsPerMin = ({ token, client, userid }) => {
       labels,
       datasets: [
         {
-          label: 'user',
+          label: username,
           data: (data.length > 0 ? data.map((item) => item.value) : []),
           borderColor: 'rgb(86, 127, 51)',
           backgroundColor: 'rgba(86, 127, 51, 0.5)',
           yAxisID: 'y',
+          showLine: true,
         },
       ],
     };

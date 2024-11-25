@@ -56,7 +56,7 @@ import { ajax } from 'rxjs/ajax';
 //         </div>
 //     )
 // }
-const MouseData = ({ token, client, userid }) => {
+const MouseData = ({ token, client, userid,username }) => {
     const [metrics, setMetrics] = useState([]);
     const [data, setData] = useState([]);
     // userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
@@ -121,7 +121,7 @@ const MouseData = ({ token, client, userid }) => {
       labels,
       datasets: [
         {
-          label: 'user',
+          label: username,
           data: (data.length > 0 ? data.map((item) => item.value) : []),
           borderColor: 'rgb(86, 127, 51)',
           backgroundColor: 'rgba(86, 127, 51, 0.5)',

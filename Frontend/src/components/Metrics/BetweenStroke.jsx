@@ -5,10 +5,9 @@ import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import paths from '../../paths.json'
-const BetweenStroke = ({ token, client, userid }) => {
+const BetweenStroke = ({ token, client, userid,username }) => {
     const [metrics, setMetrics] = useState([]);
     const [data, setData] = useState([]);
-  
     useEffect(() => {
       const fetchData = () => {
         const subscription = from(ajax({
@@ -69,7 +68,7 @@ const BetweenStroke = ({ token, client, userid }) => {
       labels,
       datasets: [
         {
-          label: 'user',
+          label: username,
           data: (data.length > 0 ? data.map((item) => item.value) : []),
           borderColor: 'rgb(86, 127, 51)',
           backgroundColor: 'rgba(86, 127, 51, 0.5)',
