@@ -7,7 +7,7 @@ import { ajax } from 'rxjs/ajax';
 import paths from '../../paths.json'
 import { useTheme } from '../../hooks/ThemeProvider';
 
-const AvgClickDwell = ({ token, client, userinfo }) => {
+const AvgClickDwell = ({ token, client, userid }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
   const theme = useTheme();
@@ -15,7 +15,7 @@ const AvgClickDwell = ({ token, client, userinfo }) => {
   useEffect(() => {
     const fetchData = () => {
       const subscription = from(ajax({
-        url: `${paths.api_url}api/clickdwelltime`,
+        url: `${process.env.REACT_APP_API_URL}api/clickdwelltime/${userid}`,
         method: 'GET',
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -37,7 +37,7 @@ const AvgClickDwell = ({ token, client, userinfo }) => {
     const interval = setInterval(fetchData, 5000); // Fetch new data every 5 seconds
 
     return () => clearInterval(interval); // Cleanup interval on unmount
-  }, [token]);
+  }, [token,userid]);
 
   useEffect(() => {
     if (metrics.length > 0) {

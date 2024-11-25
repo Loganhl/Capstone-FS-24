@@ -89,7 +89,7 @@ const Navigation = ({ token, client, userinfo, theme, toggleTheme}) => {
           path="/biometrics"
           element={<MyBiometrics token={token} client={client} userinfo={userinfo}/>}
         />
-        <Route path="/dashboard" element={<Dashboard token={token} client={client} userinfo={userinfo} />} />
+        <Route path="/dashboard" element={<Dashboard token={token} client={client} userinfo={userinfo} theme={theme}/>} />
       </Routes>
     </Router>
   );

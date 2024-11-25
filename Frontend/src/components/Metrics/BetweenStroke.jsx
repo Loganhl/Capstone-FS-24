@@ -5,14 +5,14 @@ import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import paths from '../../paths.json'
-const BetweenStroke = ({ token, client, userinfo }) => {
+const BetweenStroke = ({ token, client, userid }) => {
     const [metrics, setMetrics] = useState([]);
     const [data, setData] = useState([]);
   
     useEffect(() => {
       const fetchData = () => {
         const subscription = from(ajax({
-          url: `${paths.api_url}api/time_between_strokes`,
+          url: `${process.env.REACT_APP_API_URL}api/time_between_strokes/${userid}`,
           method: 'GET',
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -34,7 +34,7 @@ const BetweenStroke = ({ token, client, userinfo }) => {
       const interval = setInterval(fetchData, 5000); // Fetch new data every 5 seconds
   
       return () => clearInterval(interval); // Cleanup interval on unmount
-    }, [token]);
+    }, [token,userid]);
   
     useEffect(() => {
       if (metrics.length > 0) {

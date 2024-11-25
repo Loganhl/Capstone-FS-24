@@ -111,12 +111,22 @@ app.get('/api/userselect',(req,res)=>{
 
 app.get('/api/clickdwelltime',(req,res)=>{
     //will likely change the 30 after I talk with Jack.
-    let query = 'SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 30;';
+    let query = 'SELECT * FROM  avg_click_dwell ORDER BY created_at DESC LIMIT 30;';
 
-    connection.query('SELECT * FROM  avg_click_dwell_time ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
+    connection.query('SELECT * FROM  avg_click_dwell ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
         res.json(result);
     
     })
+})
+app.get('/api/clickdwelltime/:userid',keycloak.protect(),(req,res)=>{
+    if (req.params.userid) {
+        connection.query('SELECT * FROM avg_click_dwell WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 6;',[req.params.userid],(err,result,fields)=>{
+            res.json(result);
+        })
+    }
+    else{
+        res.status(500).json({"error":"Internal Server Error"})
+    }
 })
 //aver dwell time api endpoint
 app.get('/api/avgdwelltime',(req,res)=>{
@@ -125,6 +135,16 @@ app.get('/api/avgdwelltime',(req,res)=>{
         res.json(result);
     })
 });
+app.get('/api/avgdwelltime/:userid',(req,res)=>{
+    if (req.params.userid) {
+        connection.query('SELECT * FROM avg_dwell_time WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 6;',[req.params.userid],(err,result,fields)=>{
+            res.json(result);
+        })
+    }
+    else{
+        res.status(500).json({"error":"Internal Server Error"});
+    }
+})
 //api method for getting the average time between keystrokes.
 app.get('/api/time_between_strokes',(req,res)=>{
     connection.query('SELECT * FROM avg_time_between_keystrokes ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
@@ -132,13 +152,23 @@ app.get('/api/time_between_strokes',(req,res)=>{
         res.json(result);
     })
 })
+app.get('/api/time_between_strokes/:userid',keycloak.protect(),(req,res)=>{
+    if (req.params.userid) {
+        connection.query('SELECT * FROM avg_time_between_keystrokes WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 6;',[req.params.userid],(err,result,fields)=>{
+            res.json(result);
+        })
+    }
+    else{
+        res.status(500).json({"error":"Internal Server Error"})
+    }
+})
 app.get('/api/keys_per_sec',(req,res)=>{
     let query = 'SELECT a.USERNAME, b.value,b.created_at FROM USER_ENTITY a , keys_per_sec b WHERE a.ID = b.USER_ID AND a.USERNAME = (?);';
     connection.query('SELECT * FROM keys_per_sec ORDER BY created_at DESC LIMIT 6;',(err,result,fields)=>{
         res.json(result);
     })
 })
-app.get('/api/keys_per_sec:userid',(req,res)=>{
+app.get('/api/keys_per_sec:userid',keycloak.protect(),(req,res)=>{
     try{
         if (req.params.userid) {
             connection.query("SELECT * FROM keys_per_sec WHERE a.USERID = ? ORDER BY DESC LIMIT 60;",[req.params.userid],(err,result,fields)=>{

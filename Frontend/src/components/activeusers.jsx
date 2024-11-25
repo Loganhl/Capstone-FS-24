@@ -9,7 +9,7 @@ const ActiveUsers = ({client,token})=>{
     useEffect(()=>{
         if(isRun.current) return;
         isRun.current = true;
-        axios.get(`http://localhost:2500/api/activeusers`,{
+        axios.get(`${process.env.REACT_APP_API_URL}api/activeusers`,{
             "headers":{
                 "Authorization":`Bearer ${token}`
             }

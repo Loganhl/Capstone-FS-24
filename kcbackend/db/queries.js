@@ -3,7 +3,7 @@ const connection = require('./connect')
 
 function Maketables(){
     //create keys per second
-    let q1 = 'CREATE TABLE IF NOT EXISTS avg_click_dwell_time (    avg_click_dwell_time_id INT PRIMARY KEY AUTO_INCREMENT,value REAL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, USER_ID VARCHAR(36),FOREIGN KEY (USER_ID) REFERENCES USER_ENTITY(ID));';
+    let q1 = 'CREATE TABLE IF NOT EXISTS avg_click_dwell (    avg_click_dwell_time_id INT PRIMARY KEY AUTO_INCREMENT,value REAL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, USER_ID VARCHAR(36),FOREIGN KEY (USER_ID) REFERENCES USER_ENTITY(ID));';
     connection.query(q1);
     // connection.query('CREATE TABLE IF NOT EXISTS keys_per_sec (keys_per_sec_id INT PRIMARY KEY AUTO_INCREMENT,value REAL,USER_ID VARCHAR(36)  FOREIGN KEY (USER_ID) REFERENCES USER_ENTITY(ID));')
 
@@ -22,7 +22,7 @@ function Maketables(){
     let q6 = 'CREATE TABLE IF NOT EXISTS wpm (wpm_id INT PRIMARY KEY AUTO_INCREMENT,value REAL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, USER_ID VARCHAR(36),  FOREIGN KEY (USER_ID) REFERENCES USER_ENTITY(ID));'
     connection.query(q6);
 
-    let q7 = 'CREATE TABLE IF NOT EXISTS percentages (wpm_perc FLOAT, click_dwell_perc FLOAT, dwell_time_perc FLOAT, keys_per_sec_perc FLOAT, mouse_speed_perc FLOAT, time_between_keystrokes_perc FLOAT,USER_ID varchar(36), FOREIGN KEY (USER_ID) REFERENCEs USER_ENTITY(ID));'
+    let q7 = 'CREATE TABLE IF NOT EXISTS percentages (perc_id INT PRIMARY KEY AUTO_INCREMENT, wpm_perc FLOAT, avg_click_dwell_perc FLOAT, avg_dwell_time_perc FLOAT, keys_per_sec_perc FLOAT, mouse_speed_perc FLOAT, avg_time_between_keystrokes_perc FLOAT,USER_ID varchar(36), FOREIGN KEY (USER_ID) REFERENCEs USER_ENTITY(ID));'
     connection.query(q7);
 }
 

@@ -62,11 +62,11 @@ import paths from '../../paths.json'
 const WordsPerMin = ({ token, client, userid }) => {
     const [metrics, setMetrics] = useState([]);
     const [data, setData] = useState([]);
-  
+    // userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
     useEffect(() => {
       const fetchData = () => {
         const subscription = from(ajax({
-          url: `${paths.api_url}api/wpm/`,
+          url: `${process.env.REACT_APP_API_URL}api/wpm/${userid}`,
           method: 'GET',
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -88,7 +88,7 @@ const WordsPerMin = ({ token, client, userid }) => {
       const interval = setInterval(fetchData, 30000); // Fetch new data every 5 seconds
   
       return () => clearInterval(interval); // Cleanup interval on unmount
-    }, [token]);
+    }, [token,userid]);
   
     useEffect(() => {
       if (metrics.length > 0) {
