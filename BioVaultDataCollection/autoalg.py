@@ -37,7 +37,7 @@ def fetch_all_user_ids(config):
     try:
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
-        cursor.execute("SELECT DISTINCT USER_ID FROM user_data_table")  # Replace with actual table containing user IDs
+        cursor.execute("SELECT DISTINCT USER_ID FROM USER_ENTITY")  # Replace with actual table containing user IDs
         user_ids = [row[0] for row in cursor.fetchall()]
         cursor.close()
         conn.close()
