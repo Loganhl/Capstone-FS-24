@@ -12,3 +12,4 @@ pathlib==1.0.1
 scikit-learn
 pathlib
 mysql-connector-python
+pyinstallerx

@@ -54,8 +54,16 @@ npm run start
 this should load load your Dashboard.
 Enter the username and password for the account you created on your biovault realm.
 <img src="/Docs/uicap.PNG"></img>
-# Keystroke logger windows service
-This service can be installed by running `python KsLog.py install` 
-Currently this service is incomplete however the install command works as does the remove command. Next steps are to inegrate the keystroke logger functions we wrote with the service. To start the service you need to run `python kslog.py start` keep in mind that you have to run the install command first.
+
+# Building the application
+<p>In order to build the data collection application make sure you have the python requirements installed.
+If you do not have them installed you can install them by running  ```pip install -r requirements.txt ```
+in the root of the cloned repo. Next you will run </p>
+```
+cd BiovaultDataCollection  
+build
+```
+<p>You will get some output from your terminal and your executable should be built.</p>
+
 # URL FOR JIRA
 https://umsystem-biovault-capstone.atlassian.net/jira/software/projects/KAN/boards/1?assignee=unassigned

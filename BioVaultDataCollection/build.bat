@@ -1,0 +1,1 @@
+pyinstaller --collect-submodules pynput main.py
