@@ -59,6 +59,7 @@ Enter the username and password for the account you created on your biovault rea
 <p>In order to build the data collection application make sure you have the python requirements installed.
 If you do not have them installed you can install them by running  ```pip install -r requirements.txt ```
 in the root of the cloned repo. Next you will run </p>
+
 ```
 cd BiovaultDataCollection
 build
