@@ -60,9 +60,9 @@ Enter the username and password for the account you created on your biovault rea
 If you do not have them installed you can install them by running  ```pip install -r requirements.txt ```
 in the root of the cloned repo. Next you will run </p>
 ```
-cd BiovaultDataCollection  
+cd BiovaultDataCollection
 build
-```
+```  
 <p>You will get some output from your terminal and your executable should be built.</p>
 
 # URL FOR JIRA
