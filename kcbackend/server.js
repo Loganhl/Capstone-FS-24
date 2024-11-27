@@ -69,7 +69,7 @@ app.get('/api/wpm',(req,res)=>{
     })
 })
 //needs testing
-app.get('/api/wpm/:userid',keycloak.protect(),(req,res)=>{
+app.get('/api/wpm/:userid',(req,res)=>{
     try{
         if (req.params.userid) {
             connection.query('SELECT * FROM  wpm WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 30;',[req.params.userid],(err,results,fields)=>{
@@ -88,7 +88,7 @@ app.get('/api/mousespeed',(req,res)=>{
         res.json(result);
     })
 })
-app.get('/api/mousespeed/:userid',keycloak.protect(),(req,res)=>{
+app.get('/api/mousespeed/:userid',(req,res)=>{
     try{
         if (req.params.userid) {
             //new insertions every ten seconds of activity.
@@ -124,7 +124,7 @@ app.get('/api/clickdwelltime',(req,res)=>{
     
     })
 })
-app.get('/api/clickdwelltime/:userid',keycloak.protect(),(req,res)=>{
+app.get('/api/clickdwelltime/:userid',(req,res)=>{
     if (req.params.userid) {
         connection.query('SELECT * FROM avg_click_dwell WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 6;',[req.params.userid],(err,result,fields)=>{
             res.json(result);
@@ -158,7 +158,7 @@ app.get('/api/time_between_strokes',(req,res)=>{
         res.json(result);
     })
 })
-app.get('/api/time_between_strokes/:userid',keycloak.protect(),(req,res)=>{
+app.get('/api/time_between_strokes/:userid',(req,res)=>{
     if (req.params.userid) {
         connection.query('SELECT * FROM avg_time_between_keystrokes WHERE USER_ID = ? ORDER BY created_at DESC LIMIT 6;',[req.params.userid],(err,result,fields)=>{
             res.json(result);
@@ -174,7 +174,7 @@ app.get('/api/keys_per_sec',(req,res)=>{
         res.json(result);
     })
 })
-app.get('/api/keys_per_sec:userid',keycloak.protect(),(req,res)=>{
+app.get('/api/keys_per_sec:userid',(req,res)=>{
     try{
         if (req.params.userid) {
             connection.query("SELECT * FROM keys_per_sec WHERE a.USERID = ? ORDER BY DESC LIMIT 60;",[req.params.userid],(err,result,fields)=>{

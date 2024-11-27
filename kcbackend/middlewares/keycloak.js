@@ -14,4 +14,6 @@ const config = {
 }
 
 
-module.exports = new Keycloak({}, config);
+module.exports = new Keycloak({
+  
+}, config);
