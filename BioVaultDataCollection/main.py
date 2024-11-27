@@ -7,11 +7,14 @@ from pynput import keyboard
 from pynput.mouse import Listener as MouseListener
 from metrics.session_manager import SessionManager
 from kc import get_userid
+from security import prompt_for_credentials
 
 
 def main():
     db = Database()
-    user_id = get_userid('user@user.com','user')
+
+    username, password = prompt_for_credentials()
+    user_id = get_userid(username, password)
     session_manager = SessionManager(db,user_id)
     
 

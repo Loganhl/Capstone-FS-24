@@ -22,7 +22,7 @@ def fetch_user_data(config, table_name, user_id):
     try:
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor(dictionary=True)
-        query = f"SELECT value FROM {table_name} WHERE USER_ID = '{user_id}' ORDER BY timestamp ASC"
+        query = f"SELECT value FROM {table_name} WHERE USER_ID = '{user_id}' ORDER BY created_at ASC"
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
@@ -37,7 +37,7 @@ def fetch_all_user_ids(config):
     try:
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
-        cursor.execute("SELECT DISTINCT USER_ID FROM user_data_table")  # Replace with actual table containing user IDs
+        cursor.execute("SELECT DISTINCT ID FROM USER_ENTITY")  # Replace with actual table containing user IDs
         user_ids = [row[0] for row in cursor.fetchall()]
         cursor.close()
         conn.close()
@@ -123,7 +123,6 @@ def insert_percentage(config, table_name, anomaly_percentage, user_id):
         logging.error(f"Error inserting percentage into {table_name} for user_id {user_id}: {e}")
 
 def main():
-    logging.info("MAIN")
     table_names = [
         'wpm',
         'mouse_speed',

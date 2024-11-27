@@ -2,7 +2,7 @@ import time
 from metrics.keystroke_metrics import KeystrokeMetrics
 from metrics.mouse_metrics import MouseMetrics
 from database.database import Database
-INACTIVITY_TIMEOUT = 3
+INACTIVITY_TIMEOUT = 2
 
 class SessionManager:
 
@@ -46,7 +46,7 @@ class SessionManager:
         elif self.current_session == 'mouse':
             metrics = self.mouse_metrics.stop()
             if metrics and 20000 > metrics['mouse_speed'] > 0:
-                self.db.insert_metric('avg_click_dwell', metrics['avg_click_dwell_time'], self.user_id)
+                self.db.insert_metric('avg_click_dwell_time', metrics['avg_click_dwell_time'], self.user_id)
                 self.db.insert_metric('mouse_speed', metrics['mouse_speed'], self.user_id)
             self.mouse_metrics.reset()
         self.current_session = None
