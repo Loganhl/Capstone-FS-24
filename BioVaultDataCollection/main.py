@@ -1,4 +1,3 @@
-
 import time
 from metrics.keystroke_metrics import KeystrokeMetrics
 from metrics.mouse_metrics import MouseMetrics
@@ -15,8 +14,7 @@ def main():
 
     username, password = prompt_for_credentials()
     user_id = get_userid(username, password)
-    session_manager = SessionManager(db,user_id)
-    
+    session_manager = SessionManager(db, user_id)
 
     def on_key_press(key):
         session_manager.start_keyboard_session()
@@ -45,6 +43,7 @@ def main():
 
     try:
         while True:
+            session_manager.check_training_tables()
             session_manager.check_inactivity()
             time.sleep(0.1)
     except KeyboardInterrupt:
