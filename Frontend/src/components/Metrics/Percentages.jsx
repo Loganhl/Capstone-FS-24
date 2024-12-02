@@ -6,7 +6,7 @@ import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import paths from '../../paths.json'
 import { useTheme } from '../../hooks/ThemeProvider';
-const Percentages = ({ token, client, userid }) => {
+const Percentages = ({ token, client, userid,username }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
   // userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
@@ -70,25 +70,28 @@ const Percentages = ({ token, client, userid }) => {
     labels,
     datasets: [
       {
-        label: 'wpm_perc',
+        label:  `${username} wpm_perc`,
         data: (data.length > 0 ? data.map((item) => item.wpm_perc) : []),
         borderColor: 'rgb(86, 127, 51)',
         backgroundColor: 'rgba(86, 127, 51, 0.5)',
+        spanGaps:true,
         yAxisID: 'y',
       },
       {
-        label:'avg_click_dwell_perc',
+        label:`${username} avg_click_dwell_perc`,
         data: (data.length >0 ? data.map((item)=> item.avg_click_dwell_perc) : []),
         borderColor: 'rgb(145, 220,95)',
         backgroundColor:'rgba(145, 220,95,0.5)',
-        yAxisID: 'y1'
+        spanGaps:true,
+        yAxisID: 'y'
       },
       {
-        label:'avg_dwell_time_perc',
+        label:`${username} avg_dwell_time_perc`,
         data:(data.length >0 ? data.map((item)=> item.avg_dwell_time_perc):[]),
         borderColor: 'rgb(129,45,201)',
         backgroundColor: 'rgba(129,45,201,0.5)',
-        yAxisID:'y2',
+        spanGaps:true,
+        yAxisID:'y',
       }
     ],
   };

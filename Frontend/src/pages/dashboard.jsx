@@ -6,6 +6,7 @@ import AvgClickDwell from "../components/Metrics/AvgClickDwell";
 import MouseData from "../components/Metrics/MouseData";
 import WordsPerMin from "../components/Metrics/Wpm";
 import BetweenStroke from "../components/Metrics/BetweenStroke";
+import Percentages from "../components/Metrics/Percentages";
 const UserContext = createContext();
 const usernameContext = createContext();
 const RealmUsers = ({ token, setValue,setUsername,theme }) => {
@@ -67,6 +68,9 @@ const Dashboard = ({ token, client,theme }) => {
           </Col>
           <Col>
             <AvgClickDwell token={token} userid={userid} username={username}/>
+          </Col>
+          <Col>
+            <Percentages token={token} userid={userid} username={username}/>
           </Col>
         </Row>
         <Row>
