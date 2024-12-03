@@ -22,17 +22,26 @@ class Database:
             print(f"Error connecting to the database: {e}")
             self.conn = None
 
-    def insert_metric(self, table_name, metric_name, value, user_id):
+    def insert_metrics(self, table_name, metrics, user_id):
         if self.conn is None:
             print("Database connection not established. Cannot insert data.")
             return
         try:
-            query = f"INSERT INTO {table_name} ({metric_name}, USER_ID) VALUES (%s, %s)"
-            self.cursor.execute(query, (value, user_id))
+            # Build query dynamically for multiple columns
+            columns = ', '.join(metrics.keys()) + ', USER_ID'
+            placeholders = ', '.join(['%s'] * (len(metrics) + 1))  # One extra placeholder for USER_ID
+            query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+            
+            # Prepare the values tuple
+            values = list(metrics.values()) + [user_id]
+
+            # Execute and commit
+            self.cursor.execute(query, values)
             self.conn.commit()
-            print(f"Inserted {metric_name} value {value} into table {table_name}.")
+            print(f"Inserted metrics into table {table_name}: {metrics}")
         except mysql.connector.Error as e:
             print(f"Error inserting data into table {table_name}: {e}")
+
 
     def insert_regular_metric(self, table_name, value, user_id):
         if self.conn is None:

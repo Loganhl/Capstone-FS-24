@@ -30,15 +30,18 @@ class SessionManager:
             self.mouse_metrics.start()
             self.current_session = 'mouse'
 
-    def end_session(self): #the best way to have all the data in the world is to be great
-        if self.current_session == 'keyboard':#
+    def end_session(self): 
+        if self.current_session == 'keyboard':
             metrics = self.keyboard_metrics.stop()
             if metrics and metrics['wpm'] > 0:
                 if self.use_training_tables:
-                    self.db.insert_metric('keystroke_training_data', 'wpm', metrics['wpm'], self.user_id)
-                    self.db.insert_metric('keystroke_training_data', 'keys_per_sec', metrics['keys_per_sec'], self.user_id)
-                    self.db.insert_metric('keystroke_training_data', 'avg_dwell_time', metrics['avg_dwell_time'], self.user_id)
-                    self.db.insert_metric('keystroke_training_data', 'avg_time_between_keystrokes', metrics['avg_time_between_keystrokes'], self.user_id)
+                    keystroke_metrics = {
+                        'wpm': metrics['wpm'],
+                        'keys_per_sec': metrics['keys_per_sec'],
+                        'avg_dwell_time': metrics['avg_dwell_time'],
+                        'avg_time_between_keystrokes': metrics['avg_time_between_keystrokes']
+                    }
+                    self.db.insert_metrics('keystroke_training_data', keystroke_metrics, self.user_id)
                 else:
                     self.db.insert_regular_metric('wpm', metrics['wpm'], self.user_id)
                     self.db.insert_regular_metric('keys_per_sec', metrics['keys_per_sec'], self.user_id)
@@ -49,8 +52,11 @@ class SessionManager:
             metrics = self.mouse_metrics.stop()
             if metrics and 20000 > metrics['mouse_speed'] > 0:
                 if self.use_training_tables:
-                    self.db.insert_metric('mouse_training_data', 'avg_click_dwell_time', metrics['avg_click_dwell_time'], self.user_id)
-                    self.db.insert_metric('mouse_training_data', 'mouse_speed', metrics['mouse_speed'], self.user_id)
+                    mouse_metrics = {
+                        'avg_click_dwell_time': metrics['avg_click_dwell_time'],
+                        'mouse_speed': metrics['mouse_speed']
+                    }
+                    self.db.insert_metrics('mouse_training_data', mouse_metrics, self.user_id)
                 else:
                     self.db.insert_regular_metric('avg_click_dwell_time', metrics['avg_click_dwell_time'], self.user_id)
                     self.db.insert_regular_metric('mouse_speed', metrics['mouse_speed'], self.user_id)
