@@ -1,14 +1,15 @@
-FROM node:lts-alpine3.20
+FROM node:19
 
-WORKDIR /frontend
+# RUN mkdir -p /usr/src/app
 
+WORKDIR /usr/src/app
 
-COPY . /frontend/
+COPY package.json /usr/src/app
 
-COPY package.json /frontend/
-COPY package-lock.json /frontend/
-COPY . /frontend/
-
+# RUN npm cache clean
 RUN npm install
 
+COPY . /usr/src/app
+EXPOSE 3000
 
+CMD ["npm run start"]

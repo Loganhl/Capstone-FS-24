@@ -72,22 +72,22 @@ const Percentages = ({ token, client, userid,username }) => {
       {
         label: `${username} Average Time Between Keystrokes Anomalies`,
         data: (data.length >0 ?data.map((item)=> item.avg_time_between_keystrokes_perc): []),
-        borderColor: 'rgb(0,0,0)',
-        backgroundColor:'rgba(0,0,0,0.5)',
+        borderColor: 'rgb(0,250,125)',
+        backgroundColor:'rgba(0,250,0,0.5)',
         spanGaps:true
       },
       {
         label: `${username} Keys Per Second Anomalies`,
         data: (data.length >0 ? data.map((item)=> item.keys_per_sec_perc): []),
-        borderColor: 'rgb(255,90,255)',
-        backgroundColor: 'rgba(255,90,255,0.5)',
+        borderColor: 'rgb(255,0,25)',
+        backgroundColor: 'rgba(255,90,25,0.5)',
         spanGaps:true,
       },
       {
         label: `${username} Mouse_data percentages`,
         data: (data.length >0 ? data.map((item)=> item.mouse_speed_perc): []),
-        borderColor: 'rgb(197,140,250)',
-        backgroundColor: 'rgba(197,140,250,0.5)',
+        borderColor: 'rgb(19,20,250)',
+        backgroundColor: 'rgba(19 ,20,250,0.5)',
         spanGaps: true,
       },
       {

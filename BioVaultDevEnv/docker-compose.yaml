@@ -2,18 +2,20 @@ version: '3.8'
 
 services:
   # frontend isnt quite ready yet dont build it 
-  # frontend:
-  #   build: ../frontend
-  #   container_name: frontend
-  #   environment:
-  #     - BACKEND_URL=http://backend:2500 #this is only the backend url when the frontend is containerized inside docker compose!
-  #     - KEYCLOAK_URL=http://keycloak:8080 #this is only the keycloak url when the frontend is containerized inside docker compose!
-  #   ports:
-  #     - "80:3000"
-  #   depends_on:
-  #     - mysql
-  #     - backend
-  #   entrypoint: npm run start.
+  frontend:
+    build: ../frontend
+    container_name: frontend
+    environment:
+      - BACKEND_URL=http://backend:2500 #this is only the backend url when the frontend is containerized inside docker compose!
+      - KEYCLOAK_URL=http://keycloak:8080 #this is only the keycloak url when the frontend is containerized inside docker compose!
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+      - backend
+    entrypoint: npm run start
   backend:
     build: ../kcbackend
     container_name: backend
