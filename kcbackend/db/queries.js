@@ -24,6 +24,12 @@ function Maketables(){
 
     let q7 = 'CREATE TABLE IF NOT EXISTS percentages (perc_id INT PRIMARY KEY AUTO_INCREMENT, wpm_perc FLOAT, avg_click_dwell_perc FLOAT, avg_dwell_time_perc FLOAT, keys_per_sec_perc FLOAT, mouse_speed_perc FLOAT, avg_time_between_keystrokes_perc FLOAT,USER_ID varchar(36), FOREIGN KEY (USER_ID) REFERENCEs USER_ENTITY(ID));'
     connection.query(q7);
+
+    let q8 = 'CREATE TABLE IF NOT EXISTS mouse_training_data (mouse_training_id INT PRIMARY KEY AUTO_INCREMENT, mouse_speed FLOAT, avg_click_dwell_time FLOAT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, USER_ID VARCHAR(36),  FOREIGN KEY (USER_ID) REFERENCES USER_ENTITY(ID));'
+    connection.query(q8);
+
+    let q9 = 'CREATE TABLE IF NOT EXISTS keystroke_training_data (keystroke_training_id INT PRIMARY KEY AUTO_INCREMENT, wpm FLOAT, keys_per_sec FLOAT, avg_time_between_keystrokes FLOAT, avg_dwell_time FLOAT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, USER_ID VARCHAR(36),  FOREIGN KEY (USER_ID) REFERENCES USER_ENTITY(ID));'
+    connection.query(q9);
 }
 
 module.exports = Maketables;

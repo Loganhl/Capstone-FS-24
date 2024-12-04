@@ -1,6 +1,7 @@
 import mysql.connector
 import pandas as pd
 from sklearn.ensemble import IsolationForest
+from sklearn.preprocessing import StandardScaler
 import logging
 import time
 
@@ -18,11 +19,10 @@ config = {
 }
 
 def fetch_user_data(config, table_name, user_id):
-    #Fetches data for a specific user from the specified table.
     try:
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor(dictionary=True)
-        query = f"SELECT value FROM {table_name} WHERE USER_ID = '{user_id}' ORDER BY created_at ASC"
+        query = f"SELECT * FROM {table_name} WHERE USER_ID = '{user_id}' ORDER BY created_at ASC"
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
@@ -32,93 +32,146 @@ def fetch_user_data(config, table_name, user_id):
         logging.error(f"Error fetching data for user_id {user_id} from {table_name}: {str(e)}")
         return pd.DataFrame()
 
-def fetch_all_user_ids(config):
-    #Fetches all unique user IDs from the database.
+def fetch_all_user_ids(config, table_names):
     try:
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
-        cursor.execute("SELECT DISTINCT ID FROM USER_ENTITY")  # Replace with actual table containing user IDs
-        user_ids = [row[0] for row in cursor.fetchall()]
+        user_ids = set()
+        for table_name in table_names:
+            cursor.execute(f"SELECT DISTINCT USER_ID FROM {table_name}")
+            user_ids.update([row[0] for row in cursor.fetchall()])
         cursor.close()
         conn.close()
-        return user_ids
+        return list(user_ids)
     except Exception as e:
         logging.error(f"Error fetching user IDs: {str(e)}")
         return []
 
-def check_sql_table_and_analyze(config, table_name, user_id):
+def fetch_training_data(config, user_id):
+    try:
+        mouse_data = fetch_user_data(config, 'mouse_training_data', user_id)
+        
+        keyboard_data = fetch_user_data(config, 'keyboard_training_data', user_id)
+
+        combined_data = pd.merge(mouse_data[['USER_ID', 'mouse_speed', 'avg_click_dwell_time']], 
+                                 keyboard_data[['USER_ID', 'wpm', 'keys_per_sec', 'avg_time_between_keystrokes', 'avg_dwell_time']], 
+                                 on='USER_ID', how='inner')
+
+        return combined_data
+
+    except Exception as e:
+        logging.error(f"Error fetching and merging training data for user_id {user_id}: {str(e)}")
+        return pd.DataFrame()
+
+def normalize_data(df):
+    scaler = StandardScaler()
+    df_scaled = df.copy()
+    df_scaled[['mouse_speed', 'avg_click_dwell_time', 'wpm', 'keys_per_sec', 
+               'avg_time_between_keystrokes', 'avg_dwell_time']] = scaler.fit_transform(
+        
+        df[['mouse_speed', 'avg_click_dwell_time', 'wpm', 'keys_per_sec', 
+            'avg_time_between_keystrokes', 'avg_dwell_time']]
+    )
+    return df_scaled
+
+def check_data(config, table_name, user_id):
     df = fetch_user_data(config, table_name, user_id)
     
-    # Empty Check.
     if df.empty:
         logging.info(f"{table_name} for user_id {user_id} is empty.")
         return None
     
-    # Convert numeric and drop NaN values.
     df.iloc[:, 0] = pd.to_numeric(df.iloc[:, 0], errors='coerce')
     df = df.dropna()
-    
-    if df.empty:
-        logging.info(f"After dropping NaN values, {table_name} for user_id {user_id} is empty.")
-        return None
     
     row_count = len(df)
     logging.info(f"Checking {table_name} for user_id {user_id}, found {row_count} rows.")
     
-    if row_count >= 75:
-        df.columns = df.columns.astype(str)
+    if row_count >= 10:
+        training_data = fetch_training_data(config, user_id)
+        if training_data.empty:
+            logging.error(f"Training data for user_id {user_id} is missing.")
+            return None
         
-        # Split data into training and testing sets.
-        training_data = df.iloc[:50]
-        testing_data = df.iloc[50:75]
+        training_data = normalize_data(training_data)
+        df = normalize_data(df)
         
-        iso_forest = IsolationForest(contamination=0.1, random_state=42)
+        iso_forest = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.1, random_state=42)
+        iso_forest.fit(training_data[['mouse_speed', 'avg_click_dwell_time', 'wpm', 'keys_per_sec', 
+                                      'avg_time_between_keystrokes', 'avg_dwell_time']])
         
-        # Fit the model on the training data.
-        iso_forest.fit(training_data)
+        df['anomaly'] = iso_forest.predict(df[['mouse_speed', 'avg_click_dwell_time', 'wpm', 'keys_per_sec', 
+                                               'avg_time_between_keystrokes', 'avg_dwell_time']])
+        df['anomaly'] = df['anomaly'].map({1: 0, -1: 1})
         
-        # Predict anomalies on the testing data.
-        testing_data['anomaly'] = iso_forest.predict(testing_data)
-        
-        # Set Predictions to Binary.
-        testing_data['anomaly'] = testing_data['anomaly'].map({1: 0, -1: 1})
-        
-        anomalies_count = testing_data['anomaly'].sum()
-        anomaly_percentage = (anomalies_count / len(testing_data)) * 100
+        anomalies_count = df['anomaly'].sum()
+        anomaly_percentage = (anomalies_count / len(df)) * 100
         logging.info(f"{table_name} for user_id {user_id} has anomaly percentage: {anomaly_percentage:.2f}%")
         
-        if anomalies_count > 0:
-            logging.info(f"Warning: {anomalies_count} anomalies detected in {table_name} for user_id {user_id}.")
-        
+        if anomaly_percentage <= 30:
+            logging.info(f"Anomaly percentage below 30%, moving data to training set for {user_id}.")
+            move_data_to_training_set(config, table_name, user_id, df)
+        else:
+            #Code to run when high anomaly percentage.
+            logging.info(f"Anomaly percentage above 30% for {user_id} in {table_name}.")
         return anomaly_percentage
     else:
-        logging.info(f"{table_name} for user_id {user_id} does not have enough data (75 rows needed).")
+        logging.info(f"{table_name} for user_id {user_id} does not have enough data (10 rows needed).")
     
     return None
+
+def move_data_to_training_set(config, table_name, user_id, df):
+    try:
+        conn = mysql.connector.connect(**config)
+        cursor = conn.cursor()
+        
+        if table_name in ['wpm', 'keys_per_sec', 'avg_time_between_keystrokes', 'avg_dwell_time']:
+
+            cursor.executemany(f"""
+                INSERT INTO keyboard_training_data (USER_ID, wpm, keys_per_sec, avg_time_between_keystrokes, avg_dwell_time) 
+                VALUES (%s, %s, %s, %s, %s)
+            """, df[['USER_ID', 'wpm', 'keys_per_sec', 'avg_time_between_keystrokes', 'avg_dwell_time']].values.tolist())
+        
+        elif table_name in ['mouse_speed', 'avg_click_dwell_time']:
+            cursor.executemany(f"""
+                INSERT INTO mouse_training_data (USER_ID, mouse_speed, avg_click_dwell_time) 
+                VALUES (%s, %s, %s)
+            """, df[['USER_ID', 'mouse_speed', 'avg_click_dwell_time']].values.tolist())
+        
+
+        created_at_values = ', '.join([f"'{row}'" for row in df['created_at']])
+        cursor.execute(f"""
+            DELETE FROM {table_name} WHERE USER_ID = %s AND created_at IN ({created_at_values})
+        """, (user_id,))
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        logging.info(f"Moved data for user_id {user_id} to training. Removed from {table_name}.")
+    
+    except mysql.connector.Error as e:
+        logging.error(f"Error moving data for user_id {user_id} to training set: {e}")
+
 
 def insert_percentage(config, table_name, anomaly_percentage, user_id):
     if anomaly_percentage is None:
         return
     
     try:
-        # Connect to the database.
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
         
-        # Construct the column name.
         column_name = f'{table_name}_perc'
         
-        # Insert the percentage into the constructed column.
         cursor.execute(f"""
             INSERT INTO percentages (USER_ID, {column_name}) VALUES (%s, %s)
         """, (user_id, anomaly_percentage))
         
-        # Commit.
         conn.commit()
         
         cursor.close()
         conn.close()
-
     except mysql.connector.Error as e:
         logging.error(f"Error inserting percentage into {table_name} for user_id {user_id}: {e}")
 
@@ -133,15 +186,13 @@ def main():
     ]
     
     while True:
-        user_ids = fetch_all_user_ids(config)
+        user_ids = fetch_all_user_ids(config, table_names)
         
         for user_id in user_ids:
             for table_name in table_names:
                 logging.info('------------------------------------------------------------------------------------------------')
-                anomaly_percentage = check_sql_table_and_analyze(config, table_name, user_id)
+                anomaly_percentage = check_data(config, table_name, user_id)
                 insert_percentage(config, table_name, anomaly_percentage, user_id)
-                if anomaly_percentage is not None:
-                    logging.info(f"Processed {table_name} for user_id {user_id} with anomaly percentage: {anomaly_percentage:.2f}%")
         
         time.sleep(10)
 

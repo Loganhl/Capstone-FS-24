@@ -5,6 +5,7 @@ class MouseMetrics:
     MIN_MOVEMENTS = 3  # minimum movements to calculate metrics
     MOVEMENT_THRESHOLD = 5 #minimum amount of pixels for a valid mouse movement
     EMA_ALPHA = 0.1
+    MIN_CLICKS = 1
 
     #initialize variables
     def __init__(self):
@@ -67,6 +68,11 @@ class MouseMetrics:
         print(self.movement_count)
         if self.start_time is None or self.movement_count < self.MIN_MOVEMENTS:
             print(f"Insufficient movements: {self.movement_count}")
+            return None
+        
+        # Check if the number of clicks is above 1
+        if len(self.click_durations) <= 1:
+            print("Insufficient clicks for calculation.")
             return None
 
         elapsed_time = time.time() - self.start_time
