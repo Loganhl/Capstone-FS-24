@@ -108,7 +108,7 @@ def check_data(config, metric_table, user_id):
 
         relevant_columns = ['USER_ID', metric_column]
         training_data = training_data.loc[:, [col for col in relevant_columns if col in training_data.columns]]
-
+        temp_training_data = training_data
         df = df.rename(columns={'value': metric_column})
         df = df.loc[:, [col for col in relevant_columns if col in df.columns]]
 
@@ -122,6 +122,7 @@ def check_data(config, metric_table, user_id):
 
         df = handle_missing_values(df)
         training_data = handle_missing_values(training_data)
+        temp_training_data = handle_missing_values(temp_training_data)
 
         iso_forest = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.1, random_state=42)
         iso_forest.fit(training_data[[metric_column]])
@@ -138,7 +139,7 @@ def check_data(config, metric_table, user_id):
         # If anomaly percentage is under 30%, move data to training
         if anomaly_percentage <= 30:
             logging.info(f"Anomaly percentage below 30%, moving data to training set for {user_id}.")
-            move_data_to_training_set(config, metric_table, user_id, df)
+            move_data_to_training_set(config, metric_table, user_id, temp_training_data)
 
         return anomaly_percentage
     except Exception as e:
