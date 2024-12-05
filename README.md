@@ -37,20 +37,9 @@ KEYCLOAK_REALM=biovault
 ```
 To Retrieve your client secret you will need to go to your keycloak administration console and select the backend client and go to the credentials tab and copy the client secret and add it to the `.env` file.
 ### start the backend
-From the main repo folder run:
-```
-cd kcbackend
-npm run i
-npm run start
-```
+
 Now the api should be listening on http://localhost:2500
 
-Next from the main repo folder run:
-```
-cd frontend
-npm run i
-npm run start
-```
 this should load load your Dashboard.
 Enter the username and password for the account you created on your biovault realm.
 <img src="/Docs/uicap.PNG"></img>
