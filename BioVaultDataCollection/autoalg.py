@@ -6,18 +6,17 @@ from sklearn.impute import SimpleImputer
 import logging
 import time
 
-
 # Initialize logging.
 logging.basicConfig(filename='anomaly_detection.log', level=logging.DEBUG,
-                   format='%(asctime)s:%(levelname)s:%(message)s')
+                    format='%(asctime)s:%(levelname)s:%(message)s')
 
 # Database configuration.
 config = {
-   'user': 'root',
-   'password': 'secretsquirrels',
-   'host': 'localhost',
-   'database': 'biometric_auth',
-   'port': '3307'
+    'user': 'root',
+    'password': 'secretsquirrels',
+    'host': 'localhost',
+    'database': 'biometric_auth',
+    'port': '3307'
 }
 
 # Mapping of individual metric tables to their corresponding training table columns.
@@ -74,18 +73,18 @@ def fetch_training_data(config, user_id):
 def normalize_data(df):
     """Normalizes data for anomaly detection."""
     required_columns = [
-       'mouse_speed', 'avg_click_dwell_time', 'wpm',
-       'keys_per_sec', 'avg_time_between_keystrokes', 'avg_dwell_time'
+        'mouse_speed', 'avg_click_dwell_time', 'wpm',
+        'keys_per_sec', 'avg_time_between_keystrokes', 'avg_dwell_time'
     ]
     for col in required_columns:
         if col not in df.columns:
             logging.error(f"Column '{col}' is missing in the DataFrame.")
             raise KeyError(f"Column '{col}' is missing in the DataFrame.")
-    
+
     scaler = StandardScaler()
     df_scaled = df.copy()
     df_scaled[required_columns] = scaler.fit_transform(df[required_columns])
-    return df_scaled
+    return df_scaled, scaler
 
 def check_data(config, metric_table, user_id):
     """Checks for anomalies in data from individual metric tables."""
@@ -116,23 +115,24 @@ def check_data(config, metric_table, user_id):
             logging.warning(f"Missing column {metric_column} in either training data or metric data for {metric_table}.")
             return None
 
-        scaler = StandardScaler()
-        training_data[[metric_column]] = scaler.fit_transform(training_data[[metric_column]])
-        df[[metric_column]] = scaler.transform(df[[metric_column]])
+        # Normalize data for anomaly detection
+        training_data_normalized, scaler = normalize_data(training_data)
+        df_normalized = df.copy()
+        df_normalized[[metric_column]] = scaler.transform(df[[metric_column]])
 
-        df = handle_missing_values(df)
-        training_data = handle_missing_values(training_data)
+        df_normalized = handle_missing_values(df_normalized)
+        training_data_normalized = handle_missing_values(training_data_normalized)
 
         iso_forest = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.1, random_state=42)
-        iso_forest.fit(training_data[[metric_column]])
+        iso_forest.fit(training_data_normalized[[metric_column]])
 
-        df['anomaly'] = iso_forest.predict(df[[metric_column]])
-        df['anomaly'] = df['anomaly'].map({1: 0, -1: 1})
+        df_normalized['anomaly'] = iso_forest.predict(df_normalized[[metric_column]])
+        df_normalized['anomaly'] = df_normalized['anomaly'].map({1: 0, -1: 1})
 
-        anomalies_count = df['anomaly'].sum()
-        anomaly_percentage = (anomalies_count / len(df)) * 100 if len(df) >= 10 else 0
+        anomalies_count = df_normalized['anomaly'].sum()
+        anomaly_percentage = (anomalies_count / len(df_normalized)) * 100 if len(df_normalized) >= 10 else 0
 
-        if len(df) >= 10:
+        if len(df_normalized) >= 10:
             logging.info(f"{metric_table} for user_id {user_id} has anomaly percentage: {anomaly_percentage:.2f}%")
         
         # If anomaly percentage is under 30%, move data to training
@@ -160,11 +160,9 @@ def move_data_to_training_set(config, metric_table, user_id, df):
             logging.error(f"Unknown table name: {metric_table}")
             return
         
-        # Filter data to only include relevant columns
         relevant_columns = ['USER_ID'] + [metric_table_map[metric_table]]
         df_filtered = df[relevant_columns]
 
-        # Insert data into the training table
         column_placeholders = ', '.join(['%s'] * len(relevant_columns))
         columns_sql = ', '.join(relevant_columns)
         insert_query = f"INSERT INTO {target_table} ({columns_sql}) VALUES ({column_placeholders})"
@@ -186,17 +184,17 @@ def move_data_to_training_set(config, metric_table, user_id, df):
 
 def main():
     table_names = list(metric_table_map.keys())
-  
+
     while True:
         user_ids = fetch_all_user_ids(config, table_names)
-      
+
         for user_id in user_ids:
             for metric_table in table_names:
                 anomaly_percentage = check_data(config, metric_table, user_id)
                 if anomaly_percentage is not None:
                     print(f"Anomaly percentage for user {user_id} in {metric_table}: {anomaly_percentage:.2f}%")
-                    
-        time.sleep(60)  # Check every minute.
+
+        time.sleep(60)  
 
 def fetch_all_user_ids(config, table_names):
     """Fetches all distinct user IDs."""
@@ -212,7 +210,6 @@ def fetch_all_user_ids(config, table_names):
     except Exception as e:
         logging.error(f"Error fetching user IDs: {str(e)}")
         return []
-    
-    
+
 if __name__ == "__main__":
     main()
