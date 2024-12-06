@@ -150,15 +150,15 @@ def check_data(config, metric_table, user_id):
         if anomaly_percentage <= 30:
             logging.info(f"Anomaly percentage below 30%, moving data to training set for {user_id}")
             move_data_to_training_set(config, metric_table, user_id, raw_df)
-
+        else:
+            logging.info(f"Anomaly percentage above 30%, storing percentage and wiping data for {user_id}")
+            clear_data_from_testing(config, metric_table, user_id, raw_df)
         return anomaly_percentage
 
     except KeyError as ke:
         logging.error(f"Missing column in DataFrame: {ke}")
     except Exception as e:
         logging.error(f"Unexpected error: {str(e)}")
-
-
 
 
 def insert_anomaly_percentages(config, user_id, metric_table, anomaly_percentages):
@@ -256,6 +256,41 @@ def move_data_to_training_set(config, metric_table, user_id, raw_df):
             conn.commit()
 
             logging.info(f"Moved data for user_id {user_id} to {target_table}. Removed from {metric_table}.")
+
+    except mysql.connector.Error as e:
+        logging.error(f"Database error for user_id {user_id} in {metric_table}: {str(e)} move data to training set")
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+def clear_data_from_testing(config, metric_table, user_id, raw_df):
+    try:
+            conn = mysql.connector.connect(**config)
+            cursor = conn.cursor()
+
+            column_map = {
+                'wpm': 'wpm',
+                'mouse_speed': 'mouse_speed',
+                'keys_per_sec': 'keys_per_sec',
+                'avg_time_between_keystrokes': 'avg_time_between_keystrokes',
+                'avg_dwell_time': 'avg_dwell_time',
+                'avg_click_dwell_time': 'avg_click_dwell_time'
+            }
+
+            if metric_table not in column_map:
+                logging.error(f"Unknown table name: {metric_table}")
+                return
+
+            if 'created_at' in raw_df.columns:
+                created_at_values = ', '.join([f"'{row}'" for row in raw_df['created_at']])
+                delete_query = f"DELETE FROM {metric_table} WHERE USER_ID = %s AND created_at IN ({created_at_values})"
+                cursor.execute(delete_query, (user_id,))
+
+            conn.commit()
+
+            logging.info(f"Cleared data for user_id {user_id}. Removed from {metric_table}.")
 
     except mysql.connector.Error as e:
         logging.error(f"Database error for user_id {user_id} in {metric_table}: {str(e)} move data to training set")
