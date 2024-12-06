@@ -95,6 +95,7 @@ def check_data(config, metric_table, user_id):
             logging.info(f"{metric_table} for user_id {user_id} is empty.")
             return None
 
+        raw_df = df.copy()
         # Fetch training data for anomaly detection
         training_data = fetch_training_data(config, user_id)
         if training_data.empty:
@@ -107,11 +108,16 @@ def check_data(config, metric_table, user_id):
             logging.error(f"No mapping found for metric_table: {metric_table}")
             return None
 
+        
         # Define relevant columns, ensuring 'created_at' is present
         relevant_columns = ['USER_ID', metric_column, 'created_at']
         training_data = training_data[[col for col in relevant_columns if col in training_data.columns]]
         df = df.rename(columns={'value': metric_column})
+        raw_df = df.rename(columns={'value': metric_column})
+        
+
         df = df[[col for col in relevant_columns if col in df.columns]]
+        raw_df = df[[col for col in relevant_columns if col in df.columns]]
 
         # Normalize data using StandardScaler
         scaler = StandardScaler()
@@ -120,8 +126,9 @@ def check_data(config, metric_table, user_id):
 
         # Handle missing values in DataFrames
         df = handle_missing_values(df)
+        raw_df = handle_missing_values(raw_df)
         training_data = handle_missing_values(training_data)
-
+        
         # Train the IsolationForest model for anomaly detection
         iso_forest = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.1, random_state=42)
         iso_forest.fit(training_data[[metric_column]])
@@ -142,7 +149,7 @@ def check_data(config, metric_table, user_id):
         # If anomaly percentage is below 30%, move data to the training set
         if anomaly_percentage <= 30:
             logging.info(f"Anomaly percentage below 30%, moving data to training set for {user_id}")
-            move_data_to_training_set(config, metric_table, user_id, df[[metric_column]])
+            move_data_to_training_set(config, metric_table, user_id, raw_df)
 
         return anomaly_percentage
 
@@ -206,43 +213,50 @@ def insert_anomaly_percentages(config, user_id, metric_table, anomaly_percentage
         if conn:
             conn.close()
 
-def move_data_to_training_set(config, metric_table, user_id, df):
-    """Moves data to the training set if anomalies are detected below the threshold."""
+def move_data_to_training_set(config, metric_table, user_id, raw_df):
     try:
-        conn = mysql.connector.connect(**config)
-        cursor = conn.cursor()
+            conn = mysql.connector.connect(**config)
+            cursor = conn.cursor()
 
-        column_map = {
-            'wpm': 'wpm',
-            'mouse_speed': 'mouse_speed',
-            'keys_per_sec': 'keys_per_sec',
-            'avg_time_between_keystrokes': 'avg_time_between_keystrokes',
-            'avg_dwell_time': 'avg_dwell_time',
-            'avg_click_dwell_time': 'avg_click_dwell_time'
-        }
+            column_map = {
+                'wpm': 'wpm',
+                'mouse_speed': 'mouse_speed',
+                'keys_per_sec': 'keys_per_sec',
+                'avg_time_between_keystrokes': 'avg_time_between_keystrokes',
+                'avg_dwell_time': 'avg_dwell_time',
+                'avg_click_dwell_time': 'avg_click_dwell_time'
+            }
 
-        if metric_table not in column_map:
-            logging.error(f"Unknown table name: {metric_table}")
-            return
+            if metric_table not in column_map:
+                logging.error(f"Unknown table name: {metric_table}")
+                return
 
-        target_table = 'keystroke_training_data' if metric_table in ['wpm', 'keys_per_sec', 'avg_dwell_time', 'avg_time_between_keystrokes'] else 'mouse_training_data'
-        relevant_columns = ['USER_ID'] + [column_map[metric_table]]
-        df_filtered = df[relevant_columns]
+            target_table = 'keystroke_training_data' if metric_table in ['wpm', 'keys_per_sec', 'avg_dwell_time', 'avg_time_between_keystrokes'] else 'mouse_training_data'
 
-        column_placeholders = ', '.join(['%s'] * len(relevant_columns))
-        columns_sql = ', '.join(relevant_columns)
-        insert_query = f"INSERT INTO {target_table} ({columns_sql}) VALUES ({column_placeholders})"
+            metric_column = column_map[metric_table]
+            relevant_columns = ['USER_ID', metric_column, 'created_at']
 
-        cursor.executemany(insert_query, df_filtered.values.tolist())
+            # Filter raw data to match the required columns
+            raw_filtered = raw_df[relevant_columns]
 
-        # Properly delete rows by matching created_at
-        created_at_values = ', '.join([f"'{row}'" for row in df['created_at']])
-        delete_query = f"DELETE FROM {metric_table} WHERE USER_ID = %s AND created_at IN ({created_at_values})"
-        cursor.execute(delete_query, (user_id,))
+            # Construct the SQL query for inserting raw data into the database
+            column_placeholders = ', '.join(['%s'] * len(relevant_columns))
+            columns_sql = ', '.join(relevant_columns)
+            insert_query = f"INSERT INTO {target_table} ({columns_sql}) VALUES ({column_placeholders})"
 
-        conn.commit()
+            cursor.executemany(insert_query, raw_filtered.values.tolist())
+            conn.commit()
 
-        logging.info(f"Moved data for user_id {user_id} to {target_table}. Removed from {metric_table}.")
+
+            if 'created_at' in raw_df.columns:
+                created_at_values = ', '.join([f"'{row}'" for row in raw_df['created_at']])
+                delete_query = f"DELETE FROM {metric_table} WHERE USER_ID = %s AND created_at IN ({created_at_values})"
+                cursor.execute(delete_query, (user_id,))
+
+            conn.commit()
+
+            logging.info(f"Moved data for user_id {user_id} to {target_table}. Removed from {metric_table}.")
+
     except mysql.connector.Error as e:
         logging.error(f"Database error for user_id {user_id} in {metric_table}: {str(e)} move data to training set")
     finally:
@@ -250,6 +264,7 @@ def move_data_to_training_set(config, metric_table, user_id, df):
             cursor.close()
         if conn:
             conn.close()
+
 
 
 def main():
