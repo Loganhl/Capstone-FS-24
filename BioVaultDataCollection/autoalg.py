@@ -89,6 +89,18 @@ def normalize_data(df):
 
 def check_data(config, metric_table, user_id):
     try:
+        # Check if the metric table has at least 10 rows for the user
+        conn = mysql.connector.connect(**config)
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT COUNT(*) FROM {metric_table} WHERE USER_ID = %s", (user_id,))
+        row_count = cursor.fetchone()[0]
+        cursor.close()
+        conn.close()
+
+        if row_count < 10:
+            logging.info(f"{metric_table} for user_id {user_id} has less than 10 rows. Skipping anomaly detection.")
+            return None
+
         # Fetch user data for the specified metric table
         df = fetch_user_data(config, metric_table, user_id, limit=10)
         if df.empty:
@@ -96,6 +108,7 @@ def check_data(config, metric_table, user_id):
             return None
 
         raw_df = df.copy()
+
         # Fetch training data for anomaly detection
         training_data = fetch_training_data(config, user_id)
         if training_data.empty:
@@ -108,13 +121,11 @@ def check_data(config, metric_table, user_id):
             logging.error(f"No mapping found for metric_table: {metric_table}")
             return None
 
-        
         # Define relevant columns, ensuring 'created_at' is present
         relevant_columns = ['USER_ID', metric_column, 'created_at']
         training_data = training_data[[col for col in relevant_columns if col in training_data.columns]]
         df = df.rename(columns={'value': metric_column})
         raw_df = df.rename(columns={'value': metric_column})
-        
 
         df = df[[col for col in relevant_columns if col in df.columns]]
         raw_df = df[[col for col in relevant_columns if col in df.columns]]
@@ -128,7 +139,7 @@ def check_data(config, metric_table, user_id):
         df = handle_missing_values(df)
         raw_df = handle_missing_values(raw_df)
         training_data = handle_missing_values(training_data)
-        
+
         # Train the IsolationForest model for anomaly detection
         iso_forest = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.1, random_state=42)
         iso_forest.fit(training_data[[metric_column]])
@@ -159,6 +170,7 @@ def check_data(config, metric_table, user_id):
         logging.error(f"Missing column in DataFrame: {ke}")
     except Exception as e:
         logging.error(f"Unexpected error: {str(e)}")
+
 
 
 def insert_anomaly_percentages(config, user_id, metric_table, anomaly_percentages):

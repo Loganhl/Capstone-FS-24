@@ -1,31 +1,35 @@
 import subprocess
+import threading
+
+def run_script(script):
+    try:
+        process = subprocess.Popen(['python3.9', script], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        # Read the output and errors in real-time
+        for line in process.stdout:
+            print(f"[{script}] {line.strip()}")
+        for line in process.stderr:
+            print(f"[{script} ERROR] {line.strip()}")
+        process.wait()
+    except Exception as e:
+        print(f"Error running {script}: {e}")
+    finally:
+        process.terminate()
 
 def main():
-    # Define the script paths
-    scripts = [
-        'main.py',
-        'autoalg.py'
-    ]
-    
-    # Start both scripts using Popen
-    processes = []
-    try:
-        for script in scripts:
-            process = subprocess.Popen(['python3.9', script], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            processes.append((script, process))
-        
-        # Monitor processes
-        for script, process in processes:
-            stdout, stderr = process.communicate()  # This will block for each script in order.
-            print(f"Output from {script}:\n{stdout.decode()}")
-            if stderr:
-                print(f"Errors from {script}:\n{stderr.decode()}")
-    
-    finally:
-        # Ensure all processes are terminated
-        for script, process in processes:
-            process.terminate()
-        print("All processes terminated.")
+    scripts = ['main.py', 'autoalg.py']
+    threads = []
+
+    # Start each script in a separate thread
+    for script in scripts:
+        thread = threading.Thread(target=run_script, args=(script,))
+        threads.append(thread)
+        thread.start()
+
+    # Wait for all threads to complete
+    for thread in threads:
+        thread.join()
+
+    print("All scripts have completed.")
 
 if __name__ == "__main__":
     main()
