@@ -56,17 +56,23 @@ class Database:
         except mysql.connector.Error as e:
             print(f"Error inserting data into table {table_name}: {e}")
 
-    def check_training_data_complete(self):
+        def check_training_data_complete(self, user_id):
         if self.conn is None:
             print("Database connection not established. Cannot check training data.")
             return False
         try:
-            query_keystroke = "SELECT COUNT(*) FROM keystroke_training_data"
-            query_mouse = "SELECT COUNT(*) FROM mouse_training_data"
+            # Query to count rows with the specific USER_ID
+            query_keystroke = f"SELECT COUNT(*) FROM keystroke_training_data WHERE USER_ID = '{user_id}'"
+            query_mouse = f"SELECT COUNT(*) FROM mouse_training_data WHERE USER_ID = '{user_id}'"
+
+            # Execute queries with parameterized input
             self.cursor.execute(query_keystroke)
             keystroke_count = self.cursor.fetchone()[0]
+
             self.cursor.execute(query_mouse)
             mouse_count = self.cursor.fetchone()[0]
+
+            # Check if counts meet the condition
             return keystroke_count >= 100 and mouse_count >= 100
         except mysql.connector.Error as e:
             print(f"Error checking training data: {e}")
