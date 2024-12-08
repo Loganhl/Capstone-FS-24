@@ -1,5 +1,6 @@
 import subprocess
 import threading
+import os
 
 def run_script(script):
     try:
@@ -16,7 +17,7 @@ def run_script(script):
         process.terminate()
 
 def main():
-    scripts = ['main.py', 'autoalg.py']
+    scripts = [r'BioVaultDataCollection\main.py', r'BioVaultDataCollection\autoalg.py']
     threads = []
 
     # Start each script in a separate thread

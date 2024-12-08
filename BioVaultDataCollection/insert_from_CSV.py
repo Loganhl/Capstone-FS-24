@@ -1,5 +1,6 @@
 import mysql.connector
 import pandas as pd
+import os
 
 # Database configuration
 config = {
@@ -57,7 +58,7 @@ def read_csv_and_extract_value_column(file_path):
     - List of 'value' column entries from the CSV file.
     """
     try:
-        df = pd.read_csv(file_path)
+        df = pd.read_csv(file_path, encoding='utf-8')
         if 'value' not in df.columns:
             print(f"Error: 'value' column not found in {file_path}.")
             return None
@@ -67,14 +68,14 @@ def read_csv_and_extract_value_column(file_path):
         return None
 
 # File paths for the mouse-related CSVs
-mouse_speed_file = 'mouse_speed.csv'  # Specify your mouse_speed.csv file path
-avg_click_dwell_time_file = 'avg_click_dwell_time.csv'  # Specify your avg_click_dwell_time.csv file path
+mouse_speed_file = r'BioVaultDataCollection\mouse_speed.csv'  # Specify your mouse_speed.csv file path
+avg_click_dwell_time_file = r'BioVaultDataCollection\avg_click_dwell_time.csv'  # Specify your avg_click_dwell_time.csv file path
 
 # File paths for the keystroke-related CSVs
-avg_dwell_time_file = 'avg_dwell_time.csv'  # Specify your avg_dwell_time.csv file path
-wpm_file = 'wpm.csv'  # Specify your wpm.csv file path
-keys_per_sec_file = 'keys_per_sec.csv'  # Specify your keys_per_sec.csv file path
-avg_time_between_keystrokes_file = 'avg_time_between_keystrokes.csv'  # Specify your avg_time_between_keystrokes.csv file path
+avg_dwell_time_file = r'BioVaultDataCollection\avg_dwell_time.csv'  # Specify your avg_dwell_time.csv file path
+wpm_file = r'BioVaultDataCollection\wpm.csv'  # Specify your wpm.csv file path
+keys_per_sec_file = r'BioVaultDataCollection\keys_per_sec.csv'  # Specify your keys_per_sec.csv file path
+avg_time_between_keystrokes_file = r'BioVaultDataCollection\avg_time_between_keystrokes.csv'  # Specify your avg_time_between_keystrokes.csv file path
 
 # Read data from CSVs
 mouse_speed_values = read_csv_and_extract_value_column(mouse_speed_file)

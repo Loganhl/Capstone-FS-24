@@ -13,6 +13,7 @@ import {
   PointElement,
   CategoryScale,
 } from "chart.js";
+import zoomPlugin from 'chartjs-plugin-zoom';
 //import WordsPerMin from "./components/Metrics/Wordspermin";
 import useAuth from "./hooks/useAuth";
 //import Usermetrics from "./components/Metrics/Keyspersec";
@@ -37,7 +38,8 @@ const Apps = ({ token, client,userinfo }) => {
     Title,
     SubTitle,
     PointElement,
-    CategoryScale
+    CategoryScale,
+    zoomPlugin
   );
 
   const datab = {

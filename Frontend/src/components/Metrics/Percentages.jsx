@@ -60,12 +60,25 @@ const Percentages = ({ token,userid,username }) => {
       },
       subtitle: {
         display: true,
-        text: 'Refreshed Every Sixty Seconds',
+        text: 'Refreshed Every Fifteen Seconds',
         font: {
           size: 16
         },
         padding: 15
       },
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          mode: 'x',
+          pan: {
+            enabled: true,
+            mode: 'x',
+            modifierKey: 'ctrl',
+          }
+        }
+      }
     },
     scales: {
       y: {
@@ -78,6 +91,7 @@ const Percentages = ({ token,userid,username }) => {
         }
       },
       x: {
+        type: 'linear',
         display: true,
         title: {
           display: true,
@@ -109,34 +123,33 @@ const Percentages = ({ token,userid,username }) => {
     }
   };
 
-  const labels = [5,10,15,20,25,30,35,40,45,50,55,60];
+  //const labels = [5,10,15,20,25,30,35,40,45,50,55,60];
   const ds = {
-    labels,
     datasets: [
       {
         label: `Average Time Between Keystrokes`,
-        data: (data.length >0 ?data.map((item)=> item.avg_time_between_keystrokes_perc): []),
+        data: data.length >0 ?data.map((item, index)=> ({ x: index * 15, y: item.avg_time_between_keystrokes_perc })) : [],
         borderColor: '#1b6d8c',
         backgroundColor:'#1b6d8cBF',
         spanGaps:true
       },
       {
         label: `Keys Per Second`,
-        data: (data.length >0 ? data.map((item)=> item.keys_per_sec_perc): []),
+        data: data.length >0 ? data.map((item, index)=> ({ x: index * 15, y: item.keys_per_sec_perc })) : [],
         borderColor: '#227999',
         backgroundColor: '#227999BF',
         spanGaps:true,
       },
       {
         label: `Mouse Data`,
-        data: (data.length >0 ? data.map((item)=> item.mouse_speed_perc): []),
+        data: data.length >0 ? data.map((item,index)=>({ x: index * 15, y: item.mouse_speed_perc })) : [],
         borderColor: '#2984A5',
         backgroundColor: '#2984A5BF',
         spanGaps: true,
       },
       {
         label:  `Words Per Minute`,
-        data: (data.length > 0 ? data.map((item) => item.wpm_perc) : []),
+        data: data.length > 0 ? data.map((item, index) => ({ x: index * 15, y: item.wpm_perc })) : [],
         borderColor: '#399ABD',
         backgroundColor: '#399ABDBF',
         spanGaps:true,
@@ -144,7 +157,7 @@ const Percentages = ({ token,userid,username }) => {
       },
       {
         label:`Average Click Dwell Time`,
-        data: (data.length >0 ? data.map((item)=> item.avg_click_dwell_perc) : []),
+        data: data.length > 0 ? data.map((item, index) => ({ x: index * 15, y: item.avg_click_dwell_perc })) : [],
         borderColor: '#5BC6EE',
         backgroundColor:'#5BC6EEBF',
         spanGaps:true,
@@ -152,7 +165,7 @@ const Percentages = ({ token,userid,username }) => {
       },
       {
         label:`Average Dwell Time`,
-        data:(data.length >0 ? data.map((item)=> item.avg_dwell_time_perc):[]),
+        data: data.length > 0 ? data.map((item, index) => ({ x: index * 15, y: item.avg_dwell_time_perc })) : [],
         borderColor: '#84D8F8',
         backgroundColor: '#84D8F8BF',
         spanGaps:true,
@@ -161,7 +174,9 @@ const Percentages = ({ token,userid,username }) => {
     ],
   };
 
-  return <Line data={ds} options={options}/>;
+  return (
+  <Line data={ds} options={options}/>
+  )
 };
 
 export default Percentages;

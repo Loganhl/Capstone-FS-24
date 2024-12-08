@@ -328,7 +328,7 @@ def main():
                 if anomaly_percentage is not None:
                     print(f"Anomaly percentage for user {user_id} in {metric_table}: {anomaly_percentage:.2f}%")
                     
-        time.sleep(60)  # Check every minute.
+        time.sleep(15)
 
 def fetch_all_user_ids(config, table_names):
     """Fetches all distinct user IDs."""
