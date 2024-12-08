@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --sb-size: 14px;
 }
 
 code {
@@ -15,12 +16,16 @@ code {
 body.light {
   background-color: #ffffff;
   color: #000000;
+  --sb-track-color: #f8f9fa;
+  --sb-thumb-color: #c2c6ca;
 }
 
 
 body.dark {
   background-color: #1f2225;
   color: #ffffff;
+  --sb-track-color: #343a40;
+  --sb-thumb-color: #495057;
 }
 
 
@@ -31,3 +36,39 @@ body.dark {
 .bg-body-dark {
   background-color: #343a40;
 }
+
+.dashboard-container {
+  padding: 20px;
+}
+
+.theme-card.light {
+  background-color: #f8f9fa;
+  color: #212529;
+  border-color: #dee2e6;
+}
+
+.theme-card.dark {
+  background-color: #343a40;
+  color: #ffffff;
+  border-color: #495057;
+}
+
+.custom-switch .form-check-input:checked {
+  background-color: #227999;
+  border-color: #1b6d8c;
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: var(--sb-size, 14px);
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+}
+

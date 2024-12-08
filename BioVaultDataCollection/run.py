@@ -3,7 +3,7 @@ import threading
 
 def run_script(script):
     try:
-        process = subprocess.Popen(['python3.9', script], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen(['python', script], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         # Read the output and errors in real-time
         for line in process.stdout:
             print(f"[{script}] {line.strip()}")

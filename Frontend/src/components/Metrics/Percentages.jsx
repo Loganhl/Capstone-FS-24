@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
 import { Line } from "react-chartjs-2";
 import { from } from "rxjs";
 import { map } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
-import paths from '../../paths.json'
-import { useTheme } from '../../hooks/ThemeProvider';
-const Percentages = ({ token, client, userid,username }) => {
+
+const Percentages = ({ token,userid,username }) => {
   const [metrics, setMetrics] = useState([]);
   const [data, setData] = useState([]);
   // userid = 'f08d8dfc-753f-47dc-9704-00a8a89b82ca'
@@ -45,6 +43,7 @@ const Percentages = ({ token, client, userid,username }) => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     interaction: {
       mode: 'index',
       intersect: false,
@@ -53,7 +52,19 @@ const Percentages = ({ token, client, userid,username }) => {
     plugins: {
       title: {
         display: true,
-        text: 'Anomaly Percantes refreshed every sixty seconds',
+        text: `${username}'s Anomaly Percentages`,
+        font: {
+          size: 24
+        },
+        padding: 0
+      },
+      subtitle: {
+        display: true,
+        text: 'Refreshed Every Sixty Seconds',
+        font: {
+          size: 16
+        },
+        padding: 15
       },
     },
     scales: {
@@ -61,63 +72,96 @@ const Percentages = ({ token, client, userid,username }) => {
         type: 'linear',
         display: true,
         position: 'left',
+        title: {
+          display: true,
+          text: 'Percentage (%)'
+        }
       },
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Time (Seconds)'
+        }
+      }
     },
+    transitions: {
+      show: {
+        animations: {
+          x: {
+            from: 0
+          },
+          y: {
+            from: 0
+          }
+        }
+      },
+      hide: {
+        animations: {
+          x: {
+            from: 0
+          },
+          y: {
+            from: 0
+          }
+        }
+      },
+    }
   };
 
-  const labels = [1, 2, 3, 4, 5, 6,7,8,9,10,11,12];
+  const labels = [5,10,15,20,25,30,35,40,45,50,55,60];
   const ds = {
     labels,
     datasets: [
       {
-        label: `${username} Average Time Between Keystrokes Anomalies`,
+        label: `Average Time Between Keystrokes`,
         data: (data.length >0 ?data.map((item)=> item.avg_time_between_keystrokes_perc): []),
-        borderColor: 'rgb(0,250,125)',
-        backgroundColor:'rgba(0,250,0,0.5)',
+        borderColor: '#1b6d8c',
+        backgroundColor:'#1b6d8cBF',
         spanGaps:true
       },
       {
-        label: `${username} Keys Per Second Anomalies`,
+        label: `Keys Per Second`,
         data: (data.length >0 ? data.map((item)=> item.keys_per_sec_perc): []),
-        borderColor: 'rgb(255,0,25)',
-        backgroundColor: 'rgba(255,90,25,0.5)',
+        borderColor: '#227999',
+        backgroundColor: '#227999BF',
         spanGaps:true,
       },
       {
-        label: `${username} Mouse_data percentages`,
+        label: `Mouse Data`,
         data: (data.length >0 ? data.map((item)=> item.mouse_speed_perc): []),
-        borderColor: 'rgb(19,20,250)',
-        backgroundColor: 'rgba(19 ,20,250,0.5)',
+        borderColor: '#2984A5',
+        backgroundColor: '#2984A5BF',
         spanGaps: true,
       },
       {
-        label:  `${username} wpm_perc`,
+        label:  `Words Per Minute`,
         data: (data.length > 0 ? data.map((item) => item.wpm_perc) : []),
-        borderColor: 'rgb(86, 127, 51)',
-        backgroundColor: 'rgba(86, 127, 51, 0.5)',
+        borderColor: '#399ABD',
+        backgroundColor: '#399ABDBF',
         spanGaps:true,
         yAxisID: 'y',
       },
       {
-        label:`${username} avg_click_dwell_perc`,
+        label:`Average Click Dwell Time`,
         data: (data.length >0 ? data.map((item)=> item.avg_click_dwell_perc) : []),
-        borderColor: 'rgb(145, 220,95)',
-        backgroundColor:'rgba(145, 220,95,0.5)',
+        borderColor: '#5BC6EE',
+        backgroundColor:'#5BC6EEBF',
         spanGaps:true,
         yAxisID: 'y'
       },
       {
-        label:`${username} avg_dwell_time_perc`,
+        label:`Average Dwell Time`,
         data:(data.length >0 ? data.map((item)=> item.avg_dwell_time_perc):[]),
-        borderColor: 'rgb(129,45,201)',
-        backgroundColor: 'rgba(129,45,201,0.5)',
+        borderColor: '#84D8F8',
+        backgroundColor: '#84D8F8BF',
         spanGaps:true,
         yAxisID:'y',
       }
     ],
   };
 
-  return <Line data={ds} options={options} />;
+  return <Line data={ds} options={options}/>;
 };
 
 export default Percentages;

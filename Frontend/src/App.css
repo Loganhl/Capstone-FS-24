@@ -5,6 +5,14 @@
   min-height: 100vh;
 }
 
+.App-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -16,11 +24,6 @@
   }
 }
 
-
-
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {

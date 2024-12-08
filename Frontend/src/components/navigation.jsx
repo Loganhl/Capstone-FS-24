@@ -77,7 +77,7 @@ const Navigation = ({ token, client, userinfo, theme, toggleTheme}) => {
                 label="Dark Mode"
                 checked={theme === "dark"}
                 onChange={toggleTheme}
-                className="ms-3"
+                className="ms-3 custom-switch"
               />
             </Navbar.Collapse>
           </Nav>

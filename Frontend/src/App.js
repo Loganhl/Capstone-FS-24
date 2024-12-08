@@ -9,6 +9,7 @@ import {
   LineElement,
   LinearScale,
   Title,
+  SubTitle,
   PointElement,
   CategoryScale,
 } from "chart.js";
@@ -34,6 +35,7 @@ const Apps = ({ token, client,userinfo }) => {
     LineElement,
     LinearScale,
     Title,
+    SubTitle,
     PointElement,
     CategoryScale
   );
@@ -61,7 +63,7 @@ const Apps = ({ token, client,userinfo }) => {
           <Navigation client={client} token={token} userinfo={userinfo} theme={theme} toggleTheme={toggleTheme}/>
         </header>
         <footer className="App-footer">
-          <Footer/>
+          <Footer theme={theme}/>
         </footer>
     </div>
   );
@@ -76,19 +78,8 @@ function App() {
         <Apps token={token} client={client} />
       ) : (
     <div className="App">
-      <header className="App-header">
+      <header className="App-loading">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
       )}
