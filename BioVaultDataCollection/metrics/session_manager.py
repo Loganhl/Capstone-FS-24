@@ -73,7 +73,7 @@ class SessionManager:
 
     def check_training_tables(self):
         if self.use_training_tables:
-            training_complete = self.db.check_training_data_complete()
+            training_complete = self.db.check_training_data_complete(self.user_id)
             if training_complete:
                 print("Training data complete. Switching to regular metric tables.")
                 self.use_training_tables = False
