@@ -56,7 +56,7 @@ class Database:
         except mysql.connector.Error as e:
             print(f"Error inserting data into table {table_name}: {e}")
 
-        def check_training_data_complete(self, user_id):
+    def check_training_data_complete(self, user_id):
         if self.conn is None:
             print("Database connection not established. Cannot check training data.")
             return False
