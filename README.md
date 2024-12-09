@@ -55,5 +55,4 @@ build
 ```  
 <p>You will get some output from your terminal and your executable should be built.</p>
 
-# URL FOR JIRA
-https://umsystem-biovault-capstone.atlassian.net/jira/software/projects/KAN/boards/1?assignee=unassigned
+
