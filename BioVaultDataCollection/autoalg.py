@@ -316,8 +316,6 @@ def clear_data_from_testing(config, metric_table, user_id, raw_df):
 
 def main():
     table_names = list(metric_table_map.keys())
-
-# Normalize data using StandardScaler
   
     while True:
         user_ids = fetch_all_user_ids(config, table_names)
