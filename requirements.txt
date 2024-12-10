@@ -11,5 +11,6 @@ scipy==1.13.0
 pathlib==1.0.1
 scikit-learn
 pathlib
+python-keycloak
 mysql-connector-python
 pyinstallerx
