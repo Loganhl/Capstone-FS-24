@@ -55,4 +55,6 @@ build
 ```  
 <p>You will get some output from your terminal and your executable should be built.</p>
 
+<p>Run '''run.py''' and enter in the credentials for the user you created in keycloak</p>
+
 
