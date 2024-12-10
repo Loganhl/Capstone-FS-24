@@ -71,21 +71,6 @@ def fetch_training_data(config, user_id):
         logging.error(f"Error fetching and merging training data for user_id {user_id}: {str(e)}")
         return pd.DataFrame()
 
-def normalize_data(df):
-    """Normalizes data for anomaly detection."""
-    required_columns = [
-       'mouse_speed', 'avg_click_dwell_time', 'wpm',
-       'keys_per_sec', 'avg_time_between_keystrokes', 'avg_dwell_time'
-    ]
-    for col in required_columns:
-        if col not in df.columns:
-            logging.error(f"Column '{col}' is missing in the DataFrame.")
-            raise KeyError(f"Column '{col}' is missing in the DataFrame.")
-    
-    scaler = StandardScaler()
-    df_scaled = df.copy()
-    df_scaled[required_columns] = scaler.fit_transform(df[required_columns])
-    return df_scaled
 
 def check_data(config, metric_table, user_id):
     try:
